@@ -19,7 +19,9 @@ src/
 ├── domain/         Logique pure
 │   ├── common/     Dates calendaires locales
 │   ├── profile/    Modèle du profil, brouillon de formulaire, validation, intégrité
-│   └── settings/   Modèle des réglages, délais après essais ratés
+│   ├── settings/   Modèle des réglages, délais après essais ratés
+│   └── training/   Moteur de musculation : exercices, programme, planning, progression,
+│                   échauffement, records, séances
 ├── data/           IndexedDB (Dexie) : schéma versionné, migrations, repositories,
 │                   erreurs de stockage, hooks réactifs, maintenance
 ├── security/       Empreinte du code de verrouillage (PBKDF2 via WebCrypto)
@@ -27,7 +29,8 @@ src/
 │   ├── onboarding/ Bienvenue et configuration initiale en 5 étapes
 │   ├── profile/    Profil, modification par section, pesées
 │   ├── settings/   Confidentialité, verrouillage, stockage, effacement
-│   └── today/ training/ calendar/ progress/ more/ recovery/ nutrition/ coach/
+│   ├── training/   Semaine type, programme modifiable, séance en direct, historique, records
+│   └── today/ calendar/ progress/ more/ recovery/ nutrition/ coach/
 ├── ui/             Composants réutilisables (Screen, Card, Button, champs, dialogues…)
 ├── pwa/            Service worker : enregistrement et mises à jour
 ├── styles/         Thème global Tailwind
@@ -38,7 +41,7 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 
 ## Données
 
-### Tables (IndexedDB `vyro`, schéma v1)
+### Tables (IndexedDB `vyro`, schéma v2)
 
 | Table | Clé | Contenu |
 |---|---|---|
@@ -46,6 +49,9 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 | `bodyWeights` | auto, index `date` | Historique des pesées (le poids n'est pas un champ du profil) |
 | `settings` | `'app'` | Confidentialité et verrouillage (empreinte du code, jamais le code) |
 | `drafts` | texte | Brouillons de formulaires (configuration interrompue) |
+| `routine` (v2) | `'me'` | Semaine type : jours de salle, de basket, de match |
+| `programs` (v2) | id, index `createdAt` | Programmes ; un seul actif, les anciens sont conservés |
+| `workouts` (v2) | id, index `date`, `status`, `programId` | Séances (en cours, terminées, abandonnées) |
 
 ### Repositories
 
@@ -70,6 +76,20 @@ Dexie 4 ouvre sans erreur une base créée par une version **plus récente** de 
 ### Conservation
 
 Après la configuration, l'application demande `navigator.storage.persist()`. Les Réglages affichent l'état réel (conservation garantie, espace utilisé, installation sur l'écran d'accueil).
+
+## Moteur de musculation (`src/domain/training`)
+
+Fonctions pures et déterministes, toutes testées. Chaque décision est accompagnée d'une explication affichée.
+
+- **Bibliothèque** (`exercises.ts`) : 37 exercices à identifiants stables, avec muscles, matériel, sollicitation des jambes, incrément de charge, consignes de technique et de sécurité.
+- **Programme** (`program.ts`) : séances A et B « corps complet » + C facultative sans jambes. Choix des exercices selon le matériel, les exercices à éviter (texte libre) ou aimés, et l'exclusion du développé couché libre. Volume selon l'expérience ; exercices accessoires retirés pour tenir dans la durée maximale. Mouvement impossible à couvrir → avertissement, jamais d'exercice inventé. Aucune charge de départ inventée.
+- **Planning** (`schedule.ts`) : jamais de séance un jour de match ni de séance jambes la veille ; 48 h entre deux séances si possible ; lendemain de match et jours de basket évités. Sans disponibilités, rien n'est planifié. Semaine trop chargée → moins de séances, jamais de séance plus lourde. Séance manquée → ni rattrapage ni surcharge, la rotation A/B reprend.
+- **Progression** (`progression.ts`) : double progression (répétitions puis plus petit incrément de charge). Aucune hausse après une douleur (réduction de 10 %), une séance allégée, une série à l'échec, une séance notée 9/10 ou plus, une séance incomplète, ou sans répétitions en réserve renseignées. Deux séances sous la fourchette → −5 %. Reprise après 14 jours → −10 %, après 28 jours → −20 %. Aucune charge maximale testée ni estimée.
+- **Conseil avant séance** : jour de match ou douleur → repos conseillé ; veille de match (séance jambes) ou fatigue → version allégée conseillée. L'utilisateur décide.
+- **Échauffement** (`warmup.ts`) : cardio léger, mobilité ciblée, séries d'approche à ~50 % et ~75 % de la charge de travail.
+- **Records** (`records.ts`) : charge la plus lourde, plus de répétitions, meilleur tonnage — uniquement à partir des séries enregistrées.
+
+Chaque saisie d'une séance en cours est enregistrée immédiatement ; une seule séance peut être en cours à la fois.
 
 ## Verrouillage local
 

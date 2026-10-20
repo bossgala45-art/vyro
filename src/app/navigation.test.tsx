@@ -50,9 +50,9 @@ describe('écrans', () => {
   });
 
   it('identifie clairement les modules non développés, sans données fictives', async () => {
-    renderRoute('/entrainement');
+    renderRoute('/calendrier');
     expect(await screen.findByText('Module en construction')).toBeInTheDocument();
-    expect(screen.getByText('Prévu à l’étape 3 du développement')).toBeInTheDocument();
+    expect(screen.getByText('Prévu à l’étape 4 du développement')).toBeInTheDocument();
     expect(screen.getByText(/Aucune donnée n’est affichée/)).toBeInTheDocument();
   });
 
