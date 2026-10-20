@@ -48,6 +48,15 @@ export const VYRO_SCHEMA: readonly SchemaVersion[] = [
       drafts: 'id',
     },
   },
+  {
+    // Étape 3 : musculation. Nouvelles tables uniquement : aucune donnée existante n'est transformée.
+    version: 2,
+    stores: {
+      routine: 'id',
+      programs: 'id, createdAt',
+      workouts: 'id, date, status, programId',
+    },
+  },
 ];
 
 export const CURRENT_SCHEMA_VERSION = VYRO_SCHEMA[VYRO_SCHEMA.length - 1]?.version ?? 0;
