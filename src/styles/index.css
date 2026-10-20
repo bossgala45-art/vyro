@@ -1,0 +1,74 @@
+@import 'tailwindcss';
+
+/*
+ * Thème VYRO — noir bleuté, bleu électrique, blanc.
+ * Contrastes vérifiés (WCAG) sur le fond --color-ink-950 :
+ *   texte 18.8:1, texte atténué 7.6:1, accent 6.2:1 (sur surface), blanc sur bouton 5.1:1.
+ */
+@theme {
+  --color-ink-950: #05070d;
+  --color-ink-900: #0c1322;
+  --color-ink-800: #121c30;
+  --color-ink-700: #1d2a44;
+  --color-snow: #f4f7ff;
+  --color-mist: #8fa0bd;
+  --color-volt-600: #1f5eff;
+  --color-volt-500: #3d7bff;
+  --color-volt-400: #5b93ff;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', Roboto, sans-serif;
+
+  --animate-screen-in: screen-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  @keyframes screen-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--color-ink-950);
+    color: var(--color-snow);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    color-scheme: dark;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-ink-950);
+    font-family: var(--font-sans);
+    overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Safari zoome sur les champs dont le texte fait moins de 16px. */
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1em);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-volt-400);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
