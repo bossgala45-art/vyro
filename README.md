@@ -2,7 +2,7 @@
 
 Application personnelle de coaching sportif (musculation, basket, récupération), sous forme de **PWA** installable depuis Safari sur iPhone. Toutes les données restent sur l'appareil.
 
-> **État actuel : étape 1 / 10 — fondations.** La navigation et le thème fonctionnent. Les modules sont des écrans vides, clairement marqués « Module en construction » ; aucune donnée fictive n'est affichée.
+> **État actuel : étape 2 / 10 — profil et stockage local.** Configuration initiale, profil modifiable, historique des pesées, réglages de confidentialité, verrouillage par code et effacement des données fonctionnent. Les autres modules sont marqués « Module en construction » ; aucune donnée fictive n'est affichée.
 
 ## Utiliser VYRO sur iPhone
 
@@ -53,4 +53,6 @@ Voir [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) pour l'organisation du code.
 
 - Les tests d'interface tournent sur **Chromium avec émulation iPhone**, pas sur le moteur WebKit de Safari : la vérification finale se fait sur un vrai iPhone.
 - Une PWA n'a pas accès à Face ID natif, à HealthKit ni aux widgets iOS.
+- Le verrouillage par code est **visuel** : il masque l'application mais ne chiffre pas les données stockées. Le chiffrement arrive avec les sauvegardes (étape 9).
+- Il n'existe pas encore de sauvegarde : effacer les données de Safari ou désinstaller l'app efface tout.
 - Les notifications en arrière-plan nécessitent un serveur de push : elles ne sont pas prévues sans service dédié (alternatives proposées à l'étape 9).
