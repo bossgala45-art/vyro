@@ -1,7 +1,16 @@
 import Dexie, { type Table } from 'dexie';
 import type { AppSettings } from '../domain/settings/types';
 import type { BodyWeightEntry, Profile } from '../domain/profile/types';
-import type { Program, WeeklyRoutine, Workout } from '../domain/training/types';
+import type {
+  Activity,
+  ActivityLog,
+  DayOverride,
+  OccurrenceException,
+  PlanSnapshot,
+  PlanningSettings,
+  Vacation,
+} from '../domain/calendar/types';
+import type { Program, Workout } from '../domain/training/types';
 import { StorageError, guard } from './errors';
 import { applySchema, VYRO_SCHEMA, type SchemaVersion } from './schema';
 
@@ -19,9 +28,15 @@ export class VyroDatabase extends Dexie {
   bodyWeights!: Table<BodyWeightEntry, number>;
   settings!: Table<AppSettings, 'app'>;
   drafts!: Table<DraftRecord, string>;
-  routine!: Table<WeeklyRoutine, 'me'>;
   programs!: Table<Program, string>;
   workouts!: Table<Workout, string>;
+  activities!: Table<Activity, string>;
+  exceptions!: Table<OccurrenceException, string>;
+  vacations!: Table<Vacation, string>;
+  dayOverrides!: Table<DayOverride, string>;
+  planning!: Table<PlanningSettings, 'me'>;
+  activityLogs!: Table<ActivityLog, string>;
+  planSnapshots!: Table<PlanSnapshot, string>;
 
   constructor(name = DATABASE_NAME, versions: readonly SchemaVersion[] = VYRO_SCHEMA) {
     super(name);

@@ -1,6 +1,7 @@
 import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { calendarRepository } from '../../data/repositories/calendarRepository';
 import { trainingRepository } from '../../data/repositories/trainingRepository';
 import { generateProgram } from '../../domain/training/program';
 import type { Weekday } from '../../domain/training/types';
@@ -22,11 +23,9 @@ async function seedProgram() {
 }
 
 async function seedRoutine(gymDays: Weekday[] = [0, 1, 2, 3, 4, 5, 6]) {
-  await trainingRepository.saveRoutine({
+  await calendarRepository.savePlanning({
     id: 'me',
-    gymDays,
-    practiceDays: [],
-    matchDays: [],
+    gymSlots: gymDays.map((weekday) => ({ weekday, from: null, to: null })),
     includeOptionalThird: false,
     updatedAt: '2026-10-01T00:00:00.000Z',
   });
@@ -58,12 +57,14 @@ describe('mise en place', () => {
     const { router } = renderRoute('/entrainement');
 
     await user.click(await screen.findByRole('button', { name: 'Indiquer mes disponibilités' }));
-    await user.click(await screen.findByLabelText('Jours possibles pour la salle : Lun'));
-    await user.click(screen.getByLabelText('Jours possibles pour la salle : Mer'));
-    await user.click(screen.getByLabelText('Jour(s) de match habituel(s) : Sam'));
-    await user.click(screen.getByRole('button', { name: 'Enregistrer' }));
-    await waitFor(() => expect(router.state.location.pathname).toBe('/entrainement'));
-    expect((await trainingRepository.getRoutine())?.gymDays).toEqual([0, 2]);
+    await waitFor(() => expect(router.state.location.pathname).toBe('/calendrier/habituel'));
+    await user.click(await screen.findByRole('checkbox', { name: 'Lundi' }));
+    await user.click(screen.getByRole('checkbox', { name: 'Mercredi' }));
+    await user.click(screen.getByRole('button', { name: 'Enregistrer les disponibilités' }));
+    expect(await screen.findByText(/Disponibilités enregistrées/)).toBeInTheDocument();
+    expect((await calendarRepository.load()).planning?.gymSlots.map((slot) => slot.weekday)).toEqual([0, 2]);
+
+    await user.click(within(screen.getByRole('navigation', { name: 'Navigation principale' })).getByRole('link', { name: 'Séances' }));
 
     await user.click(await screen.findByRole('button', { name: 'Générer mon programme' }));
     expect(await screen.findByText('Prochaine séance')).toBeInTheDocument();
@@ -79,7 +80,7 @@ describe('mise en place', () => {
     await seedProgram();
     await seedRoutine([]);
     renderRoute('/entrainement');
-    expect(await screen.findByText(/ne planifie rien sans connaître tes disponibilités/)).toBeInTheDocument();
+    expect(await screen.findByText(/ne planifie rien sans les connaître/)).toBeInTheDocument();
   });
 });
 

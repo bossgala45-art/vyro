@@ -5,8 +5,8 @@ import { EXERCISES, alternativesFor, getExercise, matchesAvoided } from './exerc
 import { estimateMinutes, generateProgram, programExerciseIds, templateLegDemand } from './program';
 import { PROGRESSION_RULES, computeTarget, type Exposure } from './progression';
 import { computeRecords, newRecordsIn } from './records';
-import { adviseSession, nextCoreTemplate, planWeek, weekStart, weekStatuses, weekdayOf } from './schedule';
-import type { ExerciseSlot, LoggedSet, Program, Weekday, Workout } from './types';
+import { adviseSession, nextCoreTemplate, weekStart, weekStatuses, weekdayOf } from './schedule';
+import type { ExerciseSlot, LoggedSet, Program, Workout } from './types';
 import { buildWarmup } from './warmup';
 import { createWorkout, exposuresFor, lastCompletedCoreKey, summarizeWorkout, validateSet } from './workout';
 
@@ -241,79 +241,21 @@ describe('progression', () => {
   });
 });
 
-const ROUTINE = { gymDays: [0, 1, 2, 3, 4] as Weekday[], practiceDays: [1, 3] as Weekday[], matchDays: [5] as Weekday[], includeOptionalThird: false };
-
-describe('planification de la semaine', () => {
+describe('semaine et rotation', () => {
   const generated = program();
-
-  it('ne planifie rien sans disponibilités connues', () => {
-    const plan = planWeek({ routine: { ...ROUTINE, gymDays: [] }, program: generated, nextCoreKey: 'A' });
-    expect(plan.status).toBe('unknown-availability');
-    expect(plan.sessions).toEqual([]);
-  });
-
-  it('ne place jamais de séance un jour de match ni de séance jambes la veille', () => {
-    const plan = planWeek({ routine: { ...ROUTINE, gymDays: [0, 1, 2, 3, 4, 5, 6] }, program: generated, nextCoreKey: 'A' });
-    const days = plan.sessions.map((session) => session.weekday);
-    expect(days).not.toContain(5);
-    expect(days).not.toContain(4);
-  });
-
-  it('espace les séances de 48 h et évite les jours de basket quand c’est possible', () => {
-    const plan = planWeek({ routine: ROUTINE, program: generated, nextCoreKey: 'A' });
-    expect(plan.sessions.map((s) => [s.weekday, s.templateKey])).toEqual([
-      [0, 'A'],
-      [2, 'B'],
-    ]);
-    expect(plan.status).toBe('ok');
-  });
-
-  it('respecte la rotation : commence par la séance suivante', () => {
-    const plan = planWeek({ routine: ROUTINE, program: generated, nextCoreKey: 'B' });
-    expect(plan.sessions.map((s) => s.templateKey)).toEqual(['B', 'A']);
-  });
-
-  it('ne compense pas une semaine chargée par une séance plus lourde', () => {
-    const plan = planWeek({ routine: { ...ROUTINE, gymDays: [4] }, program: generated, nextCoreKey: 'A' });
-    expect(plan.status).toBe('no-valid-day');
-    const reduced = planWeek({ routine: { ...ROUTINE, gymDays: [2] }, program: generated, nextCoreKey: 'A' });
-    expect(reduced.status).toBe('reduced');
-    expect(reduced.sessions).toHaveLength(1);
-    expect(reduced.explanations.join(' ')).toContain('pas de rattrapage');
-  });
-
-  it('place la 3e séance facultative seulement si un jour convient', () => {
-    const withThird = planWeek({
-      routine: { ...ROUTINE, gymDays: [0, 2, 4, 6], includeOptionalThird: true },
-      program: generated,
-      nextCoreKey: 'A',
-    });
-    const optional = withThird.sessions.find((s) => s.optional);
-    expect(optional?.templateKey).toBe('C');
-    // Le vendredi (veille du match) est accepté pour C, qui ne travaille pas les jambes.
-    expect(optional?.weekday).toBe(4);
-
-    const crowded = planWeek({
-      routine: { ...ROUTINE, gymDays: [0, 1, 2], includeOptionalThird: true },
-      program: generated,
-      nextCoreKey: 'A',
-    });
-    expect(crowded.sessions.some((s) => s.optional)).toBe(false);
-  });
 
   it('marque une séance passée non faite comme manquée, sans rattrapage', () => {
     const sessions = [
-      { weekday: 0 as Weekday, templateKey: 'A' as const, optional: false, notes: [] },
-      { weekday: 1 as Weekday, templateKey: 'B' as const, optional: false, notes: [] },
-      { weekday: 3 as Weekday, templateKey: 'A' as const, optional: false, notes: [] },
+      { date: '2026-10-19', templateKey: 'A' as const },
+      { date: '2026-10-20', templateKey: 'B' as const },
+      { date: '2026-10-22', templateKey: 'A' as const },
     ];
-    const monday = '2026-10-19';
-    expect([...weekStatuses(sessions, monday, TODAY, []).values()]).toEqual(['missed', 'today', 'upcoming']);
+    expect([...weekStatuses(sessions, TODAY, []).values()]).toEqual(['missed', 'today', 'upcoming']);
     // Séance A faite mardi au lieu de lundi : elle compte comme faite.
-    const statuses = weekStatuses(sessions, monday, TODAY, [{ date: TODAY, templateKey: 'A' }]);
-    expect(statuses.get(0)).toBe('done');
-    expect(statuses.get(1)).toBe('today');
-    expect(statuses.get(3)).toBe('upcoming');
+    const statuses = weekStatuses(sessions, TODAY, [{ date: TODAY, templateKey: 'A' }]);
+    expect(statuses.get('2026-10-19')).toBe('done');
+    expect(statuses.get('2026-10-20')).toBe('today');
+    expect(statuses.get('2026-10-22')).toBe('upcoming');
   });
 
   it('calcule les jours de la semaine', () => {
@@ -321,13 +263,6 @@ describe('planification de la semaine', () => {
     expect(weekdayOf('2026-10-25')).toBe(6);
     expect(weekStart('2026-10-25')).toBe('2026-10-19');
     expect(weekStart('2026-11-02')).toBe('2026-11-02');
-  });
-
-  it('ne planifie pas les jours passés quand le programme démarre en cours de semaine', () => {
-    const plan = planWeek({ routine: ROUTINE, program: generated, nextCoreKey: 'A', firstDay: 1 });
-    expect(plan.sessions.every((session) => session.weekday >= 1)).toBe(true);
-    expect(plan.sessions[0]?.templateKey).toBe('A');
-    expect(plan.explanations[0]).toContain('en cours de semaine');
   });
 
   it('alterne A et B selon la dernière séance faite', () => {

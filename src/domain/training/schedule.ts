@@ -1,20 +1,7 @@
 import { toIsoDate, type IsoDate } from '../common/dates';
-import { templateLegDemand } from './program';
-import { WEEKDAYS, type Program, type TemplateKey, type Weekday, type WeeklyRoutine } from './types';
+import type { Program, TemplateKey, Weekday } from './types';
 
-/**
- * Placement des séances dans la semaine, autour du basket.
- *
- * Règles strictes :
- * - uniquement sur un jour déclaré disponible pour la salle ;
- * - jamais le jour d'un match ;
- * - jamais de séance avec du travail de jambes la veille d'un match.
- * Préférences (pénalités) :
- * - éviter deux jours de salle consécutifs (48 h entre deux séances) ;
- * - éviter le lendemain d'un match et les jours d'entraînement de basket ;
- * - la 3e séance (facultative) n'est placée que si un jour reste vraiment adapté.
- * Sans disponibilités déclarées, rien n'est planifié.
- */
+/** Outils de semaine et de rotation des séances, et conseil avant séance. */
 
 export const WEEKDAY_LABELS: Record<Weekday, string> = {
   0: 'Lundi',
@@ -25,33 +12,6 @@ export const WEEKDAY_LABELS: Record<Weekday, string> = {
   5: 'Samedi',
   6: 'Dimanche',
 };
-
-export const SCHEDULE_PENALTIES = {
-  consecutiveGymDays: 5,
-  dayAfterMatch: 3,
-  practiceSameDay: 2,
-  /** Au-delà, la 3e séance facultative n'est pas proposée. */
-  maxOptionalPenalty: 2,
-} as const;
-
-export interface PlannedSession {
-  weekday: Weekday;
-  templateKey: TemplateKey;
-  optional: boolean;
-  /** Remarques sur ce jour (entraînement de basket le même jour…). */
-  notes: string[];
-}
-
-export type WeekPlanStatus = 'ok' | 'unknown-availability' | 'no-valid-day' | 'reduced';
-
-export interface WeekPlan {
-  status: WeekPlanStatus;
-  sessions: PlannedSession[];
-  explanations: string[];
-}
-
-const prev = (day: Weekday) => ((day + 6) % 7) as Weekday;
-const next = (day: Weekday) => ((day + 1) % 7) as Weekday;
 
 export function weekdayOf(date: IsoDate): Weekday {
   const [y, m, d] = date.split('-').map(Number) as [number, number, number];
@@ -71,130 +31,6 @@ export function dateOfWeekday(monday: IsoDate, weekday: Weekday): IsoDate {
   return toIsoDate(new Date(y, m - 1, d + weekday));
 }
 
-function combinations<T>(items: readonly T[], size: number): T[][] {
-  if (size === 0) return [[]];
-  return items.flatMap((item, index) => combinations(items.slice(index + 1), size - 1).map((rest) => [item, ...rest]));
-}
-
-interface PlanInput {
-  routine: Pick<WeeklyRoutine, 'gymDays' | 'practiceDays' | 'matchDays' | 'includeOptionalThird'>;
-  program: Program;
-  /** Séance principale à faire en premier (rotation A/B). */
-  nextCoreKey: TemplateKey;
-  /**
-   * Premier jour planifiable de la semaine (programme créé en cours de semaine) :
-   * les jours précédents ne sont ni planifiés ni comptés comme manqués.
-   */
-  firstDay?: Weekday;
-}
-
-export function planWeek({ routine, program, nextCoreKey, firstDay = 0 }: PlanInput): WeekPlan {
-  const explanations: string[] = [];
-  if (firstDay > 0) explanations.push('Programme commencé en cours de semaine : planning à partir de ce jour seulement.');
-  if (routine.gymDays.length === 0) {
-    return {
-      status: 'unknown-availability',
-      sessions: [],
-      explanations: ['Indique tes jours disponibles pour la salle : VYRO ne planifie rien sans connaître tes disponibilités.'],
-    };
-  }
-
-  const isMatch = (day: Weekday) => routine.matchDays.includes(day);
-  const isPractice = (day: Weekday) => routine.practiceDays.includes(day);
-  const coreTemplates = program.templates.filter((template) => !template.optional);
-  const optional = program.templates.find((template) => template.optional);
-  const coreOrder = [...coreTemplates].sort((a, b) =>
-    a.key === nextCoreKey ? -1 : b.key === nextCoreKey ? 1 : a.key.localeCompare(b.key),
-  );
-  const hasLegs = (key: TemplateKey) => {
-    const template = program.templates.find((item) => item.key === key);
-    return template ? templateLegDemand(template) !== 'none' && templateLegDemand(template) !== 'low' : false;
-  };
-
-  const allowed = (day: Weekday, key: TemplateKey) =>
-    day >= firstDay &&
-    routine.gymDays.includes(day) && !isMatch(day) && !(hasLegs(key) && isMatch(next(day)));
-
-  const dayPenalty = (day: Weekday) =>
-    (isMatch(prev(day)) ? SCHEDULE_PENALTIES.dayAfterMatch : 0) + (isPractice(day) ? SCHEDULE_PENALTIES.practiceSameDay : 0);
-
-  const spacingPenalty = (days: readonly Weekday[]) =>
-    days.reduce<number>((total, day) => total + (days.includes(next(day)) ? SCHEDULE_PENALTIES.consecutiveGymDays : 0), 0);
-
-  // Séances principales : meilleure combinaison de jours (rotation dans l'ordre chronologique).
-  const bestDays = (count: number): { days: Weekday[]; score: number } | null => {
-    let found: { days: Weekday[]; score: number } | null = null;
-    for (const days of combinations(WEEKDAYS, count)) {
-      if (!days.every((day, index) => allowed(day, coreOrder[index]?.key ?? 'A'))) continue;
-      const score = days.reduce<number>((total, day) => total + dayPenalty(day), 0) + spacingPenalty(days);
-      if (!found || score < found.score) found = { days, score };
-    }
-    return found;
-  };
-
-  // Moins de séances si la semaine ne le permet pas — jamais de séance plus lourde pour compenser.
-  let coreCount = coreOrder.length;
-  let best = bestDays(coreCount);
-  while (!best && coreCount > 1) {
-    coreCount -= 1;
-    best = bestDays(coreCount);
-  }
-
-  if (!best) {
-    return {
-      status: 'no-valid-day',
-      sessions: [],
-      explanations: [
-        ...explanations,
-        'Aucun jour disponible ne convient cette semaine (jours de match ou veilles de match uniquement). Ajoute un jour disponible ou garde la semaine pour le basket.',
-      ],
-    };
-  }
-
-  const sessions: PlannedSession[] = best.days.map((day, index) => {
-    const key = coreOrder[index]?.key ?? 'A';
-    const notes: string[] = [];
-    if (isPractice(day)) notes.push('Entraînement de basket le même jour : fais la musculation après une pause, ou allège.');
-    if (isMatch(prev(day))) notes.push('Lendemain de match : écoute ta récupération, la version allégée est possible.');
-    return { weekday: day, templateKey: key, optional: false, notes };
-  });
-
-  explanations.push(
-    `${sessions.length} séance${sessions.length > 1 ? 's' : ''} principale${sessions.length > 1 ? 's' : ''} placée${sessions.length > 1 ? 's' : ''} sur tes jours disponibles, jamais un jour de match.`,
-  );
-  if (routine.matchDays.length > 0) explanations.push('Pas de séance avec travail de jambes la veille d’un match.');
-  if (spacingPenalty(best.days) === 0 && sessions.length > 1) explanations.push('Au moins 48 h entre deux séances de musculation.');
-  if (coreCount < coreOrder.length) {
-    explanations.push(
-      `Une seule séance possible cette semaine avec tes disponibilités : pas de rattrapage ni de séance plus lourde pour compenser.`,
-    );
-  }
-
-  // 3e séance facultative.
-  if (routine.includeOptionalThird && optional && coreCount === coreOrder.length) {
-    const used = sessions.map((session) => session.weekday);
-    const candidates = WEEKDAYS.filter((day) => !used.includes(day) && allowed(day, optional.key))
-      .map((day) => ({ day, score: dayPenalty(day) + spacingPenalty([...used, day]) - spacingPenalty(used) }))
-      .filter((candidate) => candidate.score <= SCHEDULE_PENALTIES.maxOptionalPenalty)
-      .sort((a, b) => a.score - b.score || a.day - b.day);
-    const chosen = candidates[0];
-    if (chosen) {
-      sessions.push({
-        weekday: chosen.day,
-        templateKey: optional.key,
-        optional: true,
-        notes: ['Facultative : à faire seulement si tu te sens bien récupéré.'],
-      });
-      explanations.push('Séance facultative proposée sur un jour qui ne gêne pas ta récupération.');
-    } else {
-      explanations.push('Pas de 3e séance cette semaine : aucun jour restant ne laisse assez de récupération.');
-    }
-  }
-
-  sessions.sort((a, b) => a.weekday - b.weekday);
-  return { status: coreCount < coreOrder.length ? 'reduced' : 'ok', sessions, explanations };
-}
-
 /** Séance principale suivante dans la rotation (A puis B puis A…), d'après la dernière faite. */
 export function nextCoreTemplate(program: Program, lastCompletedCoreKey: TemplateKey | null): TemplateKey {
   const core = program.templates.filter((template) => !template.optional).map((template) => template.key);
@@ -207,26 +43,23 @@ export function nextCoreTemplate(program: Program, lastCompletedCoreKey: Templat
 export type DayStatus = 'done' | 'missed' | 'today' | 'upcoming';
 
 /**
- * État des séances prévues de la semaine. Une séance faite un autre jour que prévu compte
- * comme faite. Une séance manquée n'est ni rattrapée ni compensée : la rotation reprend
- * simplement à la séance suivante.
+ * État des séances prévues. Une séance faite un autre jour que prévu compte comme faite.
+ * Une séance manquée n'est ni rattrapée ni compensée : la rotation reprend simplement.
  */
 export function weekStatuses(
-  sessions: readonly PlannedSession[],
-  monday: IsoDate,
+  sessions: readonly { date: IsoDate; templateKey: TemplateKey }[],
   today: IsoDate,
-  completedThisWeek: readonly { date: IsoDate; templateKey: TemplateKey }[],
-): Map<Weekday, DayStatus> {
-  const remaining = [...completedThisWeek].sort((a, b) => a.date.localeCompare(b.date));
-  const statuses = new Map<Weekday, DayStatus>();
-  for (const session of [...sessions].sort((a, b) => a.weekday - b.weekday)) {
-    const date = dateOfWeekday(monday, session.weekday);
+  completed: readonly { date: IsoDate; templateKey: TemplateKey }[],
+): Map<IsoDate, DayStatus> {
+  const remaining = [...completed].sort((a, b) => a.date.localeCompare(b.date));
+  const statuses = new Map<IsoDate, DayStatus>();
+  for (const session of [...sessions].sort((a, b) => a.date.localeCompare(b.date))) {
     const matchIndex = remaining.findIndex((workout) => workout.templateKey === session.templateKey);
     if (matchIndex !== -1) {
       remaining.splice(matchIndex, 1);
-      statuses.set(session.weekday, 'done');
+      statuses.set(session.date, 'done');
     } else {
-      statuses.set(session.weekday, date < today ? 'missed' : date === today ? 'today' : 'upcoming');
+      statuses.set(session.date, session.date < today ? 'missed' : session.date === today ? 'today' : 'upcoming');
     }
   }
   return statuses;

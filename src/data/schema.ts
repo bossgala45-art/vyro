@@ -1,5 +1,6 @@
 import type Dexie from 'dexie';
 import type { Transaction } from 'dexie';
+import { migrateRoutineToCalendar } from './migrations/v3-calendar';
 
 /**
  * Une version du schéma IndexedDB.
@@ -56,6 +57,21 @@ export const VYRO_SCHEMA: readonly SchemaVersion[] = [
       programs: 'id, createdAt',
       workouts: 'id, date, status, programId',
     },
+  },
+  {
+    // Étape 4 : calendrier. La semaine type (v2) est convertie puis sa table supprimée.
+    version: 3,
+    stores: {
+      activities: 'id, kind, date',
+      exceptions: 'id, activityId, date',
+      vacations: 'id, start',
+      dayOverrides: 'date',
+      planning: 'id',
+      activityLogs: 'id, date, kind',
+      planSnapshots: 'weekStart',
+      routine: null,
+    },
+    upgrade: migrateRoutineToCalendar,
   },
 ];
 

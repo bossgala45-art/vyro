@@ -1,4 +1,8 @@
+import { Link } from 'react-router';
 import { todayIso } from '../../app/clock';
+import { weekStart } from '../../domain/training/schedule';
+import { formatTimeRange } from '../calendar/labels';
+import { useWeek } from '../calendar/usePlanning';
 import { useProfile } from '../../data/hooks';
 import { daysBetween } from '../../domain/common/dates';
 import { Card } from '../../ui/Card';
@@ -10,7 +14,12 @@ const dateFormatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: '
 
 export function TodayScreen() {
   const profile = useProfile();
+  const week = useWeek(weekStart(todayIso()));
   const today = dateFormatter.format(new Date());
+  const todayDate = todayIso();
+  const activities = week?.occurrences.filter((occurrence) => occurrence.date === todayDate && !occurrence.suspended) ?? [];
+  const session = week?.plan?.sessions.find((item) => item.date === todayDate);
+  const sessionStatus = session ? week?.statuses.get(todayDate) : undefined;
   const daysLeft = profile ? daysBetween(todayIso(), profile.goal.targetDate) : null;
 
   return (
@@ -43,11 +52,41 @@ export function TodayScreen() {
           )}
         </Card>
 
+        {week && (
+          <Card>
+            <div className="flex items-center justify-between">
+              <h2 className="font-semibold text-snow">Au programme aujourd’hui</h2>
+              <Link to={`/calendrier/jour/${todayDate}`} className="flex min-h-11 items-center px-2 text-sm font-medium text-volt-400">
+                Détails
+              </Link>
+            </div>
+            {activities.length === 0 && !session ? (
+              <p className="mt-1 text-sm text-mist">Rien de prévu dans ton calendrier.</p>
+            ) : (
+              <ul className="mt-2 space-y-1 text-sm text-snow">
+                {activities.map((activity) => (
+                  <li key={activity.id}>
+                    {activity.title} · {formatTimeRange(activity)}
+                  </li>
+                ))}
+                {session && (
+                  <li>
+                    Musculation : séance {session.templateKey}
+                    {session.startTime ? ` à ${session.startTime}` : ''}
+                    {session.light ? ' (version allégée conseillée)' : ''}
+                    {sessionStatus === 'done' ? ' — faite ✓' : ''}
+                  </li>
+                )}
+              </ul>
+            )}
+          </Card>
+        )}
+
         <ModulePlaceholder
           step={5}
           planned={[
-            'Séance du jour adaptée à ton planning basket',
             'Check-in rapide de récupération',
+            'Séance adaptée à ta forme du jour',
             'Message du coach basé sur tes données réelles',
           ]}
         />

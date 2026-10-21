@@ -1,5 +1,5 @@
-import { isStoredProgram, isStoredRoutine, isStoredWorkout, validateSlot } from '../../domain/training/integrity';
-import type { Program, WeeklyRoutine, Workout } from '../../domain/training/types';
+import { isStoredProgram, isStoredWorkout, validateSlot } from '../../domain/training/integrity';
+import type { Program, Workout } from '../../domain/training/types';
 import { db as defaultDb, type VyroDatabase } from '../db';
 import { StorageError, guard } from '../errors';
 
@@ -13,18 +13,6 @@ function assertProgramValid(program: Program) {
 
 export function createTrainingRepository(db: VyroDatabase) {
   return {
-    async getRoutine(): Promise<WeeklyRoutine | null> {
-      const record = await guard(() => db.routine.get('me'));
-      if (record === undefined) return null;
-      if (!isStoredRoutine(record)) throw new StorageError('integrity', { detail: 'semaine type' });
-      return record;
-    },
-
-    async saveRoutine(routine: WeeklyRoutine): Promise<void> {
-      if (!isStoredRoutine(routine)) throw new RangeError('Semaine type invalide.');
-      await guard(() => db.routine.put(routine));
-    },
-
     async getActiveProgram(): Promise<Program | null> {
       const programs = await guard(() => db.programs.toArray());
       const active = programs.filter((program) => program.active);
