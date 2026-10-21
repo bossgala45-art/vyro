@@ -3,21 +3,19 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { buildProfile } from '../domain/profile/draft';
 import { generateProgram } from '../domain/training/program';
 import { createWorkout } from '../domain/training/workout';
-import type { WeeklyRoutine } from '../domain/training/types';
 import { TEST_NOW, TEST_TODAY, validDraft } from '../test/fixtures';
 import { VyroDatabase, openDatabase } from './db';
 import { deleteAllData } from './maintenance';
 import { createBodyWeightRepository } from './repositories/bodyWeightRepository';
 import { createProfileRepository } from './repositories/profileRepository';
 import { createTrainingRepository } from './repositories/trainingRepository';
-import { VYRO_SCHEMA } from './schema';
+import { CURRENT_SCHEMA_VERSION, VYRO_SCHEMA } from './schema';
 
 let name: string;
 let db: VyroDatabase;
 
 const profile = () => buildProfile(validDraft(), { today: TEST_TODAY, requireWeight: true, now: TEST_NOW });
 const makeProgram = (id: string) => generateProgram({ id, now: `2026-10-${id === 'p1' ? '01' : '02'}T00:00:00.000Z`, profile: profile() }).program;
-const routine: WeeklyRoutine = { id: 'me', gymDays: [0, 2], practiceDays: [1, 3], matchDays: [5], includeOptionalThird: false, updatedAt: TEST_NOW };
 
 beforeEach(() => {
   name = `vyro-training-${crypto.randomUUID()}`;
@@ -29,7 +27,7 @@ afterEach(async () => {
   await Dexie.delete(name);
 });
 
-describe('migration v1 → v2 (musculation)', () => {
+describe('migration v1 → version actuelle', () => {
   it('conserve le profil, les pesées et les réglages existants', async () => {
     const v1 = new VyroDatabase(name, VYRO_SCHEMA.filter((entry) => entry.version === 1));
     await openDatabase(v1, 1);
@@ -37,22 +35,14 @@ describe('migration v1 → v2 (musculation)', () => {
     v1.close();
 
     await openDatabase(db);
-    expect(db.backendDB().version / 10).toBe(2);
+    expect(db.backendDB().version / 10).toBe(CURRENT_SCHEMA_VERSION);
     expect(await createProfileRepository(db).get()).toEqual(profile());
     expect(await createBodyWeightRepository(db).list()).toHaveLength(1);
-    expect(await createTrainingRepository(db).getRoutine()).toBeNull();
     expect(await createTrainingRepository(db).listWorkouts()).toEqual([]);
   });
 });
 
 describe('dépôt musculation', () => {
-  it('enregistre et relit la semaine type', async () => {
-    const repo = createTrainingRepository(db);
-    await repo.saveRoutine(routine);
-    expect(await repo.getRoutine()).toEqual(routine);
-    await expect(repo.saveRoutine({ ...routine, gymDays: [9 as never] })).rejects.toThrow(RangeError);
-  });
-
   it('active un nouveau programme en conservant l’ancien', async () => {
     const repo = createTrainingRepository(db);
     await repo.activateNewProgram(makeProgram('p1'));
@@ -110,10 +100,8 @@ describe('dépôt musculation', () => {
 
   it('l’effacement des données supprime aussi la musculation', async () => {
     const repo = createTrainingRepository(db);
-    await repo.saveRoutine(routine);
     await repo.activateNewProgram(makeProgram('p1'));
     await deleteAllData(db);
-    expect(await repo.getRoutine()).toBeNull();
     expect(await repo.getActiveProgram()).toBeNull();
   });
 });

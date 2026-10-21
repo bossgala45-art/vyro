@@ -93,7 +93,10 @@ export interface Program {
   rationale: string[];
 }
 
-/** Semaine type déclarée par l'utilisateur (remplacée par le calendrier à l'étape 4). */
+/**
+ * Ancienne semaine type (schéma v2, étape 3). Conservée uniquement pour la migration
+ * vers le calendrier (v3) : ne plus l'utiliser ailleurs.
+ */
 export interface WeeklyRoutine {
   id: 'me';
   /** Jours où la salle est possible. Vide = disponibilités inconnues : rien n'est planifié. */

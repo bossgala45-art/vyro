@@ -1,18 +1,18 @@
 import { expect, test } from '@playwright/test';
 import { completeOnboarding } from './helpers';
 
-/** Touche la case (étiquette visible) qui contient la case à cocher nommée. */
-const tapChoice = (page: import('@playwright/test').Page, name: string) => page.locator('label', { has: page.getByLabel(name, { exact: true }) }).tap();
 
 test('musculation : planning, programme, séance complète et historique', async ({ page }) => {
   await completeOnboarding(page);
   await page.goto('./#/entrainement');
 
   await page.getByRole('button', { name: 'Indiquer mes disponibilités' }).tap();
-  for (const day of ['Lun', 'Mer', 'Ven']) await tapChoice(page, `Jours possibles pour la salle : ${day}`);
-  await tapChoice(page, 'Entraînements de basket habituels : Mar');
-  await tapChoice(page, 'Jour(s) de match habituel(s) : Sam');
-  await page.getByRole('button', { name: 'Enregistrer' }).tap();
+  for (const day of ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']) {
+    await page.getByRole('checkbox', { name: day }).check();
+  }
+  await page.getByRole('button', { name: 'Enregistrer les disponibilités' }).tap();
+  await expect(page.getByText(/Disponibilités enregistrées/)).toBeVisible();
+  await page.getByRole('navigation', { name: 'Navigation principale' }).getByRole('link', { name: 'Séances' }).tap();
 
   await page.getByRole('button', { name: 'Générer mon programme' }).tap();
   // Profil de test avec des haltères seulement : le manque de matériel est signalé, pas masqué.
