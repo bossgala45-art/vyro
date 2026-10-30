@@ -2,7 +2,6 @@ import { CalendarClock, ChevronLeft, ChevronRight, Download, Palmtree, Plus, Tro
 import type { ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { todayIso } from '../../app/clock';
-import { useActiveProgram, useCalendarData, useProfile, useWorkouts } from '../../data/hooks';
 import { findConflicts } from '../../domain/calendar/occurrences';
 import { addDays } from '../../domain/calendar/time';
 import { isIsoDate, type IsoDate } from '../../domain/common/dates';
@@ -12,6 +11,7 @@ import { Card } from '../../ui/Card';
 import { Screen } from '../../ui/Screen';
 import { formatShortDate } from '../training/format';
 import { formatDayShort, formatMonth, formatTimeRange, KIND_STYLES } from './labels';
+import { useReadinessData } from '../recovery/readiness';
 import { computeWeek, usePlanChanges, type WeekView } from './usePlanning';
 
 type View = 'semaine' | 'mois';
@@ -25,10 +25,12 @@ const STATUS: Record<string, { label: string; className: string }> = {
 
 export function CalendarScreen() {
   const [params, setParams] = useSearchParams();
-  const data = useCalendarData();
-  const program = useActiveProgram();
-  const profile = useProfile();
-  const workouts = useWorkouts();
+  // Calendrier tenant compte du check-in de récupération du jour.
+  const day = useReadinessData();
+  const data = day?.data;
+  const program = day?.program;
+  const profile = day?.profile;
+  const workouts = day?.workouts;
   const today = todayIso();
   const view: View = params.get('vue') === 'mois' ? 'mois' : 'semaine';
   const rawDate = params.get('date');

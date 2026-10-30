@@ -36,10 +36,15 @@ interface CreateWorkoutInput {
   now: string;
   light: boolean;
   history: readonly Workout[];
+  /**
+   * Exercices à retirer aujourd'hui (zone douloureuse signalée au check-in).
+   * Ils sont marqués « passés » avec la raison, sans remplacement intense.
+   */
+  excludedExerciseIds?: readonly string[];
 }
 
 /** Prépare une séance à partir du programme et de l'historique (objectifs expliqués). */
-export function createWorkout({ id, program, templateKey, date, now, light, history }: CreateWorkoutInput): Workout {
+export function createWorkout({ id, program, templateKey, date, now, light, history, excludedExerciseIds = [] }: CreateWorkoutInput): Workout {
   const template = program.templates.find((item) => item.key === templateKey);
   if (!template) throw new Error(`Séance ${templateKey} absente du programme`);
 
@@ -49,15 +54,18 @@ export function createWorkout({ id, program, templateKey, date, now, light, hist
     const exposures = exposuresFor(slot.exerciseId, history);
     let target = computeTarget(slot, exercise, exposures, date);
     if (light) target = lightenTarget(target, exposures[0] ? workingLoad(exposures[0].sets) : null);
+    const excluded = excludedExerciseIds.includes(slot.exerciseId);
     return [
       {
         exerciseId: slot.exerciseId,
         slot: { ...slot },
         target: { sets: target.sets, repMin: target.repMin, repMax: target.repMax, loadKg: target.loadKg },
-        targetNote: target.note,
+        targetNote: excluded
+          ? 'Retiré aujourd’hui : il sollicite la zone douloureuse signalée au check-in. Ne le refais que sans douleur.'
+          : target.note,
         sets: emptySets(target.sets, target.loadKg),
         pain: { reported: false, note: '' },
-        skipped: false,
+        skipped: excluded,
       },
     ];
   });

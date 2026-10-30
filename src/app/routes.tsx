@@ -16,7 +16,10 @@ import { WelcomeScreen } from '../features/onboarding/WelcomeScreen';
 import { ProfileEditScreen } from '../features/profile/ProfileEditScreen';
 import { ProfileScreen } from '../features/profile/ProfileScreen';
 import { ProgressScreen } from '../features/progress/ProgressScreen';
+import { CheckInScreen } from '../features/recovery/CheckInScreen';
 import { RecoveryScreen } from '../features/recovery/RecoveryScreen';
+import { ThresholdsScreen } from '../features/recovery/ThresholdsScreen';
+import { TodayReadinessScreen } from '../features/recovery/TodayReadinessScreen';
 import { SettingsScreen } from '../features/settings/SettingsScreen';
 import { TodayScreen } from '../features/today/TodayScreen';
 import { HistoryScreen, WorkoutDetailScreen } from '../features/training/HistoryScreen';
@@ -60,6 +63,9 @@ export const routes: RouteObject[] = [
           { path: 'progres', element: <ProgressScreen /> },
           { path: 'plus', element: <MoreScreen /> },
           { path: 'recuperation', element: <RecoveryScreen /> },
+          { path: 'recuperation/check-in', element: <CheckInScreen /> },
+          { path: 'recuperation/aujourdhui', element: <TodayReadinessScreen /> },
+          { path: 'recuperation/reperes', element: <ThresholdsScreen /> },
           { path: 'nutrition', element: <NutritionScreen /> },
           { path: 'coach', element: <CoachScreen /> },
           { path: 'profil', element: <ProfileScreen /> },

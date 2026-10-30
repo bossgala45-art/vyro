@@ -1,3 +1,5 @@
+import { DEFAULT_THRESHOLDS, type RecoveryThresholds } from '../recovery/types';
+
 /** Empreinte du code de verrouillage : le code lui-même n'est jamais enregistré. */
 export interface LockVerifier {
   algorithm: 'PBKDF2-SHA256';
@@ -26,6 +28,10 @@ export interface AppSettings {
     /** Horodatage ISO avant lequel aucun nouvel essai n'est accepté. */
     retryAfter: string | null;
   };
+  recovery: {
+    /** Repères du moteur de récupération (réglables, non médicaux). */
+    thresholds: RecoveryThresholds;
+  };
 }
 
 export function defaultSettings(): AppSettings {
@@ -33,6 +39,7 @@ export function defaultSettings(): AppSettings {
     id: 'app',
     privacy: { hideWhenInactive: true },
     lock: { verifier: null, autoLockMinutes: 1, failedAttempts: 0, retryAfter: null },
+    recovery: { thresholds: { ...DEFAULT_THRESHOLDS } },
   };
 }
 

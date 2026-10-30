@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { nowIso, todayIso } from '../../app/clock';
-import { useActiveProgram, useCalendarData, usePlanSnapshot, useProfile, useWorkouts } from '../../data/hooks';
+import { usePlanSnapshot } from '../../data/hooks';
+import { useReadinessData } from '../recovery/readiness';
 import { calendarRepository } from '../../data/repositories/calendarRepository';
 import { diffPlans, toSnapshot, type PlanChange } from '../../domain/calendar/diff';
 import { expandOccurrences } from '../../domain/calendar/occurrences';
@@ -57,12 +58,9 @@ export function computeWeek(
 
 /** Données d'une semaine, recalculées dès que le calendrier ou les séances changent. */
 export function useWeek(monday: IsoDate): WeekView | undefined {
-  const data = useCalendarData();
-  const program = useActiveProgram();
-  const profile = useProfile();
-  const workouts = useWorkouts();
-  if (data === undefined || program === undefined || profile === undefined || workouts === undefined) return undefined;
-  return computeWeek(monday, todayIso(), data, program, profile, workouts);
+  const day = useReadinessData();
+  if (!day) return undefined;
+  return computeWeek(monday, todayIso(), day.data, day.program, day.profile, day.workouts);
 }
 
 /**

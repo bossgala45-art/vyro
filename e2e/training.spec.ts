@@ -19,10 +19,14 @@ test('musculation : planning, programme, séance complète et historique', async
   await expect(page.getByText(/aucun exercice disponible pour « tirage vertical »/).first()).toBeVisible();
   await expect(page.getByRole('list', { name: 'Planning de la semaine' })).toBeVisible();
 
+  // Commencer → check-in de récupération → conseil du jour → séance.
   await page.getByRole('button', { name: 'Commencer' }).tap();
-  const dialog = page.getByRole('dialog');
-  await dialog.getByText('Bien', { exact: true }).tap();
-  await dialog.getByRole('button', { name: 'Commencer', exact: true }).tap();
+  await page.getByLabel('Sommeil cette nuit').fill('8');
+  await page.getByRole('button', { name: 'Énergie : 7' }).tap();
+  await page.getByText('Non', { exact: true }).tap();
+  await page.getByRole('button', { name: 'Voir mon conseil du jour' }).tap();
+  await expect(page.getByText('Séance normale')).toBeVisible();
+  await page.getByRole('button', { name: 'Commencer la séance A' }).tap();
 
   await expect(page.getByRole('heading', { level: 1, name: 'Séance A — corps complet' })).toBeVisible();
   await page.getByLabel('Répétitions — Squat gobelet, série 1').fill('10');

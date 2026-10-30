@@ -31,15 +31,16 @@ async function seedRoutine(gymDays: Weekday[] = [0, 1, 2, 3, 4, 5, 6]) {
   });
 }
 
+/** Commencer → check-in de récupération → conseil du jour → séance. */
 async function startSession(user: User, feeling: 'Bien' | 'Fatigué' = 'Bien') {
   await user.click(await screen.findByRole('button', { name: 'Commencer' }));
-  const dialog = await screen.findByRole('dialog');
-  await user.click(within(dialog).getByLabelText(feeling));
-  const startButton =
-    feeling === 'Fatigué'
-      ? within(dialog).getByRole('button', { name: 'Commencer la version allégée' })
-      : within(dialog).getByRole('button', { name: 'Commencer' });
-  await user.click(startButton);
+  await user.type(await screen.findByLabelText('Sommeil cette nuit'), '8');
+  await user.click(screen.getByRole('button', { name: `Énergie : ${feeling === 'Fatigué' ? 3 : 7}` }));
+  await user.click(screen.getByLabelText('Non'));
+  await user.click(screen.getByRole('button', { name: 'Voir mon conseil du jour' }));
+  await user.click(
+    await screen.findByRole('button', { name: feeling === 'Fatigué' ? 'Commencer la séance A allégée' : 'Commencer la séance A' }),
+  );
   await screen.findByRole('heading', { level: 1, name: 'Séance A — corps complet' });
   expect(screen.getByText(feeling === 'Fatigué' ? 'Version allégée' : 'Séance en cours')).toBeInTheDocument();
 }
@@ -58,11 +59,13 @@ describe('mise en place', () => {
 
     await user.click(await screen.findByRole('button', { name: 'Indiquer mes disponibilités' }));
     await waitFor(() => expect(router.state.location.pathname).toBe('/calendrier/habituel'));
-    await user.click(await screen.findByRole('checkbox', { name: 'Lundi' }));
-    await user.click(screen.getByRole('checkbox', { name: 'Mercredi' }));
+    // Tous les jours cochés : le test ne dépend pas du jour de la semaine où il tourne.
+    for (const day of ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']) {
+      await user.click(await screen.findByRole('checkbox', { name: day }));
+    }
     await user.click(screen.getByRole('button', { name: 'Enregistrer les disponibilités' }));
     expect(await screen.findByText(/Disponibilités enregistrées/)).toBeInTheDocument();
-    expect((await calendarRepository.load()).planning?.gymSlots.map((slot) => slot.weekday)).toEqual([0, 2]);
+    expect((await calendarRepository.load()).planning?.gymSlots.map((slot) => slot.weekday)).toEqual([0, 1, 2, 3, 4, 5, 6]);
 
     await user.click(within(screen.getByRole('navigation', { name: 'Navigation principale' })).getByRole('link', { name: 'Séances' }));
 
@@ -133,11 +136,16 @@ describe('séance', () => {
     const user = userEvent.setup();
     renderRoute('/entrainement');
     await user.click(await screen.findByRole('button', { name: 'Commencer' }));
-    const dialog = await screen.findByRole('dialog');
-    await user.click(within(dialog).getByLabelText('Douleur'));
-    expect(within(dialog).getByText('Repos conseillé')).toBeInTheDocument();
-    await user.click(within(dialog).getByRole('button', { name: 'Je me repose aujourd’hui' }));
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    await user.type(await screen.findByLabelText('Sommeil cette nuit'), '8');
+    await user.click(screen.getByRole('button', { name: 'Énergie : 7' }));
+    await user.click(screen.getByLabelText('Oui'));
+    await user.click(screen.getByLabelText('Genoux'));
+    await user.click(screen.getByRole('button', { name: 'Intensité de la douleur : 7' }));
+    await user.click(screen.getByRole('button', { name: 'Voir mon conseil du jour' }));
+    expect(await screen.findByText('Repos conseillé')).toBeInTheDocument();
+    expect(screen.getByText(/professionnel de santé/)).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Commencer/ })).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Je me repose aujourd’hui' }));
     expect(await trainingRepository.listWorkouts()).toEqual([]);
   });
 

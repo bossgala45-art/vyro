@@ -10,6 +10,7 @@ import type {
   PlanningSettings,
   Vacation,
 } from '../domain/calendar/types';
+import type { CheckIn } from '../domain/recovery/types';
 import type { Program, Workout } from '../domain/training/types';
 import { StorageError, guard } from './errors';
 import { applySchema, VYRO_SCHEMA, type SchemaVersion } from './schema';
@@ -37,6 +38,7 @@ export class VyroDatabase extends Dexie {
   planning!: Table<PlanningSettings, 'me'>;
   activityLogs!: Table<ActivityLog, string>;
   planSnapshots!: Table<PlanSnapshot, string>;
+  checkIns!: Table<CheckIn, string>;
 
   constructor(name = DATABASE_NAME, versions: readonly SchemaVersion[] = VYRO_SCHEMA) {
     super(name);

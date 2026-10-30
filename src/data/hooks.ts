@@ -4,6 +4,8 @@ import type { AppSettings } from '../domain/settings/types';
 import type { Program, Workout } from '../domain/training/types';
 import { trainingRepository } from './repositories/trainingRepository';
 import { calendarRepository } from './repositories/calendarRepository';
+import { recoveryRepository } from './repositories/recoveryRepository';
+import type { CheckIn } from '../domain/recovery/types';
 import type { PlanSnapshot } from '../domain/calendar/types';
 import type { CalendarData } from '../domain/calendar/weekly';
 import type { IsoDate } from '../domain/common/dates';
@@ -41,6 +43,11 @@ export function useCalendarData(): CalendarData | undefined {
  */
 export function usePlanSnapshot(weekStart: IsoDate): { weekStart: IsoDate; snapshot: PlanSnapshot | null } | undefined {
   return useLiveQuery(async () => ({ weekStart, snapshot: await calendarRepository.getSnapshot(weekStart) }), [weekStart]);
+}
+
+/** Check-ins de récupération, du plus ancien au plus récent. */
+export function useCheckIns(): CheckIn[] | undefined {
+  return useLiveQuery(() => recoveryRepository.list(), []);
 }
 
 /** `null` : aucun programme généré. */

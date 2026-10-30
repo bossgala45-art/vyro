@@ -6,15 +6,13 @@ import { StorageError } from '../../data/errors';
 import { trainingRepository } from '../../data/repositories/trainingRepository';
 import { estimateMinutes, generateProgram } from '../../domain/training/program';
 import { nextCoreTemplate, weekStart, type DayStatus } from '../../domain/training/schedule';
-import type { TemplateKey } from '../../domain/training/types';
-import { createWorkout, lastCompletedCoreKey } from '../../domain/training/workout';
+import { lastCompletedCoreKey } from '../../domain/training/workout';
 import { Alert } from '../../ui/Alert';
 import { Button } from '../../ui/Button';
 import { Card } from '../../ui/Card';
 import { Screen } from '../../ui/Screen';
 import { useWeek } from '../calendar/usePlanning';
 import { formatShortDate, newId } from './format';
-import { StartWorkoutDialog } from './StartWorkoutDialog';
 
 const STATUS_LABELS: Record<DayStatus, { label: string; className: string }> = {
   done: { label: 'Faite', className: 'bg-emerald-500/15 text-emerald-300' },
@@ -28,7 +26,6 @@ export function TrainingScreen() {
   const today = todayIso();
   const monday = weekStart(today);
   const week = useWeek(monday);
-  const [starting, setStarting] = useState<TemplateKey | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [warnings, setWarnings] = useState<string[]>([]);
@@ -36,7 +33,6 @@ export function TrainingScreen() {
   if (!week) return null;
   const { profile, program, workouts, plan, statuses, data } = week;
   const hasAvailability = data.planning !== null && data.planning.gymSlots.length > 0;
-  const todayContext = week.days.find((day) => day.date === today);
   const running = workouts.find((workout) => workout.status === 'in-progress');
 
   const generate = async () => {
@@ -54,24 +50,10 @@ export function TrainingScreen() {
     }
   };
 
-  const start = async (templateKey: TemplateKey, light: boolean) => {
-    if (!program) return;
-    setBusy(true);
-    setError(null);
-    try {
-      const workout = createWorkout({ id: newId(), program, templateKey, date: today, now: nowIso(), light, history: workouts });
-      const started = await trainingRepository.startWorkout(workout);
-      navigate(`/entrainement/seance/${started.id}`);
-    } catch (e) {
-      setError(e instanceof StorageError ? e.message : 'Séance non démarrée.');
-      setBusy(false);
-    }
-  };
 
   const nextKey = program ? nextCoreTemplate(program, lastCompletedCoreKey(program, workouts)) : null;
   const nextTemplate = program?.templates.find((template) => template.key === nextKey);
   const optionalTemplate = program?.templates.find((template) => template.optional);
-  const startingTemplate = program?.templates.find((template) => template.key === starting);
 
   return (
     <Screen title="Séances" subtitle="Musculation">
@@ -128,11 +110,11 @@ export function TrainingScreen() {
           <p className="text-sm text-mist">
             {nextTemplate.focus} · environ {estimateMinutes(nextTemplate.slots)} min
           </p>
-          <Button block className="mt-4" onClick={() => setStarting(nextTemplate.key)}>
+          <Button block className="mt-4" onClick={() => navigate(`/recuperation/check-in?seance=${nextTemplate.key}`)}>
             Commencer
           </Button>
           {optionalTemplate && (
-            <Button variant="ghost" block className="mt-1" onClick={() => setStarting(optionalTemplate.key)}>
+            <Button variant="ghost" block className="mt-1" onClick={() => navigate(`/recuperation/check-in?seance=${optionalTemplate.key}`)}>
               Faire plutôt la séance facultative {optionalTemplate.key}
             </Button>
           )}
@@ -236,17 +218,6 @@ export function TrainingScreen() {
         </ul>
       </nav>
 
-      {startingTemplate && (
-        <StartWorkoutDialog
-          template={startingTemplate}
-          isMatchDay={todayContext?.isMatchDay ?? false}
-          isDayBeforeMatch={todayContext?.matchTomorrow ?? false}
-          fatigueDeclared={todayContext?.fatigue ?? false}
-          busy={busy}
-          onCancel={() => setStarting(null)}
-          onStart={(light) => void start(startingTemplate.key, light)}
-        />
-      )}
     </Screen>
   );
 }
