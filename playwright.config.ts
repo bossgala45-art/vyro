@@ -14,6 +14,9 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${PORT}/`,
     trace: 'retain-on-failure',
+    // Comme un iPhone réglé en France : fuseau et langue réels de l'utilisateur.
+    timezoneId: 'Europe/Paris',
+    locale: 'fr-FR',
   },
   projects: [
     {

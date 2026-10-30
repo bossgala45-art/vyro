@@ -97,7 +97,7 @@ describe('pesées', () => {
     await user.type(screen.getByLabelText('Poids'), '59,2');
     await user.click(screen.getByRole('button', { name: 'Enregistrer' }));
 
-    expect(await screen.findByText('59,2 kg')).toBeInTheDocument();
+    expect((await screen.findAllByText('59,2 kg')).length).toBeGreaterThan(0);
     expect(await bodyWeightRepository.list()).toHaveLength(2);
   });
 

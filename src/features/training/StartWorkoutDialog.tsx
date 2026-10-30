@@ -1,7 +1,7 @@
 import { useId, useState } from 'react';
 import { templateLegDemand } from '../../domain/training/program';
-import { adviseSession, weekdayOf } from '../../domain/training/schedule';
-import type { SessionTemplate, Weekday, WeeklyRoutine } from '../../domain/training/types';
+import { adviseSession } from '../../domain/training/schedule';
+import type { SessionTemplate } from '../../domain/training/types';
 import { Alert } from '../../ui/Alert';
 import { Button } from '../../ui/Button';
 import { ChoiceGroup } from '../../ui/fields';
@@ -10,23 +10,23 @@ type Feeling = 'good' | 'tired' | 'pain';
 
 interface StartWorkoutDialogProps {
   template: SessionTemplate;
-  routine: WeeklyRoutine | null;
-  today: string;
+  isMatchDay: boolean;
+  isDayBeforeMatch: boolean;
+  /** Fatigue déclarée dans le calendrier pour aujourd'hui (présélectionnée). */
+  fatigueDeclared: boolean;
   busy: boolean;
   onStart: (light: boolean) => void;
   onCancel: () => void;
 }
 
 /** Question rapide avant la séance : VYRO conseille, l'utilisateur décide (rien n'est imposé). */
-export function StartWorkoutDialog({ template, routine, today, busy, onStart, onCancel }: StartWorkoutDialogProps) {
+export function StartWorkoutDialog({ template, isMatchDay, isDayBeforeMatch, fatigueDeclared, busy, onStart, onCancel }: StartWorkoutDialogProps) {
   const titleId = useId();
-  const [feeling, setFeeling] = useState<Feeling | ''>('');
-  const weekday = weekdayOf(today);
-  const tomorrow = ((weekday + 1) % 7) as Weekday;
+  const [feeling, setFeeling] = useState<Feeling | ''>(fatigueDeclared ? 'tired' : '');
   const legDemand = templateLegDemand(template);
   const advice = adviseSession({
-    isMatchDay: routine?.matchDays.includes(weekday) ?? false,
-    isDayBeforeMatch: routine?.matchDays.includes(tomorrow) ?? false,
+    isMatchDay,
+    isDayBeforeMatch,
     legSession: legDemand === 'moderate' || legDemand === 'high',
     feeling: feeling || 'unknown',
   });
