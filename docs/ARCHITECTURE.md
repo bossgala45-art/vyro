@@ -22,8 +22,10 @@ src/
 │   ├── settings/   Modèle des réglages, délais après essais ratés
 │   ├── training/   Moteur de musculation : exercices, programme, rotation, progression,
 │   │               échauffement, records, séances
-│   └── calendar/   Calendrier : occurrences, conflits, moteur d'adaptation, différences,
-│                   export ICS, vacances, suivi du basket
+│   ├── calendar/   Calendrier : occurrences, conflits, moteur d'adaptation, différences,
+│   │               export ICS, vacances, suivi du basket
+│   └── recovery/   Récupération : check-in, décision explicable, repères réglables,
+│                   zones douloureuses → exercices, historique
 ├── data/           IndexedDB (Dexie) : schéma versionné, migrations, repositories,
 │                   erreurs de stockage, hooks réactifs, maintenance
 ├── security/       Empreinte du code de verrouillage (PBKDF2 via WebCrypto)
@@ -34,6 +36,7 @@ src/
 │   ├── training/   Programme modifiable, séance en direct, historique, records
 │   ├── calendar/   Vues semaine/mois, journée, activités, planning habituel, vacances,
 │   │               export iPhone, suivi basket
+│   ├── recovery/   Check-in, conseil du jour, historique, réglage des repères
 │   └── today/ progress/ more/ recovery/ nutrition/ coach/
 ├── ui/             Composants réutilisables (Screen, Card, Button, champs, dialogues…)
 ├── pwa/            Service worker : enregistrement et mises à jour
@@ -45,7 +48,7 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 
 ## Données
 
-### Tables (IndexedDB `vyro`, schéma v3)
+### Tables (IndexedDB `vyro`, schéma v4)
 
 | Table | Clé | Contenu |
 |---|---|---|
@@ -63,6 +66,9 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 | `planning` (v3) | `'me'` | Créneaux habituels de salle, 3e séance facultative |
 | `activityLogs` (v3) | id d'occurrence, index `date`, `kind` | Suivi des matchs et entraînements (intensité, statistiques) |
 | `planSnapshots` (v3) | `weekStart` | Dernier planning vu, pour expliquer ce qui a changé |
+| `checkIns` (v4) | `date` | Check-in de récupération (un par jour, le dernier remplace le précédent) |
+
+Les repères de récupération sont stockés dans `settings` (`recovery.thresholds`), complétés par les valeurs par défaut et remis à zéro s'ils sont incohérents.
 
 La migration v2 → v3 convertit la semaine type : jours de salle → créneaux sans horaire, jours de basket et de match → activités hebdomadaires **sans horaire** (aucun horaire inventé).
 
@@ -118,6 +124,32 @@ Chaque saisie d'une séance en cours est enregistrée immédiatement ; une seule
   - Chaque jour exclu a sa raison affichée.
 - **Changements visibles** (`diff.ts`) : le dernier planning vu est mémorisé par semaine ; toute différence pour les séances à venir (déplacée, retirée, ajoutée, horaire, allègement) est affichée avec sa raison jusqu'à « J'ai compris ».
 - **Export ICS** (`ics.ts`, `export.ts`) : RFC 5545 (CRLF, échappement, lignes de 75 octets, UID stables, rappel VALARM optionnel). Fichier partagé via la feuille de partage iOS, ou téléchargé. Pas de synchronisation automatique avec le Calendrier Apple.
+
+## Récupération (`src/domain/recovery`)
+
+- **Check-in** (≈ 30 s) : sommeil, énergie et motivation (1–10), courbatures, douleur inhabituelle (zones, intensité), temps disponible, notes. Une question sans réponse reste `null` : rien n'est deviné.
+- **Contexte réel** (`context.ts`) : match aujourd'hui / demain / hier (avec l'intensité notée), séances de basket des 3 derniers jours, dernière séance de musculation et sa difficulté, séance déjà faite aujourd'hui, séance envisagée (jambes ou non, durée estimée).
+- **Décision** (`engine.ts`) : `normal`, `adapted` (version allégée), `light` (activité légère, pas de musculation), `rest`, ou `need-info` (questions listées). Chaque signal est affiché avec son effet. **Aucune note de forme** n'est calculée : elle donnerait une fausse précision et pourrait passer pour un diagnostic.
+- **Douleur inhabituelle** : jamais de séance intense sur la zone. Les exercices qui la sollicitent (`zones.ts`, correspondance volontairement large) sont retirés de la séance du jour, sans remplacement. Douleur ≥ repère → repos ; jambes douloureuses avant un match ou zone non précisée → activité légère. Conseil de consulter si la douleur persiste.
+- **Lien avec le calendrier** : un check-in « repos » ou « activité légère » retire la séance du jour du planning (avec la raison) ; « adaptée » la marque en version allégée. Sans effet si une séance a déjà été faite ce jour-là.
+
+### Repères (réglables, non médicaux)
+
+| Repère | Défaut | Effet |
+|---|---|---|
+| Nuit courte | < 6,5 h | séance allégée |
+| Nuit très courte | < 5 h | activité légère |
+| Énergie basse | ≤ 4/10 | séance allégée |
+| Énergie très basse | ≤ 2/10 | activité légère |
+| Motivation basse | ≤ 3/10 | simple remarque, ne réduit pas la séance |
+| Douleur : repos | ≥ 6/10 | repos conseillé |
+| Basket chargé | ≥ 3 séances en 3 jours | séance allégée |
+| Match intense (veille) | ≥ 8/10 | séance allégée |
+| Séance de la veille très dure | ≥ 9/10 | séance allégée |
+| Temps minimal | < 30 min | activité légère |
+| Signaux cumulés | ≥ 3 | activité légère |
+
+Jour de match ou séance déjà faite : repos (pas de musculation), même sans check-in.
 
 ## Verrouillage local
 

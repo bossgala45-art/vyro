@@ -2,7 +2,7 @@
 
 Application personnelle de coaching sportif (musculation, basket, récupération), sous forme de **PWA** installable depuis Safari sur iPhone. Toutes les données restent sur l'appareil.
 
-> **État actuel : étape 4 / 10 — calendrier intelligent et basket.** Profil, stockage local, verrouillage, programme de musculation, séances en direct, progression prudente, historique et records, calendrier (semaine/mois, activités habituelles et ponctuelles, reports, annulations, vacances, conflits, fatigue), moteur d'adaptation expliqué, suivi des matchs et export vers le Calendrier iPhone fonctionnent. Les autres modules sont marqués « Module en construction » ; aucune donnée fictive n'est affichée.
+> **État actuel : étape 5 / 10 — récupération.** Profil, stockage local, verrouillage, programme de musculation, séances en direct, progression prudente, historique et records, calendrier intelligent, suivi basket, export iPhone, check-in de récupération avec décision expliquée (normale, adaptée, activité légère, repos), repères réglables et historique de forme fonctionnent. Les autres modules sont marqués « Module en construction » ; aucune donnée fictive n'est affichée.
 
 ## Utiliser VYRO sur iPhone
 
@@ -55,6 +55,7 @@ Voir [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) pour l'organisation du code.
 - Une PWA n'a pas accès à Face ID natif, à HealthKit ni aux widgets iOS.
 - Le verrouillage par code est **visuel** : il masque l'application mais ne chiffre pas les données stockées. Le chiffrement arrive avec les sauvegardes (étape 9).
 - Le minuteur de repos s'affiche dans l'app uniquement : aucune notification n'est envoyée quand VYRO n'est pas à l'écran.
+- Les repères de récupération sont des repères prudents réglables, **pas des seuils médicaux validés** ; VYRO ne pose aucun diagnostic.
 - L'export vers le Calendrier iPhone est un fichier .ics ajouté manuellement : pas de synchronisation automatique ; après un changement, il faut exporter à nouveau.
 - Il n'existe pas encore de sauvegarde : effacer les données de Safari ou désinstaller l'app efface tout.
 - Les notifications en arrière-plan nécessitent un serveur de push : elles ne sont pas prévues sans service dédié (alternatives proposées à l'étape 9).

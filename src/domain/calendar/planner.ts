@@ -4,6 +4,7 @@ import { weekdayOf, WEEKDAY_LABELS } from '../training/schedule';
 import type { Program, SessionTemplate, TemplateKey, Weekday } from '../training/types';
 import { vacationOn } from './occurrences';
 import { addDays, fromMinutes, subtractIntervals, toMinutes, type Interval } from './time';
+import type { ReadinessLevel } from '../recovery/types';
 import type { ActivityLog, DayOverride, LocalTime, Occurrence, PlannedGymSession, PlanningSettings, Vacation } from './types';
 
 /**
@@ -55,9 +56,11 @@ interface ContextInput {
   /** Occurrences couvrant au moins la veille et le lendemain des dates. */
   occurrences: readonly Occurrence[];
   logs: readonly ActivityLog[];
+  /** Décision du check-in de récupération par date. */
+  readiness?: ReadonlyMap<IsoDate, ReadinessLevel> | undefined;
 }
 
-export function buildDayContexts({ dates, planning, overrides, vacations, occurrences, logs }: ContextInput): DayContext[] {
+export function buildDayContexts({ dates, planning, overrides, vacations, occurrences, logs, readiness }: ContextInput): DayContext[] {
   const active = occurrences.filter((occurrence) => !occurrence.suspended);
   const on = (date: IsoDate) => active.filter((occurrence) => occurrence.date === date);
   const matchOn = (date: IsoDate) => on(date).filter((occurrence) => occurrence.kind === 'match');
@@ -68,8 +71,11 @@ export function buildDayContexts({ dates, planning, overrides, vacations, occurr
     const vacation = vacationOn(date, vacations) ?? null;
     const slot = planning?.gymSlots.find((item) => item.weekday === weekday);
 
+    const checkIn = readiness?.get(date);
     let gym: DayContext['gym'];
     if (override?.rest) gym = { available: false, window: null, reason: 'jour de repos' };
+    else if (checkIn === 'rest') gym = { available: false, window: null, reason: 'repos conseillé par ton check-in' };
+    else if (checkIn === 'light') gym = { available: false, window: null, reason: 'activité légère conseillée par ton check-in' };
     else if (vacation?.gym === 'none') gym = { available: false, window: null, reason: 'vacances sans salle' };
     else if (override?.gymUnavailable) gym = { available: false, window: null, reason: 'salle indisponible ce jour-là' };
     else if (override?.gymWindow) gym = { available: true, window: override.gymWindow, reason: null };
@@ -90,7 +96,7 @@ export function buildDayContexts({ dates, planning, overrides, vacations, occurr
       matchTomorrow: matchOn(addDays(date, 1)).length > 0,
       matchYesterday: yesterdayMatches.length > 0 ? { intensity: yesterdayIntensity } : null,
       practice: on(date).some((occurrence) => occurrence.kind === 'practice'),
-      fatigue: override?.fatigue ?? false,
+      fatigue: (override?.fatigue ?? false) || checkIn === 'adapted',
       rest: override?.rest ?? false,
       vacation,
     };

@@ -1,4 +1,5 @@
 import { AUTO_LOCK_OPTIONS, defaultSettings, type AppSettings } from '../../domain/settings/types';
+import { withThresholdDefaults } from '../../domain/recovery/thresholds';
 import { db as defaultDb, type VyroDatabase } from '../db';
 import { guard } from '../errors';
 
@@ -11,7 +12,12 @@ export function withDefaults(stored: Partial<AppSettings> | undefined): AppSetti
   if (!stored) return defaults;
   const lock = { ...defaults.lock, ...stored.lock };
   if (!AUTO_LOCK_OPTIONS.includes(lock.autoLockMinutes)) lock.autoLockMinutes = defaults.lock.autoLockMinutes;
-  return { id: 'app', privacy: { ...defaults.privacy, ...stored.privacy }, lock };
+  return {
+    id: 'app',
+    privacy: { ...defaults.privacy, ...stored.privacy },
+    lock,
+    recovery: { thresholds: withThresholdDefaults(stored.recovery?.thresholds) },
+  };
 }
 
 export function createSettingsRepository(db: VyroDatabase) {

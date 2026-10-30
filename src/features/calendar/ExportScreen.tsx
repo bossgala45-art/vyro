@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { todayIso } from '../../app/clock';
-import { useActiveProgram, useCalendarData, useProfile, useWorkouts } from '../../data/hooks';
+import { useReadinessData } from '../recovery/readiness';
 import { buildExportEvents } from '../../domain/calendar/export';
 import { buildIcs, type IcsEvent } from '../../domain/calendar/ics';
 import { expandOccurrences } from '../../domain/calendar/occurrences';
@@ -40,10 +40,11 @@ async function deliver(ics: string): Promise<'shared' | 'downloaded' | 'cancelle
 }
 
 export function ExportScreen() {
-  const data = useCalendarData();
-  const program = useActiveProgram();
-  const profile = useProfile();
-  const workouts = useWorkouts();
+  const day = useReadinessData();
+  const data = day?.data;
+  const program = day?.program;
+  const profile = day?.profile;
+  const workouts = day?.workouts;
   const [range, setRange] = useState<Range>('1');
   const [includeBasketball, setIncludeBasketball] = useState(true);
   const [alarm, setAlarm] = useState<Alarm>('30');

@@ -73,6 +73,11 @@ export const VYRO_SCHEMA: readonly SchemaVersion[] = [
     },
     upgrade: migrateRoutineToCalendar,
   },
+  {
+    // Étape 5 : récupération. Nouvelle table uniquement (un check-in par jour).
+    version: 4,
+    stores: { checkIns: 'date' },
+  },
 ];
 
 export const CURRENT_SCHEMA_VERSION = VYRO_SCHEMA[VYRO_SCHEMA.length - 1]?.version ?? 0;

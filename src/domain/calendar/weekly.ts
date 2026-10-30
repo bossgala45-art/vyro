@@ -5,6 +5,7 @@ import { lastCompletedCoreKey } from '../training/workout';
 import { expandOccurrences } from './occurrences';
 import { buildDayContexts, planWeekFromCalendar, type DayContext, type WeekPlan } from './planner';
 import { addDays, dateRange } from './time';
+import type { ReadinessLevel } from '../recovery/types';
 import type { Activity, ActivityLog, DayOverride, OccurrenceException, PlanningSettings, Vacation } from './types';
 
 export interface CalendarData {
@@ -14,6 +15,8 @@ export interface CalendarData {
   overrides: readonly DayOverride[];
   planning: PlanningSettings | null;
   logs: readonly ActivityLog[];
+  /** Décision du check-in de récupération, par date (en pratique : aujourd'hui). */
+  readiness?: ReadonlyMap<IsoDate, ReadinessLevel>;
 }
 
 export function weekDays(monday: IsoDate): IsoDate[] {
@@ -25,7 +28,15 @@ export function contextsFor(data: CalendarData, dates: readonly IsoDate[]): DayC
   const last = dates[dates.length - 1];
   if (!first || !last) return [];
   const occurrences = expandOccurrences(data.activities, data.exceptions, data.vacations, addDays(first, -1), addDays(last, 1));
-  return buildDayContexts({ dates, planning: data.planning, overrides: data.overrides, vacations: data.vacations, occurrences, logs: data.logs });
+  return buildDayContexts({
+    dates,
+    planning: data.planning,
+    overrides: data.overrides,
+    vacations: data.vacations,
+    occurrences,
+    logs: data.logs,
+    readiness: data.readiness,
+  });
 }
 
 interface PlanOptions {

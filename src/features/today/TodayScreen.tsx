@@ -3,6 +3,8 @@ import { todayIso } from '../../app/clock';
 import { weekStart } from '../../domain/training/schedule';
 import { formatTimeRange } from '../calendar/labels';
 import { useWeek } from '../calendar/usePlanning';
+import { ReadinessPanel } from '../recovery/ReadinessPanel';
+import { useReadinessData } from '../recovery/readiness';
 import { useProfile } from '../../data/hooks';
 import { daysBetween } from '../../domain/common/dates';
 import { Card } from '../../ui/Card';
@@ -15,6 +17,7 @@ const dateFormatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: '
 export function TodayScreen() {
   const profile = useProfile();
   const week = useWeek(weekStart(todayIso()));
+  const readiness = useReadinessData()?.readiness;
   const today = dateFormatter.format(new Date());
   const todayDate = todayIso();
   const activities = week?.occurrences.filter((occurrence) => occurrence.date === todayDate && !occurrence.suspended) ?? [];
@@ -82,14 +85,35 @@ export function TodayScreen() {
           </Card>
         )}
 
-        <ModulePlaceholder
-          step={5}
-          planned={[
-            'Check-in rapide de récupération',
-            'Séance adaptée à ta forme du jour',
-            'Message du coach basé sur tes données réelles',
-          ]}
-        />
+        {readiness && (
+          <Card>
+            <div className="flex items-center justify-between">
+              <h2 className="font-semibold text-snow">Ta forme du jour</h2>
+              {readiness.checkIn && (
+                <Link to="/recuperation/aujourdhui" className="flex min-h-11 items-center px-2 text-sm font-medium text-volt-400">
+                  Conseil
+                </Link>
+              )}
+            </div>
+            {readiness.checkIn ? (
+              <div className="mt-2">
+                <ReadinessPanel decision={readiness.decision} compact />
+              </div>
+            ) : (
+              <>
+                <p className="mt-1 text-sm text-mist">30 secondes pour savoir si ta séance doit être normale, allégée ou remplacée par du repos.</p>
+                <Link
+                  to="/recuperation/check-in"
+                  className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-volt-600 px-4 font-semibold text-white active:bg-volt-500"
+                >
+                  Faire mon check-in
+                </Link>
+              </>
+            )}
+          </Card>
+        )}
+
+        <ModulePlaceholder step={8} planned={['Message du coach basé sur tes données réelles', 'Bilan automatique tous les 14 jours']} />
       </div>
     </section>
   );
