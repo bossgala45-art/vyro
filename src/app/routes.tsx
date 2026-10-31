@@ -20,6 +20,11 @@ import { OnboardingScreen } from '../features/onboarding/OnboardingScreen';
 import { WelcomeScreen } from '../features/onboarding/WelcomeScreen';
 import { ProfileEditScreen } from '../features/profile/ProfileEditScreen';
 import { ProfileScreen } from '../features/profile/ProfileScreen';
+import { AddPhotoScreen } from '../features/progress/AddPhotoScreen';
+import { CompareScreen } from '../features/progress/CompareScreen';
+import { MeasurementsScreen } from '../features/progress/MeasurementsScreen';
+import { PhotoScreen } from '../features/progress/PhotoScreen';
+import { PhotosScreen } from '../features/progress/PhotosScreen';
 import { ProgressScreen } from '../features/progress/ProgressScreen';
 import { CheckInScreen } from '../features/recovery/CheckInScreen';
 import { RecoveryScreen } from '../features/recovery/RecoveryScreen';
@@ -66,6 +71,11 @@ export const routes: RouteObject[] = [
           { path: 'calendrier/suivi/:occurrenceId', element: <ActivityLogScreen /> },
           { path: 'calendrier/basket', element: <BasketScreen /> },
           { path: 'progres', element: <ProgressScreen /> },
+          { path: 'progres/mensurations', element: <MeasurementsScreen /> },
+          { path: 'progres/photos', element: <PhotosScreen /> },
+          { path: 'progres/photos/nouvelle', element: <AddPhotoScreen /> },
+          { path: 'progres/photos/:id', element: <PhotoScreen /> },
+          { path: 'progres/comparer', element: <CompareScreen /> },
           { path: 'plus', element: <MoreScreen /> },
           { path: 'recuperation', element: <RecoveryScreen /> },
           { path: 'recuperation/check-in', element: <CheckInScreen /> },

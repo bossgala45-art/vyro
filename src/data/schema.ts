@@ -84,6 +84,12 @@ export const VYRO_SCHEMA: readonly SchemaVersion[] = [
     version: 5,
     stores: { meals: 'id, date', mealPhotos: 'id, mealId', drinks: 'id, date' },
   },
+  {
+    // Étape 7 : transformation physique. Les images complètes des photos sont à part :
+    // la chronologie ne charge que les miniatures.
+    version: 6,
+    stores: { measurements: 'date', progressPhotos: 'id, date, pose', progressPhotoFiles: 'id' },
+  },
 ];
 
 export const CURRENT_SCHEMA_VERSION = VYRO_SCHEMA[VYRO_SCHEMA.length - 1]?.version ?? 0;

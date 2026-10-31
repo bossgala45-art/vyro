@@ -26,12 +26,15 @@ src/
 │   │               export ICS, vacances, suivi du basket
 │   ├── recovery/   Récupération : check-in, décision explicable, repères réglables,
 │   │               zones douloureuses → exercices, historique
-│   └── nutrition/  Nutrition : catalogue d'aliments, idées de repas filtrées par les goûts,
-│                   conseils du jour, protéines, hydratation et rappels, habitudes,
-│                   interface d'analyse de photo (désactivée)
+│   ├── nutrition/  Nutrition : catalogue d'aliments, idées de repas filtrées par les goûts,
+│   │               conseils du jour, protéines, hydratation et rappels, habitudes,
+│   │               interface d'analyse de photo (désactivée)
+│   └── progress/   Transformation : séries mesurées, évolution, mensurations, chronologie
+│                   et comparaison de photos, interface d'analyse visuelle (désactivée)
 ├── data/           IndexedDB (Dexie) : schéma versionné, migrations, repositories,
 │                   erreurs de stockage, hooks réactifs, maintenance
 ├── security/       Empreinte du code de verrouillage (PBKDF2 via WebCrypto)
+├── media/          Images : décodage, réduction et réencodage JPEG dans le navigateur
 ├── features/       Un dossier par module (écrans et composants propres)
 │   ├── onboarding/ Bienvenue et configuration initiale en 5 étapes
 │   ├── profile/    Profil, modification par section, pesées
@@ -40,9 +43,9 @@ src/
 │   ├── calendar/   Vues semaine/mois, journée, activités, planning habituel, vacances,
 │   │               export iPhone, suivi basket
 │   ├── recovery/   Check-in, conseil du jour, historique, réglage des repères
-│   ├── nutrition/  Journal, hydratation, idées, protéines, habitudes, réglages ;
-│   │               réduction des photos dans le navigateur
-│   └── today/ progress/ more/ coach/
+│   ├── nutrition/  Journal, hydratation, idées, protéines, habitudes, réglages
+│   ├── progress/   Graphiques, mensurations, photos (ajout, chronologie, zoom, comparaison)
+│   └── today/ more/ coach/
 ├── ui/             Composants réutilisables (Screen, Card, Button, champs, dialogues…)
 ├── pwa/            Service worker : enregistrement et mises à jour
 ├── styles/         Thème global Tailwind
@@ -53,7 +56,7 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 
 ## Données
 
-### Tables (IndexedDB `vyro`, schéma v5)
+### Tables (IndexedDB `vyro`, schéma v6)
 
 | Table | Clé | Contenu |
 |---|---|---|
@@ -75,6 +78,11 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 | `meals` (v5) | id, index `date` | Journal alimentaire (texte, portion ressentie, réponses oui/non/inconnu) |
 | `mealPhotos` (v5) | id, index `mealId` | Photos de repas réduites (JPEG ≤ 1280 px, `ArrayBuffer`), à part pour garder la liste légère |
 | `drinks` (v5) | id, index `date` | Boissons notées (heure locale, ml) |
+| `measurements` (v6) | `date` | Tours de bras, poitrine, épaules, taille (cm) ; un tour non mesuré reste `null` |
+| `progressPhotos` (v6) | id, index `date`, `pose` | Métadonnées et miniature (360 px) des photos de progression |
+| `progressPhotoFiles` (v6) | id | Image complète (1 600 px), lue seulement pour l'affichage ou la comparaison |
+
+`src/data/backupTables.ts` inventorie chaque table et la nature de son contenu (`records`, `binary`, `transient`) pour la sauvegarde chiffrée de l'étape 9 ; un test vérifie qu'aucune table n'est oubliée, photos comprises.
 
 Les repères de récupération (`recovery.thresholds`) et d'hydratation (`nutrition.hydration`) sont stockés dans `settings`, complétés par les valeurs par défaut et remis à zéro s'ils sont incohérents.
 
@@ -187,6 +195,16 @@ Réduites dans le navigateur (plus grand côté 1 280 px, JPEG qualité 0,82) av
 
 `imageAnalysis.ts` définit l'interface d'un futur service d'analyse : **désactivée** tant qu'aucun fournisseur réel n'est connecté ; l'analyse passera par un serveur (aucune clé dans l'app) et ne produira que des propositions à valider.
 
+## Transformation physique (`src/domain/progress`)
+
+- **Mesures** : poids (table `bodyWeights` existante) et tours de bras, poitrine, épaules, taille. Une seule valeur par jour et par mesure ; une valeur absente n'est **jamais interpolée**.
+- **Graphique** (`ui/LineChart.tsx`, SVG sans dépendance) : une série à la fois, points réellement mesurés reliés par un trait, période 1 / 3 / 6 mois ou tout. Toucher le graphique ou utiliser les flèches du clavier affiche la valeur du point le plus proche. Un tableau « Voir les valeurs » reprend tous les points.
+- **Évolution** : écart entre la première et la dernière mesure de la période, affiché seulement avec au moins deux mesures. **Aucune** estimation de masse grasse, de masse musculaire ni de « score de transformation ».
+- **Photos** : pose (face, profil, dos), date choisie (import de photos anciennes possible), conseils de prise de vue, dernière photo de la même pose montrée comme repère de cadrage, rappel « photo du mois ». Chronologie par mois, visionneuse avec zoom (1× à 4×) et suppression définitive (une photo ou toutes, avec confirmation écrite).
+- **Comparaison avant/après** : côte à côte, même pose, deux dates au choix. Les mesures affichées sont celles prises à 7 jours au plus de chaque photo ; sinon « — ».
+- **Images** (`media/image.ts`) : décodées puis réencodées en JPEG dans le navigateur (1 600 px qualité 0,85 + miniature 360 px qualité 0,72). Le réencodage retire les métadonnées d'origine (position GPS…). Miniature et image complète sont enregistrées dans une seule transaction : si l'espace est plein, rien n'est enregistré.
+- **Analyse visuelle** (`visualAnalysis.ts`) : interface prévue pour un futur fournisseur, **désactivée** tant qu'aucun n'est connecté. L'analyse passerait par un serveur VYRO (aucune clé dans l'app), avec un accord explicite pour chaque photo envoyée.
+
 ## Verrouillage local
 
 - Code de 6 à 128 caractères ; seule une empreinte **PBKDF2-SHA256, 600 000 itérations, sel aléatoire de 16 octets** est stockée. Comparaison en temps constant.
@@ -207,5 +225,5 @@ Routage par hash (`#/calendrier`) avec React Router. Il fonctionne sur un héber
 
 ## Tests
 
-- **Unitaires** (`src/**/*.test.ts(x)`, Vitest + jsdom + fake-indexeddb) : validation, migrations, persistance après réouverture, quota dépassé, intégrité, verrouillage, parcours d'interface complets.
+- **Unitaires** (`src/**/*.test.ts(x)`, Vitest + jsdom + fake-indexeddb ; `src/test/realm.ts` corrige un artefact de jsdom sur les données binaires) : validation, migrations, persistance après réouverture, quota dépassé, intégrité, verrouillage, parcours d'interface complets.
 - **Interface** (`e2e/`, Playwright, build de production, émulation iPhone) : configuration, persistance après fermeture, reprise d'un brouillon, modification, verrouillage, effacement, hors ligne, absence de requêtes vers des serveurs tiers.
