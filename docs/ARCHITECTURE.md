@@ -24,11 +24,17 @@ src/
 │   │               échauffement, records, séances
 │   ├── calendar/   Calendrier : occurrences, conflits, moteur d'adaptation, différences,
 │   │               export ICS, vacances, suivi du basket
-│   └── recovery/   Récupération : check-in, décision explicable, repères réglables,
-│                   zones douloureuses → exercices, historique
+│   ├── recovery/   Récupération : check-in, décision explicable, repères réglables,
+│   │               zones douloureuses → exercices, historique
+│   ├── nutrition/  Nutrition : catalogue d'aliments, idées de repas filtrées par les goûts,
+│   │               conseils du jour, protéines, hydratation et rappels, habitudes,
+│   │               interface d'analyse de photo (désactivée)
+│   └── progress/   Transformation : séries mesurées, évolution, mensurations, chronologie
+│                   et comparaison de photos, interface d'analyse visuelle (désactivée)
 ├── data/           IndexedDB (Dexie) : schéma versionné, migrations, repositories,
 │                   erreurs de stockage, hooks réactifs, maintenance
 ├── security/       Empreinte du code de verrouillage (PBKDF2 via WebCrypto)
+├── media/          Images : décodage, réduction et réencodage JPEG dans le navigateur
 ├── features/       Un dossier par module (écrans et composants propres)
 │   ├── onboarding/ Bienvenue et configuration initiale en 5 étapes
 │   ├── profile/    Profil, modification par section, pesées
@@ -37,7 +43,9 @@ src/
 │   ├── calendar/   Vues semaine/mois, journée, activités, planning habituel, vacances,
 │   │               export iPhone, suivi basket
 │   ├── recovery/   Check-in, conseil du jour, historique, réglage des repères
-│   └── today/ progress/ more/ recovery/ nutrition/ coach/
+│   ├── nutrition/  Journal, hydratation, idées, protéines, habitudes, réglages
+│   ├── progress/   Graphiques, mensurations, photos (ajout, chronologie, zoom, comparaison)
+│   └── today/ more/ coach/
 ├── ui/             Composants réutilisables (Screen, Card, Button, champs, dialogues…)
 ├── pwa/            Service worker : enregistrement et mises à jour
 ├── styles/         Thème global Tailwind
@@ -48,7 +56,7 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 
 ## Données
 
-### Tables (IndexedDB `vyro`, schéma v4)
+### Tables (IndexedDB `vyro`, schéma v6)
 
 | Table | Clé | Contenu |
 |---|---|---|
@@ -67,8 +75,16 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 | `activityLogs` (v3) | id d'occurrence, index `date`, `kind` | Suivi des matchs et entraînements (intensité, statistiques) |
 | `planSnapshots` (v3) | `weekStart` | Dernier planning vu, pour expliquer ce qui a changé |
 | `checkIns` (v4) | `date` | Check-in de récupération (un par jour, le dernier remplace le précédent) |
+| `meals` (v5) | id, index `date` | Journal alimentaire (texte, portion ressentie, réponses oui/non/inconnu) |
+| `mealPhotos` (v5) | id, index `mealId` | Photos de repas réduites (JPEG ≤ 1280 px, `ArrayBuffer`), à part pour garder la liste légère |
+| `drinks` (v5) | id, index `date` | Boissons notées (heure locale, ml) |
+| `measurements` (v6) | `date` | Tours de bras, poitrine, épaules, taille (cm) ; un tour non mesuré reste `null` |
+| `progressPhotos` (v6) | id, index `date`, `pose` | Métadonnées et miniature (360 px) des photos de progression |
+| `progressPhotoFiles` (v6) | id | Image complète (1 600 px), lue seulement pour l'affichage ou la comparaison |
 
-Les repères de récupération sont stockés dans `settings` (`recovery.thresholds`), complétés par les valeurs par défaut et remis à zéro s'ils sont incohérents.
+`src/data/backupTables.ts` inventorie chaque table et la nature de son contenu (`records`, `binary`, `transient`) pour la sauvegarde chiffrée de l'étape 9 ; un test vérifie qu'aucune table n'est oubliée, photos comprises.
+
+Les repères de récupération (`recovery.thresholds`) et d'hydratation (`nutrition.hydration`) sont stockés dans `settings`, complétés par les valeurs par défaut et remis à zéro s'ils sont incohérents.
 
 La migration v2 → v3 convertit la semaine type : jours de salle → créneaux sans horaire, jours de basket et de match → activités hebdomadaires **sans horaire** (aucun horaire inventé).
 
@@ -133,7 +149,7 @@ Chaque saisie d'une séance en cours est enregistrée immédiatement ; une seule
 - **Douleur inhabituelle** : jamais de séance intense sur la zone. Les exercices qui la sollicitent (`zones.ts`, correspondance volontairement large) sont retirés de la séance du jour, sans remplacement. Douleur ≥ repère → repos ; jambes douloureuses avant un match ou zone non précisée → activité légère. Conseil de consulter si la douleur persiste.
 - **Lien avec le calendrier** : un check-in « repos » ou « activité légère » retire la séance du jour du planning (avec la raison) ; « adaptée » la marque en version allégée. Sans effet si une séance a déjà été faite ce jour-là.
 
-### Repères (réglables, non médicaux)
+### Repères de récupération (réglables, non médicaux)
 
 | Repère | Défaut | Effet |
 |---|---|---|
@@ -150,6 +166,44 @@ Chaque saisie d'une séance en cours est enregistrée immédiatement ; une seule
 | Signaux cumulés | ≥ 3 | activité légère |
 
 Jour de match ou séance déjà faite : repos (pas de musculation), même sans check-in.
+
+## Nutrition et hydratation (`src/domain/nutrition`)
+
+Principes : suivi simple, **sans comptage de calories**, conseils généraux et prudents, jamais de régime restrictif ni de quantité imposée.
+
+- **Journal** : moment, pris ou sauté, description libre (obligatoire si pris, même avec photo), portion ressentie (petite / normale / grande / inconnue), source de protéines et fruit/légume (oui / non / inconnu). Une réponse inconnue reste `null` : elle n'est jamais convertie en quantité ni comptée comme « non ».
+- **Goûts** (`foods.ts`) : les listes du profil sont reconnues sans tenir compte des accents, articles et pluriels simples, et par famille (« poisson » → thon, sardines, maquereau). Un **refus l'emporte toujours**. Les saisies non reconnues sont affichées comme « non prises en compte ».
+- **Idées de repas** (`meals.ts`) : 16 idées bon marché, chacune faite d'éléments interchangeables. Un élément refusé est remplacé par une alternative ; un élément facultatif refusé est retiré (et signalé) ; si un élément indispensable n'a que des refus, l'idée n'est pas proposée. Tri par aliments aimés. Aucun aliment refusé ne peut apparaître (testé pour tous les moments).
+- **Conseils du jour** (`advice.ts`) : tirés du calendrier réel (match et son horaire, entraînements, séance de musculation prévue ou faite, veille de match). Les heures conseillées (« vers 12 h 00 ») ne sont calculées que si l'horaire de l'activité est connu.
+- **Protéines** : repère général 1,2–2 g/kg/jour (prise de position ACSM / Academy of Nutrition and Dietetics / Dietitians of Canada, 2016), affiché à titre indicatif avec la dernière pesée ; sources économiques filtrées par les goûts.
+- **Habitudes** (`habits.ts`) : calculées uniquement sur les saisies ; un jour sans boisson notée est « non renseigné », pas « 0 ml ».
+
+### Hydratation
+
+| Réglage | Défaut | Source / raison |
+|---|---|---|
+| Repère quotidien | 2 000 ml | EFSA (2010) : 2,5 L d'eau/jour pour un homme adulte, dont ~20 % par les aliments |
+| Par séance de sport | + 500 ml (2 séances max.) | ordre de grandeur prudent ; varie avec la chaleur et l'intensité |
+| Verre | 250 ml | ajout rapide |
+| Rappels | désactivés ; 9 h–21 h, toutes les 2 h | |
+
+Rappels : une PWA iOS ne peut pas programmer de notification locale sans serveur de push. VYRO affiche donc un rappel **dans l'application** (si rien n'a été noté depuis l'intervalle, dans la plage horaire, repère non atteint) et propose d'**exporter les rappels vers le Calendrier** (événements répétés chaque jour en heure locale flottante, avec alerte : ils sonnent app fermée et restent à la même heure après un changement d'heure).
+
+### Photos
+
+Réduites dans le navigateur (plus grand côté 1 280 px, JPEG qualité 0,82) avant stockage, enregistrées dans la même transaction que le repas (espace plein → rien n'est modifié), supprimées définitivement avec le repas. Elles ne sont jamais envoyées. Elles seront incluses dans la sauvegarde chiffrée (étape 9).
+
+`imageAnalysis.ts` définit l'interface d'un futur service d'analyse : **désactivée** tant qu'aucun fournisseur réel n'est connecté ; l'analyse passera par un serveur (aucune clé dans l'app) et ne produira que des propositions à valider.
+
+## Transformation physique (`src/domain/progress`)
+
+- **Mesures** : poids (table `bodyWeights` existante) et tours de bras, poitrine, épaules, taille. Une seule valeur par jour et par mesure ; une valeur absente n'est **jamais interpolée**.
+- **Graphique** (`ui/LineChart.tsx`, SVG sans dépendance) : une série à la fois, points réellement mesurés reliés par un trait, période 1 / 3 / 6 mois ou tout. Toucher le graphique ou utiliser les flèches du clavier affiche la valeur du point le plus proche. Un tableau « Voir les valeurs » reprend tous les points.
+- **Évolution** : écart entre la première et la dernière mesure de la période, affiché seulement avec au moins deux mesures. **Aucune** estimation de masse grasse, de masse musculaire ni de « score de transformation ».
+- **Photos** : pose (face, profil, dos), date choisie (import de photos anciennes possible), conseils de prise de vue, dernière photo de la même pose montrée comme repère de cadrage, rappel « photo du mois ». Chronologie par mois, visionneuse avec zoom (1× à 4×) et suppression définitive (une photo ou toutes, avec confirmation écrite).
+- **Comparaison avant/après** : côte à côte, même pose, deux dates au choix. Les mesures affichées sont celles prises à 7 jours au plus de chaque photo ; sinon « — ».
+- **Images** (`media/image.ts`) : décodées puis réencodées en JPEG dans le navigateur (1 600 px qualité 0,85 + miniature 360 px qualité 0,72). Le réencodage retire les métadonnées d'origine (position GPS…). Miniature et image complète sont enregistrées dans une seule transaction : si l'espace est plein, rien n'est enregistré.
+- **Analyse visuelle** (`visualAnalysis.ts`) : interface prévue pour un futur fournisseur, **désactivée** tant qu'aucun n'est connecté. L'analyse passerait par un serveur VYRO (aucune clé dans l'app), avec un accord explicite pour chaque photo envoyée.
 
 ## Verrouillage local
 
@@ -171,5 +225,5 @@ Routage par hash (`#/calendrier`) avec React Router. Il fonctionne sur un héber
 
 ## Tests
 
-- **Unitaires** (`src/**/*.test.ts(x)`, Vitest + jsdom + fake-indexeddb) : validation, migrations, persistance après réouverture, quota dépassé, intégrité, verrouillage, parcours d'interface complets.
+- **Unitaires** (`src/**/*.test.ts(x)`, Vitest + jsdom + fake-indexeddb ; `src/test/realm.ts` corrige un artefact de jsdom sur les données binaires) : validation, migrations, persistance après réouverture, quota dépassé, intégrité, verrouillage, parcours d'interface complets.
 - **Interface** (`e2e/`, Playwright, build de production, émulation iPhone) : configuration, persistance après fermeture, reprise d'un brouillon, modification, verrouillage, effacement, hors ligne, absence de requêtes vers des serveurs tiers.

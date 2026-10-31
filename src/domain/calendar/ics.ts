@@ -21,6 +21,11 @@ export interface IcsEvent {
   description: string;
   /** Rappel avant l'événement (minutes) ; `null` = aucun. */
   alarmMinutes: number | null;
+  /**
+   * Répété chaque jour. L'heure est alors exportée en heure locale « flottante » (sans fuseau) :
+   * le rappel reste à la même heure murale après un changement d'heure.
+   */
+  repeatDaily?: boolean;
 }
 
 const pad = (value: number) => String(value).padStart(2, '0');
@@ -31,6 +36,14 @@ export function toUtcStamp(date: IsoDate, time: LocalTime, addMinutes = 0): stri
   const [h, min] = time.split(':').map(Number) as [number, number];
   const instant = new Date(y, m - 1, d, h, min + addMinutes);
   return formatUtc(instant);
+}
+
+/** Heure locale flottante (AAAAMMJJTHHMMSS, sans « Z ») d'une date et heure locales. */
+export function toLocalStamp(date: IsoDate, time: LocalTime, addMinutes = 0): string {
+  const [y, m, d] = date.split('-').map(Number) as [number, number, number];
+  const [h, min] = time.split(':').map(Number) as [number, number];
+  const instant = new Date(Date.UTC(y, m - 1, d, h, min + addMinutes));
+  return formatUtc(instant).slice(0, -1);
 }
 
 export function formatUtc(instant: Date): string {
@@ -71,7 +84,11 @@ export function buildIcs(events: readonly IcsEvent[], now: Date): string {
   const stamp = formatUtc(now);
   for (const event of events) {
     lines.push('BEGIN:VEVENT', `UID:${event.uid}`, `DTSTAMP:${stamp}`);
-    if (event.startTime !== null && isLocalTime(event.startTime)) {
+    if (event.repeatDaily && event.startTime !== null && isLocalTime(event.startTime)) {
+      lines.push(`DTSTART:${toLocalStamp(event.date, event.startTime)}`);
+      lines.push(`DTEND:${toLocalStamp(event.date, event.startTime, event.durationMinutes)}`);
+      lines.push('RRULE:FREQ=DAILY');
+    } else if (event.startTime !== null && isLocalTime(event.startTime)) {
       lines.push(`DTSTART:${toUtcStamp(event.date, event.startTime)}`);
       lines.push(`DTEND:${toUtcStamp(event.date, event.startTime, event.durationMinutes)}`);
     } else {

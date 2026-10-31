@@ -5,6 +5,10 @@ import type { Program, Workout } from '../domain/training/types';
 import { trainingRepository } from './repositories/trainingRepository';
 import { calendarRepository } from './repositories/calendarRepository';
 import { recoveryRepository } from './repositories/recoveryRepository';
+import { nutritionRepository } from './repositories/nutritionRepository';
+import { progressRepository } from './repositories/progressRepository';
+import type { MeasurementEntry, ProgressPhoto, ProgressPhotoFile } from '../domain/progress/types';
+import type { DrinkEntry, MealEntry, MealPhoto } from '../domain/nutrition/types';
 import type { CheckIn } from '../domain/recovery/types';
 import type { PlanSnapshot } from '../domain/calendar/types';
 import type { CalendarData } from '../domain/calendar/weekly';
@@ -48,6 +52,40 @@ export function usePlanSnapshot(weekStart: IsoDate): { weekStart: IsoDate; snaps
 /** Check-ins de récupération, du plus ancien au plus récent. */
 export function useCheckIns(): CheckIn[] | undefined {
   return useLiveQuery(() => recoveryRepository.list(), []);
+}
+
+/** Repas du journal (sans les photos), du plus ancien au plus récent. */
+export function useMeals(): MealEntry[] | undefined {
+  return useLiveQuery(() => nutritionRepository.listMeals(), []);
+}
+
+/** `null` : repas introuvable. */
+export function useMeal(id: string): MealEntry | null | undefined {
+  return useLiveQuery(() => nutritionRepository.getMeal(id), [id]);
+}
+
+/** `null` : pas de photo (ou photo supprimée). */
+export function useMealPhoto(id: string | null): MealPhoto | null | undefined {
+  return useLiveQuery(() => (id ? nutritionRepository.getPhoto(id) : Promise.resolve(null)), [id]);
+}
+
+export function useDrinks(): DrinkEntry[] | undefined {
+  return useLiveQuery(() => nutritionRepository.listDrinks(), []);
+}
+
+/** Mensurations, de la plus ancienne à la plus récente. */
+export function useMeasurements(): MeasurementEntry[] | undefined {
+  return useLiveQuery(() => progressRepository.listMeasurements(), []);
+}
+
+/** Photos de progression (miniatures), de la plus ancienne à la plus récente. */
+export function useProgressPhotos(): ProgressPhoto[] | undefined {
+  return useLiveQuery(() => progressRepository.listPhotos(), []);
+}
+
+/** Image complète ; `null` si elle n'existe pas (ou plus). */
+export function useProgressPhotoFile(id: string | null): ProgressPhotoFile | null | undefined {
+  return useLiveQuery(() => (id ? progressRepository.getPhotoFile(id) : Promise.resolve(null)), [id]);
 }
 
 /** `null` : aucun programme généré. */

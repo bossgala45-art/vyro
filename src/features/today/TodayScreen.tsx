@@ -3,6 +3,8 @@ import { todayIso } from '../../app/clock';
 import { weekStart } from '../../domain/training/schedule';
 import { formatTimeRange } from '../calendar/labels';
 import { useWeek } from '../calendar/usePlanning';
+import { HydrationCard } from '../nutrition/HydrationCard';
+import { useNutritionToday } from '../nutrition/useNutritionToday';
 import { ReadinessPanel } from '../recovery/ReadinessPanel';
 import { useReadinessData } from '../recovery/readiness';
 import { useProfile } from '../../data/hooks';
@@ -18,6 +20,7 @@ export function TodayScreen() {
   const profile = useProfile();
   const week = useWeek(weekStart(todayIso()));
   const readiness = useReadinessData()?.readiness;
+  const nutrition = useNutritionToday();
   const today = dateFormatter.format(new Date());
   const todayDate = todayIso();
   const activities = week?.occurrences.filter((occurrence) => occurrence.date === todayDate && !occurrence.suspended) ?? [];
@@ -112,6 +115,8 @@ export function TodayScreen() {
             )}
           </Card>
         )}
+
+        {nutrition && <HydrationCard nutrition={nutrition} compact />}
 
         <ModulePlaceholder step={8} planned={['Message du coach basé sur tes données réelles', 'Bilan automatique tous les 14 jours']} />
       </div>
