@@ -10,7 +10,12 @@ import { CalendarScreen } from '../features/calendar/CalendarScreen';
 import { CoachScreen } from '../features/coach/CoachScreen';
 import { MoreScreen } from '../features/more/MoreScreen';
 import { NotFoundScreen } from '../features/not-found/NotFoundScreen';
+import { HabitsScreen } from '../features/nutrition/HabitsScreen';
+import { HydrationSettingsScreen } from '../features/nutrition/HydrationSettingsScreen';
+import { IdeasScreen } from '../features/nutrition/IdeasScreen';
+import { MealFormScreen } from '../features/nutrition/MealFormScreen';
 import { NutritionScreen } from '../features/nutrition/NutritionScreen';
+import { ProteinScreen } from '../features/nutrition/ProteinScreen';
 import { OnboardingScreen } from '../features/onboarding/OnboardingScreen';
 import { WelcomeScreen } from '../features/onboarding/WelcomeScreen';
 import { ProfileEditScreen } from '../features/profile/ProfileEditScreen';
@@ -67,6 +72,12 @@ export const routes: RouteObject[] = [
           { path: 'recuperation/aujourdhui', element: <TodayReadinessScreen /> },
           { path: 'recuperation/reperes', element: <ThresholdsScreen /> },
           { path: 'nutrition', element: <NutritionScreen /> },
+          { path: 'nutrition/repas/nouveau', element: <MealFormScreen /> },
+          { path: 'nutrition/repas/:id', element: <MealFormScreen /> },
+          { path: 'nutrition/idees', element: <IdeasScreen /> },
+          { path: 'nutrition/proteines', element: <ProteinScreen /> },
+          { path: 'nutrition/historique', element: <HabitsScreen /> },
+          { path: 'nutrition/hydratation', element: <HydrationSettingsScreen /> },
           { path: 'coach', element: <CoachScreen /> },
           { path: 'profil', element: <ProfileScreen /> },
           { path: 'profil/modifier/:section', element: <ProfileEditScreen /> },

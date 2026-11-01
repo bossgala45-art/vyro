@@ -1,3 +1,4 @@
+import { DEFAULT_HYDRATION, type HydrationSettings } from '../nutrition/types';
 import { DEFAULT_THRESHOLDS, type RecoveryThresholds } from '../recovery/types';
 
 /** Empreinte du code de verrouillage : le code lui-même n'est jamais enregistré. */
@@ -32,6 +33,10 @@ export interface AppSettings {
     /** Repères du moteur de récupération (réglables, non médicaux). */
     thresholds: RecoveryThresholds;
   };
+  nutrition: {
+    /** Repères et rappels d'hydratation (réglables). */
+    hydration: HydrationSettings;
+  };
 }
 
 export function defaultSettings(): AppSettings {
@@ -40,6 +45,7 @@ export function defaultSettings(): AppSettings {
     privacy: { hideWhenInactive: true },
     lock: { verifier: null, autoLockMinutes: 1, failedAttempts: 0, retryAfter: null },
     recovery: { thresholds: { ...DEFAULT_THRESHOLDS } },
+    nutrition: { hydration: { ...DEFAULT_HYDRATION, reminders: { ...DEFAULT_HYDRATION.reminders } } },
   };
 }
 

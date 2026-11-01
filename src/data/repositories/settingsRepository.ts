@@ -1,4 +1,5 @@
 import { AUTO_LOCK_OPTIONS, defaultSettings, type AppSettings } from '../../domain/settings/types';
+import { withHydrationDefaults } from '../../domain/nutrition/hydration';
 import { withThresholdDefaults } from '../../domain/recovery/thresholds';
 import { db as defaultDb, type VyroDatabase } from '../db';
 import { guard } from '../errors';
@@ -17,6 +18,7 @@ export function withDefaults(stored: Partial<AppSettings> | undefined): AppSetti
     privacy: { ...defaults.privacy, ...stored.privacy },
     lock,
     recovery: { thresholds: withThresholdDefaults(stored.recovery?.thresholds) },
+    nutrition: { hydration: withHydrationDefaults(stored.nutrition?.hydration) },
   };
 }
 

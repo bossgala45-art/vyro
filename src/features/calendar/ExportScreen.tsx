@@ -13,31 +13,10 @@ import { Card } from '../../ui/Card';
 import { ChoiceGroup, Toggle } from '../../ui/fields';
 import { Screen } from '../../ui/Screen';
 import { formatShortDate } from '../training/format';
+import { deliverIcs } from './deliverIcs';
 
 type Range = '1' | '4';
 type Alarm = 'none' | '15' | '30' | '60';
-
-/** Partage le fichier (feuille de partage iOS) ou, à défaut, le télécharge. */
-async function deliver(ics: string): Promise<'shared' | 'downloaded' | 'cancelled'> {
-  const file = new File([ics], 'vyro-planning.ics', { type: 'text/calendar' });
-  if (typeof navigator.canShare === 'function' && navigator.canShare({ files: [file] })) {
-    try {
-      await navigator.share({ files: [file], title: 'Planning VYRO' });
-      return 'shared';
-    } catch (error) {
-      if (error instanceof DOMException && error.name === 'AbortError') return 'cancelled';
-    }
-  }
-  const url = URL.createObjectURL(file);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'vyro-planning.ics';
-  document.body.append(link);
-  link.click();
-  link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 10_000);
-  return 'downloaded';
-}
 
 export function ExportScreen() {
   const day = useReadinessData();
@@ -71,7 +50,7 @@ export function ExportScreen() {
   });
 
   const exportNow = async () => {
-    const outcome = await deliver(buildIcs(events, new Date()));
+    const outcome = await deliverIcs(buildIcs(events, new Date()), 'vyro-planning.ics', 'Planning VYRO');
     setResult(
       outcome === 'shared'
         ? 'Fichier partagé. Choisis « Calendrier » pour ajouter les événements.'

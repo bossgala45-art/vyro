@@ -78,6 +78,12 @@ export const VYRO_SCHEMA: readonly SchemaVersion[] = [
     version: 4,
     stores: { checkIns: 'date' },
   },
+  {
+    // Étape 6 : nutrition. Nouvelles tables uniquement ; les photos sont à part pour que la liste
+    // des repas reste légère.
+    version: 5,
+    stores: { meals: 'id, date', mealPhotos: 'id, mealId', drinks: 'id, date' },
+  },
 ];
 
 export const CURRENT_SCHEMA_VERSION = VYRO_SCHEMA[VYRO_SCHEMA.length - 1]?.version ?? 0;
