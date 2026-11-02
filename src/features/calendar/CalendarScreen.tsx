@@ -172,11 +172,13 @@ function WeekList({ week }: { week: WeekView }) {
           <li key={day.date}>
             <Link
               to={`/calendrier/jour/${day.date}`}
-              aria-label={`${formatShortDate(day.date)}${isToday ? ' (aujourd’hui)' : ''}`}
               className={`block rounded-2xl border bg-ink-900/80 p-3 active:bg-ink-800 ${isToday ? 'border-volt-500/70' : 'border-ink-700/80'}`}
             >
               <div className="flex flex-wrap items-center gap-1.5">
-                <span className={`text-sm font-semibold ${isToday ? 'text-volt-400' : 'text-snow'}`}>{formatShortDate(day.date)}</span>
+                <span className={`text-sm font-semibold ${isToday ? 'text-volt-400' : 'text-snow'}`}>
+                  {formatShortDate(day.date)}
+                  {isToday && <span className="sr-only"> (aujourd’hui)</span>}
+                </span>
                 {day.vacation && <Badge className="bg-teal-400/15 text-teal-200">Vacances</Badge>}
                 {day.rest && <Badge className="bg-ink-700 text-mist">Repos</Badge>}
                 {day.fatigue && <Badge className="bg-amber-400/15 text-amber-200">Fatigue</Badge>}

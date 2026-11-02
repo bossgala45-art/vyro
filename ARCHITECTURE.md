@@ -5,7 +5,7 @@
 1. **Trois couches séparées** : données, moteur sportif, interface.
 2. **Le domaine est pur** : des fonctions TypeScript déterministes, sans React ni accès au stockage. La date du jour leur est passée en paramètre. Elles reçoivent des données et renvoient des décisions *avec leur explication*. Cette règle est vérifiée par ESLint (`no-restricted-imports` sur `src/domain/**`).
 3. **Hors ligne d'abord** : tout fonctionne sans réseau ; aucune donnée personnelle ne quitte l'appareil.
-4. **Aucune donnée fictive** : un module non développé l'indique ; une valeur inconnue reste inconnue (champ vide, jamais de valeur par défaut inventée).
+4. **Aucune donnée fictive** : une fonction indisponible l'indique ; une valeur inconnue reste inconnue (champ vide, jamais de valeur par défaut inventée).
 5. **Aucune perte silencieuse** : une erreur de stockage est toujours affichée, la saisie est conservée, et un enregistrement abîmé n'est jamais confondu avec une absence de données.
 6. **IA future derrière une interface** : un fournisseur désactivé par défaut, qui ne pourra appeler qu'un backend sécurisé. Aucune clé API dans le frontend.
 
@@ -229,6 +229,7 @@ Aucune IA : un moteur de **règles locales** documentées ci-dessous. Le coach n
 | 10 | Motivation ≤ repère « motivation basse » | Cite la dernière note du journal de l'utilisateur |
 | 11 | Photos commencées, pas de photo ce mois-ci | Photo du mois |
 | 12 | Dernière pesée il y a 14 jours ou plus | Petite pesée |
+| 13 | Aucune sauvegarde après 7 jours d'utilisation, ou dernière sauvegarde il y a 30 jours ou plus | Sauvegarde conseillée |
 
 **Contradictions** : les messages qui poussent à s'entraîner (priorités 8 et 9) sont supprimés si le check-in conseille repos ou activité légère, ou un jour de match. Une séance marquée allégée par le planning le reste même avec un check-in normal. Chaque message indique les données sur lesquelles il s'appuie et peut être masqué (identifiant daté, conservé 30 jours). Ton : messages courts, jamais de reproche ni de rattrapage (testé).
 
@@ -258,7 +259,7 @@ L'interface passe toujours par un `CoachProvider`. Seul `localRulesCoach` existe
 - 4 essais libres, puis délai de 30 s doublé à chaque erreur (15 min max), mémorisé dans la base.
 - Verrouillé au démarrage et après un passage en arrière-plan (délai réglable).
 - **C'est un verrouillage visuel, pas un chiffrement** : il masque l'interface, les données restent en clair dans IndexedDB (protégées par le chiffrement d'iOS quand l'iPhone est verrouillé). Voir [SECURITE.md](SECURITE.md).
-- Code oublié : il n'est récupérable par personne ; seule option, effacer toutes les données.
+- Code oublié : il n'est récupérable par personne ; seule option, effacer toutes les données, puis restaurer une sauvegarde chiffrée.
 
 ## Navigation
 
@@ -275,5 +276,4 @@ Routage par hash (`#/calendrier`) avec React Router. Il fonctionne sur un héber
 
 ## Tests
 
-- **Unitaires** (`src/**/*.test.ts(x)`, Vitest + jsdom + fake-indexeddb ; `src/test/realm.ts` corrige un artefact de jsdom sur les données binaires) : validation, migrations, persistance après réouverture, quota dépassé, intégrité, verrouillage, parcours d'interface complets.
-- **Interface** (`e2e/`, Playwright, build de production, émulation iPhone) : configuration, persistance après fermeture, reprise d'un brouillon, modification, verrouillage, effacement, hors ligne, absence de requêtes vers des serveurs tiers.
+Voir [TESTS.md](TESTS.md) : tests unitaires et d'interface (Vitest), tests de bout en bout (Playwright, Chromium et WebKit), audit d'accessibilité de chaque écran (axe-core).

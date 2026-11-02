@@ -6,7 +6,7 @@ import { reviewToShow } from './review';
 import type { CoachContext, CoachMessage } from './types';
 
 /**
- * Règles des messages proactifs (documentées dans docs/ARCHITECTURE.md).
+ * Règles des messages proactifs (documentées dans ARCHITECTURE.md).
  * Chaque règle s'appuie sur un événement réel ; l'ordre de priorité règle les contradictions :
  * sécurité et récupération d'abord, puis séance, puis le reste. Un message qui pousse à
  * s'entraîner (`push`) n'est jamais affiché si la récupération conseille repos ou activité légère,

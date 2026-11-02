@@ -17,13 +17,17 @@ import { formatBytes, formatMonth, POSE_LABELS } from './labels';
 
 function TimelineThumb({ photo }: { photo: ProgressPhoto }) {
   const url = useImageUrl(photo.thumbnail);
-  const name = `${POSE_LABELS[photo.pose]}, ${formatShortDate(photo.date).toLocaleLowerCase('fr')}`;
+  const name = formatShortDate(photo.date).toLocaleLowerCase('fr');
+  const visible = `${POSE_LABELS[photo.pose]} · ${Number(photo.date.slice(8))}`;
   return (
-    <Link to={`/progres/photos/${photo.id}`} aria-label={`Ouvrir la photo : ${name}`} className="block overflow-hidden rounded-xl bg-ink-800">
+    // Le nom lu contient le texte visible (« Face · 31 ») : critère WCAG 2.5.3.
+    <Link
+      to={`/progres/photos/${photo.id}`}
+      aria-label={`Ouvrir la photo : ${visible} (${name})`}
+      className="block overflow-hidden rounded-xl bg-ink-800"
+    >
       {url && <img src={url} alt="" className="aspect-[3/4] w-full object-cover" />}
-      <span className="block px-2 py-1 text-xs text-mist">
-        {POSE_LABELS[photo.pose]} · {Number(photo.date.slice(8))}
-      </span>
+      <span className="block px-2 py-1 text-xs text-mist">{visible}</span>
     </Link>
   );
 }
