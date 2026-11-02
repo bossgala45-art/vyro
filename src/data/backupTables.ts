@@ -28,4 +28,5 @@ export const BACKUP_TABLES = {
   measurements: 'records',
   progressPhotos: 'binary',
   progressPhotoFiles: 'binary',
+  motivation: 'records',
 } as const satisfies Record<string, BackupContent>;

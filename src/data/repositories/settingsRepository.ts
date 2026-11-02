@@ -1,4 +1,5 @@
 import { AUTO_LOCK_OPTIONS, defaultSettings, type AppSettings } from '../../domain/settings/types';
+import { withCoachDefaults } from '../../domain/coach/state';
 import { withHydrationDefaults } from '../../domain/nutrition/hydration';
 import { withThresholdDefaults } from '../../domain/recovery/thresholds';
 import { db as defaultDb, type VyroDatabase } from '../db';
@@ -19,6 +20,7 @@ export function withDefaults(stored: Partial<AppSettings> | undefined): AppSetti
     lock,
     recovery: { thresholds: withThresholdDefaults(stored.recovery?.thresholds) },
     nutrition: { hydration: withHydrationDefaults(stored.nutrition?.hydration) },
+    coach: withCoachDefaults(stored.coach),
   };
 }
 

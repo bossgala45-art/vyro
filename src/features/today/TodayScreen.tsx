@@ -3,6 +3,7 @@ import { todayIso } from '../../app/clock';
 import { weekStart } from '../../domain/training/schedule';
 import { formatTimeRange } from '../calendar/labels';
 import { useWeek } from '../calendar/usePlanning';
+import { CoachTodayCard } from '../coach/CoachTodayCard';
 import { HydrationCard } from '../nutrition/HydrationCard';
 import { useNutritionToday } from '../nutrition/useNutritionToday';
 import { ReadinessPanel } from '../recovery/ReadinessPanel';
@@ -11,7 +12,6 @@ import { useProfile } from '../../data/hooks';
 import { daysBetween } from '../../domain/common/dates';
 import { Card } from '../../ui/Card';
 import { LogoMark } from '../../ui/Logo';
-import { ModulePlaceholder } from '../../ui/ModulePlaceholder';
 import { formatLongDate } from '../profile/labels';
 
 const dateFormatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -118,7 +118,7 @@ export function TodayScreen() {
 
         {nutrition && <HydrationCard nutrition={nutrition} compact />}
 
-        <ModulePlaceholder step={8} planned={['Message du coach basé sur tes données réelles', 'Bilan automatique tous les 14 jours']} />
+        <CoachTodayCard />
       </div>
     </section>
   );

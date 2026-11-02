@@ -12,6 +12,7 @@ import type {
 } from '../domain/calendar/types';
 import type { DrinkEntry, MealEntry, MealPhoto } from '../domain/nutrition/types';
 import type { MeasurementEntry, ProgressPhoto, ProgressPhotoFile } from '../domain/progress/types';
+import type { MotivationEntry } from '../domain/coach/types';
 import type { CheckIn } from '../domain/recovery/types';
 import type { Program, Workout } from '../domain/training/types';
 import { StorageError, guard } from './errors';
@@ -47,6 +48,7 @@ export class VyroDatabase extends Dexie {
   measurements!: Table<MeasurementEntry, string>;
   progressPhotos!: Table<ProgressPhoto, string>;
   progressPhotoFiles!: Table<ProgressPhotoFile, string>;
+  motivation!: Table<MotivationEntry, string>;
 
   constructor(name = DATABASE_NAME, versions: readonly SchemaVersion[] = VYRO_SCHEMA) {
     super(name);
