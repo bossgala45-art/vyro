@@ -8,6 +8,8 @@ import { UsualPlanningScreen } from '../features/calendar/UsualPlanningScreen';
 import { VacationScreen } from '../features/calendar/VacationScreen';
 import { CalendarScreen } from '../features/calendar/CalendarScreen';
 import { CoachScreen } from '../features/coach/CoachScreen';
+import { MotivationScreen } from '../features/coach/MotivationScreen';
+import { ReviewsScreen } from '../features/coach/ReviewsScreen';
 import { MoreScreen } from '../features/more/MoreScreen';
 import { NotFoundScreen } from '../features/not-found/NotFoundScreen';
 import { HabitsScreen } from '../features/nutrition/HabitsScreen';
@@ -89,6 +91,8 @@ export const routes: RouteObject[] = [
           { path: 'nutrition/historique', element: <HabitsScreen /> },
           { path: 'nutrition/hydratation', element: <HydrationSettingsScreen /> },
           { path: 'coach', element: <CoachScreen /> },
+          { path: 'coach/bilans', element: <ReviewsScreen /> },
+          { path: 'coach/motivation', element: <MotivationScreen /> },
           { path: 'profil', element: <ProfileScreen /> },
           { path: 'profil/modifier/:section', element: <ProfileEditScreen /> },
           { path: 'reglages', element: <SettingsScreen /> },

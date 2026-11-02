@@ -1,3 +1,4 @@
+import { DEFAULT_COACH_STATE, type CoachState } from '../coach/types';
 import { DEFAULT_HYDRATION, type HydrationSettings } from '../nutrition/types';
 import { DEFAULT_THRESHOLDS, type RecoveryThresholds } from '../recovery/types';
 
@@ -37,6 +38,8 @@ export interface AppSettings {
     /** Repères et rappels d'hydratation (réglables). */
     hydration: HydrationSettings;
   };
+  /** Bilans consultés et messages masqués du coach. */
+  coach: CoachState;
 }
 
 export function defaultSettings(): AppSettings {
@@ -46,6 +49,7 @@ export function defaultSettings(): AppSettings {
     lock: { verifier: null, autoLockMinutes: 1, failedAttempts: 0, retryAfter: null },
     recovery: { thresholds: { ...DEFAULT_THRESHOLDS } },
     nutrition: { hydration: { ...DEFAULT_HYDRATION, reminders: { ...DEFAULT_HYDRATION.reminders } } },
+    coach: { ...DEFAULT_COACH_STATE, dismissed: [] },
   };
 }
 

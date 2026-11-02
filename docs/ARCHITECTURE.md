@@ -29,8 +29,10 @@ src/
 │   ├── nutrition/  Nutrition : catalogue d'aliments, idées de repas filtrées par les goûts,
 │   │               conseils du jour, protéines, hydratation et rappels, habitudes,
 │   │               interface d'analyse de photo (désactivée)
-│   └── progress/   Transformation : séries mesurées, évolution, mensurations, chronologie
-│                   et comparaison de photos, interface d'analyse visuelle (désactivée)
+│   ├── progress/   Transformation : séries mesurées, évolution, mensurations, chronologie
+│   │               et comparaison de photos, interface d'analyse visuelle (désactivée)
+│   └── coach/      Coach à règles : messages proactifs, questions reconnues, objectifs,
+│                   bilans de 14 jours, journal de motivation, fournisseur (IA future)
 ├── data/           IndexedDB (Dexie) : schéma versionné, migrations, repositories,
 │                   erreurs de stockage, hooks réactifs, maintenance
 ├── security/       Empreinte du code de verrouillage (PBKDF2 via WebCrypto)
@@ -45,7 +47,8 @@ src/
 │   ├── recovery/   Check-in, conseil du jour, historique, réglage des repères
 │   ├── nutrition/  Journal, hydratation, idées, protéines, habitudes, réglages
 │   ├── progress/   Graphiques, mensurations, photos (ajout, chronologie, zoom, comparaison)
-│   └── today/ more/ coach/
+│   ├── coach/      Coach, bilans, journal de motivation, carte de l'accueil
+│   └── today/ more/
 ├── ui/             Composants réutilisables (Screen, Card, Button, champs, dialogues…)
 ├── pwa/            Service worker : enregistrement et mises à jour
 ├── styles/         Thème global Tailwind
@@ -56,7 +59,7 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 
 ## Données
 
-### Tables (IndexedDB `vyro`, schéma v6)
+### Tables (IndexedDB `vyro`, schéma v7)
 
 | Table | Clé | Contenu |
 |---|---|---|
@@ -81,10 +84,11 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 | `measurements` (v6) | `date` | Tours de bras, poitrine, épaules, taille (cm) ; un tour non mesuré reste `null` |
 | `progressPhotos` (v6) | id, index `date`, `pose` | Métadonnées et miniature (360 px) des photos de progression |
 | `progressPhotoFiles` (v6) | id | Image complète (1 600 px), lue seulement pour l'affichage ou la comparaison |
+| `motivation` (v7) | id, index `date` | Journal de motivation (texte écrit par l'utilisateur, motivation 1–10 facultative) |
 
 `src/data/backupTables.ts` inventorie chaque table et la nature de son contenu (`records`, `binary`, `transient`) pour la sauvegarde chiffrée de l'étape 9 ; un test vérifie qu'aucune table n'est oubliée, photos comprises.
 
-Les repères de récupération (`recovery.thresholds`) et d'hydratation (`nutrition.hydration`) sont stockés dans `settings`, complétés par les valeurs par défaut et remis à zéro s'ils sont incohérents.
+Les repères de récupération (`recovery.thresholds`), d'hydratation (`nutrition.hydration`) et l'état du coach (`coach` : bilan consulté, messages masqués) sont stockés dans `settings`, complétés par les valeurs par défaut et remis à zéro s'ils sont incohérents.
 
 La migration v2 → v3 convertit la semaine type : jours de salle → créneaux sans horaire, jours de basket et de match → activités hebdomadaires **sans horaire** (aucun horaire inventé).
 
@@ -204,6 +208,42 @@ Réduites dans le navigateur (plus grand côté 1 280 px, JPEG qualité 0,82) av
 - **Comparaison avant/après** : côte à côte, même pose, deux dates au choix. Les mesures affichées sont celles prises à 7 jours au plus de chaque photo ; sinon « — ».
 - **Images** (`media/image.ts`) : décodées puis réencodées en JPEG dans le navigateur (1 600 px qualité 0,85 + miniature 360 px qualité 0,72). Le réencodage retire les métadonnées d'origine (position GPS…). Miniature et image complète sont enregistrées dans une seule transaction : si l'espace est plein, rien n'est enregistré.
 - **Analyse visuelle** (`visualAnalysis.ts`) : interface prévue pour un futur fournisseur, **désactivée** tant qu'aucun n'est connecté. L'analyse passerait par un serveur VYRO (aucune clé dans l'app), avec un accord explicite pour chaque photo envoyée.
+
+## Coach (`src/domain/coach`)
+
+Aucune IA : un moteur de **règles locales** documentées ci-dessous. Le coach ne lit que `CoachContext` (données réelles) ; une donnée absente est dite absente, jamais devinée.
+
+### Messages proactifs (`messages.ts`)
+
+| Priorité | Événement réel | Message |
+|---|---|---|
+| 1 | Check-in → repos ou activité légère (douleur en premier) | Repos / activité légère, avec la raison |
+| 2 | Séance commencée non terminée | Reprendre la séance |
+| 3 | Séance terminée aujourd'hui | Félicitations + records réellement battus |
+| 4–5 | Match aujourd'hui / demain (calendrier) | Pas de muscu le jour J ; pas de jambes lourdes la veille |
+| 6 | Planning modifié depuis la dernière visite | Premier changement + lien calendrier |
+| 7 | Période de 14 jours terminée et bilan non consulté | Bilan prêt |
+| 8 | Séance prévue aujourd'hui | Sans check-in : inviter au check-in ; sinon feu vert (allégé si conseillé) |
+| 9 | Aucune séance depuis 7 jours (hors vacances) | Reprise douce, **rien à rattraper** |
+| 10 | Motivation ≤ repère « motivation basse » | Cite la dernière note du journal de l'utilisateur |
+| 11 | Photos commencées, pas de photo ce mois-ci | Photo du mois |
+| 12 | Dernière pesée il y a 14 jours ou plus | Petite pesée |
+
+**Contradictions** : les messages qui poussent à s'entraîner (priorités 8 et 9) sont supprimés si le check-in conseille repos ou activité légère, ou un jour de match. Une séance marquée allégée par le planning le reste même avec un check-in normal. Chaque message indique les données sur lesquelles il s'appuie et peut être masqué (identifiant daté, conservé 30 jours). Ton : messages courts, jamais de reproche ni de rattrapage (testé).
+
+### Questions (`intents.ts`)
+
+10 questions prévues (aujourd'hui, pourquoi ma séance a changé, progression, après un match, exercices récents, records, objectifs, récupération, régularité, douleur). Une question libre est reconnue **par mots-clés** (sans accents ni majuscules) ; la douleur passe en premier et ne donne jamais de diagnostic. Sans mot-clé reconnu, le coach répond qu'il ne sait pas et rappelle qu'il n'est pas une IA.
+
+### Objectifs, bilans, motivation
+
+- **Objectifs de la semaine** (`goals.ts`) : séances de musculation = séances planifiées (absent sans programme) ; check-ins = jours de séance planifiés, 3 au minimum ; hydratation = 5 jours au repère de base.
+- **Bilans** (`review.ts`) : une période de 14 jours tous les 14 jours depuis la création du profil. Séances, basket noté, check-ins (moyennes sur les jours renseignés), poids et mensurations (au moins 2 mesures), records battus, hydratation. Le titre du bilan est tiré des chiffres, sans culpabilisation.
+- **Journal de motivation** : notes écrites par l'utilisateur, citées telles quelles.
+
+### IA future (`provider.ts`)
+
+L'interface passe toujours par un `CoachProvider`. Seul `localRulesCoach` existe. Un fournisseur distant appellera un backend VYRO (clé côté serveur, jamais dans l'app), avec un résumé minimal (`CoachSummary`, sans photo ni nom) et après accord explicite ; `remoteCoachAvailability()` répond « indisponible » tant qu'aucun backend n'est configuré.
 
 ## Verrouillage local
 

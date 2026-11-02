@@ -7,6 +7,8 @@ import { calendarRepository } from './repositories/calendarRepository';
 import { recoveryRepository } from './repositories/recoveryRepository';
 import { nutritionRepository } from './repositories/nutritionRepository';
 import { progressRepository } from './repositories/progressRepository';
+import { coachRepository } from './repositories/coachRepository';
+import type { MotivationEntry } from '../domain/coach/types';
 import type { MeasurementEntry, ProgressPhoto, ProgressPhotoFile } from '../domain/progress/types';
 import type { DrinkEntry, MealEntry, MealPhoto } from '../domain/nutrition/types';
 import type { CheckIn } from '../domain/recovery/types';
@@ -86,6 +88,11 @@ export function useProgressPhotos(): ProgressPhoto[] | undefined {
 /** Image complète ; `null` si elle n'existe pas (ou plus). */
 export function useProgressPhotoFile(id: string | null): ProgressPhotoFile | null | undefined {
   return useLiveQuery(() => (id ? progressRepository.getPhotoFile(id) : Promise.resolve(null)), [id]);
+}
+
+/** Journal de motivation, de la note la plus ancienne à la plus récente. */
+export function useMotivation(): MotivationEntry[] | undefined {
+  return useLiveQuery(() => coachRepository.listMotivation(), []);
 }
 
 /** `null` : aucun programme généré. */

@@ -49,11 +49,13 @@ describe('écrans', () => {
     expect(screen.getByText('BUILD YOUR BEST.')).toBeInTheDocument();
   });
 
-  it('identifie clairement les modules non développés, sans données fictives', async () => {
-    renderRoute('/coach');
-    expect(await screen.findByText('Module en construction')).toBeInTheDocument();
-    expect(screen.getByText('Prévu à l’étape 8 du développement')).toBeInTheDocument();
-    expect(screen.getByText(/Aucune donnée n’est affichée/)).toBeInTheDocument();
+  it('tous les modules sont développés : aucun écran « en construction »', async () => {
+    for (const { path, label } of [...TAB_SECTIONS, ...MORE_SECTIONS]) {
+      const { unmount } = renderRoute(path);
+      expect(await screen.findByRole('heading', { level: 1 })).toBeInTheDocument();
+      expect(screen.queryByText(/Module en construction/), label).not.toBeInTheDocument();
+      unmount();
+    }
   });
 
   it('affiche une page introuvable pour un chemin inconnu', async () => {

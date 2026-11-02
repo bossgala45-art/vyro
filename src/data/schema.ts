@@ -90,6 +90,11 @@ export const VYRO_SCHEMA: readonly SchemaVersion[] = [
     version: 6,
     stores: { measurements: 'date', progressPhotos: 'id, date, pose', progressPhotoFiles: 'id' },
   },
+  {
+    // Étape 8 : coach. Journal de motivation (l'état du coach est dans les réglages).
+    version: 7,
+    stores: { motivation: 'id, date' },
+  },
 ];
 
 export const CURRENT_SCHEMA_VERSION = VYRO_SCHEMA[VYRO_SCHEMA.length - 1]?.version ?? 0;
