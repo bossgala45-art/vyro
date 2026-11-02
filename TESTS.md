@@ -8,9 +8,9 @@ Tous les résultats ci-dessous viennent de tests **réellement exécutés** (loc
 |---|---|---|
 | Types (TypeScript strict) | `npm run typecheck` | ✅ aucune erreur |
 | Lint (ESLint, domaine pur vérifié) | `npm run lint` | ✅ aucune erreur |
-| Tests unitaires et d'interface | `npm test` | ✅ **{{UNIT}}** réussis (27 fichiers) |
+| Tests unitaires et d'interface | `npm test` | ✅ **406** réussis (28 fichiers) |
 | Build de production | `npm run build` | ✅ |
-| Tests de bout en bout, Chromium + émulation iPhone 15 Pro | `npm run test:e2e` | ✅ **{{E2E}}** réussis |
+| Tests de bout en bout, Chromium + émulation iPhone 15 Pro | `npm run test:e2e` | ✅ **22** réussis |
 | Parcours principaux sur WebKit (moteur de Safari), iPhone 15 Pro | CI « Compatibilité Safari (WebKit) » | ✅ 8 réussis (exécutés par GitHub Actions ; WebKit n'est pas installé dans l'environnement de développement) |
 | Accessibilité (axe-core, WCAG 2.1 A/AA, contraste compris) sur 43 écrans | `e2e/audit.spec.ts` | ✅ 0 violation après correction de 4 problèmes |
 | Dépendances livrées | `npm audit --omit=dev` | ✅ 0 vulnérabilité |
