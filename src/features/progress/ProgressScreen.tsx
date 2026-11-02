@@ -94,15 +94,17 @@ export function ProgressScreen() {
           </Link>
         </div>
         {latest ? (
-          <dl className="mt-1 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
-            {MEASUREMENT_KEYS.map((key) => (
-              <div key={key} className="flex justify-between gap-2">
-                <dt className="text-mist">{METRIC_LABELS[key].short}</dt>
-                <dd className="text-snow">{latest[key] === null ? '—' : formatValue(latest[key], 'cm')}</dd>
-              </div>
-            ))}
-            <p className="col-span-2 mt-1 text-xs text-mist">Le {formatShortDate(latest.date).toLocaleLowerCase('fr')}</p>
-          </dl>
+          <>
+            <dl className="mt-1 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+              {MEASUREMENT_KEYS.map((key) => (
+                <div key={key} className="flex justify-between gap-2">
+                  <dt className="text-mist">{METRIC_LABELS[key].short}</dt>
+                  <dd className="text-snow">{latest[key] === null ? '—' : formatValue(latest[key], 'cm')}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-1 text-xs text-mist">Le {formatShortDate(latest.date).toLocaleLowerCase('fr')}</p>
+          </>
         ) : (
           <p className="mt-1 text-sm text-mist">Bras, poitrine, épaules, taille : un mètre ruban et 2 minutes, une fois par mois.</p>
         )}

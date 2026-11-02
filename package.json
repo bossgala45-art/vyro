@@ -1,7 +1,7 @@
 {
   "name": "vyro",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "VYRO — application personnelle de coaching sportif (PWA pour iPhone).",
   "type": "module",
   "engines": {
@@ -28,6 +28,7 @@
     "react-router": "^7.18.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "1.56.1",
     "@tailwindcss/vite": "^4.3.3",

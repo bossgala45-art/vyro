@@ -65,7 +65,13 @@ export function PhotoScreen() {
           <Plus aria-hidden size={18} />
         </Button>
       </div>
-      <div className="overflow-auto rounded-2xl bg-ink-950" style={{ maxHeight: '62dvh' }}>
+      <div
+        className="overflow-auto rounded-2xl bg-ink-950 focus-visible:outline-2 focus-visible:outline-volt-400"
+        style={{ maxHeight: '62dvh' }}
+        tabIndex={0}
+        role="region"
+        aria-label="Photo, zone déplaçable"
+      >
         {url && (
           <img
             src={url}
