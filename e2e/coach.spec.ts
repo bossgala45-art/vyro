@@ -22,7 +22,10 @@ test('coach : accueil, questions guidées, question non prise en charge, journal
   await page.goto('./#/coach/motivation');
   await page.getByLabel('Ta note').fill('Dunker avant juin');
   await page.getByRole('button', { name: 'Ajouter au journal' }).tap();
-  await expect(page.getByText('Dunker avant juin')).toBeVisible();
+  // Attendre l'enregistrement (la note apparaît dans la liste, le champ est vidé) avant de recharger.
+  const journal = page.getByRole('list', { name: 'Journal de motivation' });
+  await expect(journal.getByText('Dunker avant juin')).toBeVisible();
+  await expect(page.getByLabel('Ta note')).toHaveValue('');
   await page.reload();
-  await expect(page.getByText('Dunker avant juin')).toBeVisible();
+  await expect(journal.getByText('Dunker avant juin')).toBeVisible();
 });
