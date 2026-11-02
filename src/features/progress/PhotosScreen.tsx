@@ -53,8 +53,8 @@ export function PhotosScreen() {
   return (
     <Screen title="Chronologie" subtitle="Photos de progression">
       <Alert tone="info">
-        Tes photos restent uniquement sur cet iPhone : elles ne sont jamais envoyées. Elles seront incluses dans la sauvegarde chiffrée (étape 9) ;
-        en attendant, effacer les données de Safari les efface.
+        Tes photos restent uniquement sur cet iPhone : elles ne sont jamais envoyées. Elles sont incluses dans tes sauvegardes chiffrées
+        (Réglages → Sauvegarde) : pense à en faire une régulièrement.
       </Alert>
       <Link
         to="/progres/photos/nouvelle"

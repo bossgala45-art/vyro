@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { completeOnboarding } from './helpers';
 
-test('coach : accueil, questions guidées, question non prise en charge, journal de motivation', async ({ page }) => {
+test('coach : accueil, questions guidées, question non prise en charge, journal de motivation', { tag: '@webkit' }, async ({ page }) => {
   await completeOnboarding(page);
 
   // L'accueil mène au coach.

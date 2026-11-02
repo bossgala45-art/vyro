@@ -33,7 +33,7 @@ async function addPhoto(page: Page, buffer: Buffer, date: string) {
   await expect(page.getByRole('heading', { name: 'Chronologie' })).toBeVisible();
 }
 
-test('transformation : photos réduites, comparaison, zoom, suppression, mensurations et graphique', async ({ page }) => {
+test('transformation : photos réduites, comparaison, zoom, suppression, mensurations et graphique', { tag: '@webkit' }, async ({ page }) => {
   await completeOnboarding(page);
   await addPhoto(page, await makePng(page, '#2b4c7e'), isoDaysAgo(35));
   await addPhoto(page, await makePng(page, '#7e2b4c'), isoDaysAgo(0));

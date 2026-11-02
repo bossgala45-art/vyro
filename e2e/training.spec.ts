@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { completeOnboarding } from './helpers';
 
 
-test('musculation : planning, programme, séance complète et historique', async ({ page }) => {
+test('musculation : planning, programme, séance complète et historique', { tag: '@webkit' }, async ({ page }) => {
   await completeOnboarding(page);
   await page.goto('./#/entrainement');
 

@@ -40,6 +40,10 @@ export interface AppSettings {
   };
   /** Bilans consultés et messages masqués du coach. */
   coach: CoachState;
+  backup: {
+    /** Date du dernier export chiffré réussi (ISO), `null` si jamais. */
+    lastExportAt: string | null;
+  };
 }
 
 export function defaultSettings(): AppSettings {
@@ -50,6 +54,7 @@ export function defaultSettings(): AppSettings {
     recovery: { thresholds: { ...DEFAULT_THRESHOLDS } },
     nutrition: { hydration: { ...DEFAULT_HYDRATION, reminders: { ...DEFAULT_HYDRATION.reminders } } },
     coach: { ...DEFAULT_COACH_STATE, dismissed: [] },
+    backup: { lastExportAt: null },
   };
 }
 

@@ -189,7 +189,8 @@ export function LockSettings({ settings }: { settings: AppSettings }) {
           <li>Il empêche d’afficher VYRO sans le code, à l’ouverture et après une absence.</li>
           <li>
             Il s’agit d’un <strong className="text-snow">verrouillage visuel</strong> : les données ne sont pas chiffrées
-            sur l’appareil. Le chiffrement des sauvegardes arrive à l’étape 9.
+            sur l’appareil (iOS les protège quand l’iPhone est verrouillé). Les sauvegardes exportées, elles, sont chiffrées
+            avec ta phrase secrète.
           </li>
           <li>Le code n’est jamais enregistré : seule une empreinte (PBKDF2, 600 000 itérations) l’est.</li>
           <li>Face ID n’est pas accessible à une application web dans cette version.</li>

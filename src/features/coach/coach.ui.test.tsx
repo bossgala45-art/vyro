@@ -86,10 +86,13 @@ describe('écran du coach', () => {
     const user = userEvent.setup();
     await seedTrainingUser();
     renderRoute('/coach');
-    const hide = await screen.findByRole('button', { name: /^Masquer : / });
+    const [hide] = await screen.findAllByRole('button', { name: /^Masquer : / });
+    if (!hide) throw new Error('aucun message');
+    const before = screen.getAllByRole('button', { name: /^Masquer : / }).length;
     const title = hide.getAttribute('aria-label')?.replace('Masquer : ', '') ?? '';
     await user.click(hide);
     await waitFor(() => expect(screen.queryByRole('article', { name: title })).not.toBeInTheDocument());
+    expect(screen.queryAllByRole('button', { name: /^Masquer : / })).toHaveLength(before - 1);
     expect((await settingsRepository.get()).coach.dismissed).toHaveLength(1);
   });
 
