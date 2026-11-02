@@ -38,10 +38,34 @@ jobs:
           path: playwright-report
           retention-days: 7
 
+  webkit:
+    name: Compatibilité Safari (WebKit)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Installer WebKit pour Playwright
+        run: npx playwright install --with-deps webkit
+      - name: Parcours principaux sur WebKit (iPhone 15 Pro)
+        run: npx playwright test --project=iphone-webkit
+        env:
+          VYRO_WEBKIT: '1'
+      - name: Rapport Playwright
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-webkit
+          path: playwright-report
+          retention-days: 7
+
   deployer:
     name: Publier sur GitHub Pages
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: verifier
+    needs: [verifier, webkit]
     runs-on: ubuntu-latest
     permissions:
       contents: read

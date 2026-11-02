@@ -1,5 +1,5 @@
 /**
- * Inventaire des tables à inclure dans la future sauvegarde chiffrée (étape 9).
+ * Inventaire des tables incluses dans la sauvegarde chiffrée (`data/backup.ts`).
  *
  * Chaque table du schéma doit y figurer, avec la nature de son contenu : un test vérifie
  * qu'aucune table n'est oubliée (en particulier les photos, qui contiennent des images binaires).

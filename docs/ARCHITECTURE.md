@@ -35,7 +35,8 @@ src/
 │                   bilans de 14 jours, journal de motivation, fournisseur (IA future)
 ├── data/           IndexedDB (Dexie) : schéma versionné, migrations, repositories,
 │                   erreurs de stockage, hooks réactifs, maintenance
-├── security/       Empreinte du code de verrouillage (PBKDF2 via WebCrypto)
+├── security/       Empreinte du code de verrouillage, chiffrement des sauvegardes (WebCrypto)
+├── backup/         Conteneur des données d'une sauvegarde (JSON + images)
 ├── media/          Images : décodage, réduction et réencodage JPEG dans le navigateur
 ├── features/       Un dossier par module (écrans et composants propres)
 │   ├── onboarding/ Bienvenue et configuration initiale en 5 étapes
@@ -86,7 +87,7 @@ Sens des dépendances : `features → data → domain`, `features → domain`. L
 | `progressPhotoFiles` (v6) | id | Image complète (1 600 px), lue seulement pour l'affichage ou la comparaison |
 | `motivation` (v7) | id, index `date` | Journal de motivation (texte écrit par l'utilisateur, motivation 1–10 facultative) |
 
-`src/data/backupTables.ts` inventorie chaque table et la nature de son contenu (`records`, `binary`, `transient`) pour la sauvegarde chiffrée de l'étape 9 ; un test vérifie qu'aucune table n'est oubliée, photos comprises.
+`src/data/backupTables.ts` inventorie chaque table et la nature de son contenu (`records`, `binary`, `transient`) pour la sauvegarde chiffrée ; un test vérifie qu'aucune table n'est oubliée, photos comprises.
 
 Les repères de récupération (`recovery.thresholds`), d'hydratation (`nutrition.hydration`) et l'état du coach (`coach` : bilan consulté, messages masqués) sont stockés dans `settings`, complétés par les valeurs par défaut et remis à zéro s'ils sont incohérents.
 
@@ -195,7 +196,7 @@ Rappels : une PWA iOS ne peut pas programmer de notification locale sans serveur
 
 ### Photos
 
-Réduites dans le navigateur (plus grand côté 1 280 px, JPEG qualité 0,82) avant stockage, enregistrées dans la même transaction que le repas (espace plein → rien n'est modifié), supprimées définitivement avec le repas. Elles ne sont jamais envoyées. Elles seront incluses dans la sauvegarde chiffrée (étape 9).
+Réduites dans le navigateur (plus grand côté 1 280 px, JPEG qualité 0,82) avant stockage, enregistrées dans la même transaction que le repas (espace plein → rien n'est modifié), supprimées définitivement avec le repas. Elles ne sont jamais envoyées. Elles sont incluses dans la sauvegarde chiffrée.
 
 `imageAnalysis.ts` définit l'interface d'un futur service d'analyse : **désactivée** tant qu'aucun fournisseur réel n'est connecté ; l'analyse passera par un serveur (aucune clé dans l'app) et ne produira que des propositions à valider.
 
@@ -245,12 +246,18 @@ Aucune IA : un moteur de **règles locales** documentées ci-dessous. Le coach n
 
 L'interface passe toujours par un `CoachProvider`. Seul `localRulesCoach` existe. Un fournisseur distant appellera un backend VYRO (clé côté serveur, jamais dans l'app), avec un résumé minimal (`CoachSummary`, sans photo ni nom) et après accord explicite ; `remoteCoachAvailability()` répond « indisponible » tant qu'aucun backend n'est configuré.
 
+## Sauvegardes (`src/data/backup.ts`)
+
+- **Export** : lecture de toutes les tables (sauf brouillons) dans une transaction, conteneur `backup/container.ts` (manifeste JSON + images à part), chiffrement `security/backupCrypto.ts`, puis feuille de partage iOS ou téléchargement. Date du dernier export dans `settings.backup` (le coach la rappelle après 7 jours d'utilisation, puis tous les 30 jours).
+- **Restauration** en deux temps : `stageRestore()` déchiffre, charge les données dans une base temporaire **au schéma de la sauvegarde**, la rouvre au schéma actuel (les vraies migrations s'appliquent), vérifie tout avec les contrôles d'intégrité des repositories, puis renvoie un aperçu. `apply()` remplace les données en une transaction (le verrouillage de l'appareil est conservé) ; `discard()` supprime la base temporaire.
+- Détails du format, choix cryptographiques et limites : [SECURITE.md](SECURITE.md).
+
 ## Verrouillage local
 
 - Code de 6 à 128 caractères ; seule une empreinte **PBKDF2-SHA256, 600 000 itérations, sel aléatoire de 16 octets** est stockée. Comparaison en temps constant.
 - 4 essais libres, puis délai de 30 s doublé à chaque erreur (15 min max), mémorisé dans la base.
 - Verrouillé au démarrage et après un passage en arrière-plan (délai réglable).
-- **C'est un verrouillage visuel, pas un chiffrement** : il masque l'interface, les données restent en clair dans IndexedDB. Le chiffrement arrive avec les sauvegardes (étape 9).
+- **C'est un verrouillage visuel, pas un chiffrement** : il masque l'interface, les données restent en clair dans IndexedDB (protégées par le chiffrement d'iOS quand l'iPhone est verrouillé). Voir [SECURITE.md](SECURITE.md).
 - Code oublié : il n'est récupérable par personne ; seule option, effacer toutes les données.
 
 ## Navigation
@@ -259,6 +266,9 @@ Routage par hash (`#/calendrier`) avec React Router. Il fonctionne sur un héber
 
 ## PWA
 
+- Politique de sécurité du contenu ajoutée à `index.html` au build (`vite.config.ts`) : scripts de l'origine uniquement, aucune connexion à un autre site.
+- Bandeau « Hors ligne » (l'app reste entièrement utilisable) ; mise à jour proposée, jamais imposée.
+- Notifications : aucune notification système (pas de serveur Web Push) ; rappels dans l'app et alertes du Calendrier via .ics.
 - `vite-plugin-pwa` génère le manifeste et un service worker Workbox qui met en cache tous les fichiers de l'application.
 - Mise à jour en mode **prompt** : la nouvelle version n'est activée qu'après accord (bannière « Mettre à jour »).
 - Les chemins sont relatifs à `BASE_PATH` (`/vyro/` sur GitHub Pages, `/` en local).

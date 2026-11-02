@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { completeOnboarding } from './helpers';
 
-test('nutrition : hydratation, repas avec photo réduite, conservés après rechargement', async ({ page }) => {
+test('nutrition : hydratation, repas avec photo réduite, conservés après rechargement', { tag: '@webkit' }, async ({ page }) => {
   await completeOnboarding(page);
   await page.goto('./#/nutrition');
 

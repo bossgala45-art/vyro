@@ -92,6 +92,7 @@ function emptyContext(overrides: Partial<CoachContext> = {}): CoachContext {
     hydrationBaseMl: 2000,
     activityLogs: [],
     motivation: [],
+    lastBackupAt: null,
     state: { reviewSeenUntil: null, dismissed: [] },
     ...overrides,
   };
@@ -168,6 +169,14 @@ describe('messages', () => {
     const restart = proactiveMessages(ctx).find((message) => message.kind === 'regularity');
     expect(restart?.text).toMatch(/rien à rattraper/);
     expect(allText(ctx)).not.toMatch(/dommage|tu aurais dû|honte|paresse|échec|décevant|rattrape (la|ta|tes)|double séance/i);
+  });
+
+  it('sauvegarde : conseillée après 7 jours d’utilisation, puis tous les 30 jours', () => {
+    const ids = (ctx: CoachContext) => proactiveMessages(ctx).map((message) => message.id);
+    expect(ids(activeContext())).toContain('backup:2026-11');
+    expect(ids(activeContext({ lastBackupAt: '2026-10-20T10:00:00.000Z' }))).not.toContain('backup:2026-11');
+    expect(ids(activeContext({ lastBackupAt: '2026-09-20T10:00:00.000Z' }))).toContain('backup:2026-11');
+    expect(ids(activeContext({ startDate: '2026-11-01' }))).not.toContain('backup:2026-11');
   });
 
   it('un message masqué ne revient pas le même jour', () => {

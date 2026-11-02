@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { StorageError } from '../../data/errors';
 import { useSettings } from '../../data/hooks';
 import { deleteAllData } from '../../data/maintenance';
@@ -12,6 +12,7 @@ import { ConfirmDialog } from '../../ui/ConfirmDialog';
 import { Toggle } from '../../ui/fields';
 import { Screen } from '../../ui/Screen';
 import { LockSettings } from './LockSettings';
+import { NotificationSettings } from './NotificationSettings';
 import { StorageSettings } from './StorageSettings';
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -84,14 +85,26 @@ export function SettingsScreen() {
 
       <Section title="Sauvegardes">
         <p className="text-sm text-mist">
-          L’export chiffré et la restauration de tes données arrivent à l’étape 9. En attendant, tes données n’existent que
-          sur cet iPhone.
+          {settings.backup.lastExportAt
+            ? `Dernière sauvegarde chiffrée : ${new Date(settings.backup.lastExportAt).toLocaleDateString('fr-FR', { dateStyle: 'long' })}.`
+            : 'Aucune sauvegarde : tes données n’existent que sur cet iPhone.'}
         </p>
+        <Link
+          to="/reglages/sauvegarde"
+          className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-volt-600 px-4 font-semibold text-white active:bg-volt-500"
+        >
+          Sauvegarder ou restaurer
+        </Link>
+      </Section>
+
+      <Section title="Notifications">
+        <NotificationSettings />
       </Section>
 
       <Section title="Effacer mes données">
         <p className="mb-3 text-sm text-mist">
-          Supprime définitivement ton profil, tes pesées et tes réglages de cet iPhone. Aucune copie n’existe ailleurs.
+          Supprime définitivement toutes tes données de cet iPhone (profil, séances, calendrier, repas, photos…). Seules les
+          sauvegardes que tu as exportées existent ailleurs.
         </p>
         <Button variant="danger" block onClick={() => setConfirmingDelete(true)}>
           Effacer toutes mes données
@@ -112,7 +125,7 @@ export function SettingsScreen() {
         onCancel={() => setConfirmingDelete(false)}
         onConfirm={() => void deleteEverything()}
       >
-        <p>Profil, pesées et réglages seront supprimés de cet iPhone. Cette action est irréversible.</p>
+        <p>Toutes tes données, photos comprises, seront supprimées de cet iPhone. Cette action est irréversible.</p>
       </ConfirmDialog>
     </Screen>
   );

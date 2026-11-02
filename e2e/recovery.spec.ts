@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { completeOnboarding } from './helpers';
 
-test('récupération : check-in, conseil expliqué, historique et effet sur le calendrier', async ({ page }) => {
+test('récupération : check-in, conseil expliqué, historique et effet sur le calendrier', { tag: '@webkit' }, async ({ page }) => {
   await completeOnboarding(page);
 
   // L'accueil invite au check-in.

@@ -21,6 +21,7 @@ export function withDefaults(stored: Partial<AppSettings> | undefined): AppSetti
     recovery: { thresholds: withThresholdDefaults(stored.recovery?.thresholds) },
     nutrition: { hydration: withHydrationDefaults(stored.nutrition?.hydration) },
     coach: withCoachDefaults(stored.coach),
+    backup: { lastExportAt: typeof stored.backup?.lastExportAt === 'string' ? stored.backup.lastExportAt : null },
   };
 }
 

@@ -10,7 +10,7 @@ test('premier lancement : la configuration est obligatoire avant d’accéder à
   await expect(page.getByText('Étape 1 sur 5')).toBeVisible();
 });
 
-test('le profil survit à la fermeture et à la réouverture de l’application', async ({ page, context }) => {
+test('le profil survit à la fermeture et à la réouverture de l’application', { tag: '@webkit' }, async ({ page, context }) => {
   await completeOnboarding(page);
 
   // Nouvelle page dans le même navigateur = app fermée puis rouverte (même stockage).
@@ -59,7 +59,7 @@ test('modifier le profil et ajouter une pesée', async ({ page }) => {
   await expect(page.getByText('58,7 kg').first()).toBeVisible();
 });
 
-test('verrouillage : code demandé à la réouverture, mauvais code refusé', async ({ page }) => {
+test('verrouillage : code demandé à la réouverture, mauvais code refusé', { tag: '@webkit' }, async ({ page }) => {
   await completeOnboarding(page);
   await page.goto('./#/reglages');
   await page.getByRole('button', { name: 'Activer le verrouillage' }).tap();

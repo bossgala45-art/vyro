@@ -95,7 +95,7 @@ export function LockScreen() {
       >
         <p>
           Le code n’est enregistré nulle part : il ne peut pas être récupéré. La seule solution est d’effacer toutes les
-          données de VYRO sur cet iPhone et de recommencer.
+          données de VYRO sur cet iPhone et de recommencer. Si tu as une sauvegarde chiffrée, tu pourras la restaurer ensuite.
         </p>
       </ConfirmDialog>
     </main>

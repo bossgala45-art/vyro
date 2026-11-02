@@ -15,6 +15,9 @@ import type { CoachContext, CoachMessage } from './types';
 
 const NO_WORKOUT_DAYS = 7;
 const WEIGHT_REMINDER_DAYS = 14;
+/** Sauvegarde conseillée après 7 jours d'utilisation, puis tous les 30 jours. */
+const BACKUP_FIRST_DAYS = 7;
+const BACKUP_EVERY_DAYS = 30;
 
 type Rule = (ctx: CoachContext) => CoachMessage | CoachMessage[] | null;
 
@@ -233,6 +236,23 @@ const rules: Rule[] = [
       action: { label: 'Nouvelle pesée', to: '/progres' },
     };
   },
+  // 12. Sauvegarde : les données n'existent que sur cet iPhone.
+  (ctx) => {
+    if (!ctx.startDate) return null;
+    const last = ctx.lastBackupAt ? ctx.lastBackupAt.slice(0, 10) : null;
+    const due = last ? daysBetween(last, ctx.today) >= BACKUP_EVERY_DAYS : daysBetween(ctx.startDate, ctx.today) >= BACKUP_FIRST_DAYS;
+    if (!due) return null;
+    return {
+      id: `backup:${ctx.today.slice(0, 7)}`,
+      kind: 'tracking',
+      priority: 13,
+      push: false,
+      title: 'Sauvegarde conseillée',
+      text: last ? `Dernière sauvegarde le ${frDate(last)}. Un export chiffré protège tes séances et tes photos.` : 'Tes données n’existent que sur cet iPhone : un export chiffré les met à l’abri.',
+      basedOn: 'la date de ta dernière sauvegarde',
+      action: { label: 'Sauvegarder', to: '/reglages/sauvegarde' },
+    };
+  },
 ];
 
 /** Messages du jour, du plus important au moins important, contradictions résolues. */
@@ -266,4 +286,4 @@ export function greeting(ctx: CoachContext): { title: string; text: string } {
   };
 }
 
-export const COACH_RULES = { NO_WORKOUT_DAYS, WEIGHT_REMINDER_DAYS } as const;
+export const COACH_RULES = { NO_WORKOUT_DAYS, WEIGHT_REMINDER_DAYS, BACKUP_FIRST_DAYS, BACKUP_EVERY_DAYS } as const;

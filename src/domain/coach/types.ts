@@ -71,6 +71,8 @@ export interface CoachContext {
   hydrationBaseMl: number;
   activityLogs: readonly ActivityLog[];
   motivation: readonly MotivationEntry[];
+  /** Dernier export chiffré (ISO), `null` si jamais fait. */
+  lastBackupAt: string | null;
   state: CoachState;
 }
 

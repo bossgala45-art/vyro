@@ -5,7 +5,7 @@ import type { LockVerifier } from '../domain/settings/types';
  *
  * Le code n'est jamais stocké : seule une empreinte PBKDF2-SHA256 salée l'est.
  * IMPORTANT : ce verrouillage est VISUEL. Il bloque l'accès à l'interface mais
- * ne chiffre pas les données (le chiffrement arrive avec les sauvegardes, étape 9).
+ * ne chiffre pas les données stockées (seules les sauvegardes exportées sont chiffrées, voir backupCrypto.ts).
  */
 
 /** Recommandation OWASP 2023 pour PBKDF2-HMAC-SHA256. */

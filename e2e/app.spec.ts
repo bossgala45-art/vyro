@@ -103,6 +103,7 @@ test.describe('PWA', () => {
     await context.setOffline(true);
     await page.reload();
     await expect(page.getByText('Salut Alex')).toBeVisible();
+    await expect(page.getByText(/Hors ligne : tout fonctionne/)).toBeVisible();
 
     await page.getByRole('navigation', { name: 'Navigation principale' }).getByRole('link', { name: 'Calendrier' }).tap();
     await expect(page.getByRole('heading', { level: 1, name: 'Calendrier' })).toBeVisible();

@@ -60,7 +60,7 @@ export function StorageErrorScreen({ error }: { error: StorageError }) {
           void deleteAllData().finally(() => window.location.reload());
         }}
       >
-        <p>Profil, pesées et réglages seront définitivement supprimés de cet appareil.</p>
+        <p>Toutes les données de VYRO (photos comprises) seront définitivement supprimées de cet appareil.</p>
       </ConfirmDialog>
     </main>
   );

@@ -32,6 +32,7 @@ import { CheckInScreen } from '../features/recovery/CheckInScreen';
 import { RecoveryScreen } from '../features/recovery/RecoveryScreen';
 import { ThresholdsScreen } from '../features/recovery/ThresholdsScreen';
 import { TodayReadinessScreen } from '../features/recovery/TodayReadinessScreen';
+import { BackupScreen } from '../features/settings/BackupScreen';
 import { SettingsScreen } from '../features/settings/SettingsScreen';
 import { TodayScreen } from '../features/today/TodayScreen';
 import { HistoryScreen, WorkoutDetailScreen } from '../features/training/HistoryScreen';
@@ -96,6 +97,7 @@ export const routes: RouteObject[] = [
           { path: 'profil', element: <ProfileScreen /> },
           { path: 'profil/modifier/:section', element: <ProfileEditScreen /> },
           { path: 'reglages', element: <SettingsScreen /> },
+          { path: 'reglages/sauvegarde', element: <BackupScreen /> },
           { path: '*', element: <NotFoundScreen /> },
         ],
       },

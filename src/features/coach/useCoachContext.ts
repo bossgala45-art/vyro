@@ -74,6 +74,7 @@ export function useCoachContext(): CoachContext | undefined {
     hydrationBaseMl: settings.nutrition.hydration.baseGoalMl,
     activityLogs: data.logs,
     motivation,
+    lastBackupAt: settings.backup.lastExportAt,
     state: settings.coach,
   };
 }
