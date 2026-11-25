@@ -1,0 +1,34 @@
+# LÉA — Fiche personnage
+
+Rôle : sœur d'Adrien, disparue lors de l'accident expérimental. Décision : D-011.
+
+## Identité visuelle `[VALIDÉ]`
+| Trait | Valeur |
+|---|---|
+| Âge | 25 ans *(moment auquel cet âge s'applique : voir Q-009)* |
+| Silhouette | Mince et naturelle |
+| Cheveux | Brun foncé, mi-longs, légèrement ondulés |
+| Yeux | Marron |
+| Traits | Doux et expressifs |
+| Peau | Claire |
+
+## Personnalité `[VALIDÉ]`
+Chaleureuse, intelligente, calme, empathique, indépendante.
+
+## Tenues
+| ID | Tenue | Statut |
+|---|---|---|
+| T-LEA-01 | Tenue principale : pull beige clair, pantalon neutre | `[VALIDÉ]` |
+
+Couleur et coupe exactes du « pantalon neutre » : à aligner sur la planche validée `[À DÉFINIR]`.
+Autres tenues éventuelles : `[À DÉFINIR]` (Q-016).
+
+## Mode de présence à l'écran
+`[À DÉFINIR]` (présence physique, souvenir, image, voix… — Q-016).
+
+## Référence visuelle
+- Planche d'identité créée et validée `[VALIDÉ]` (D-016).
+- Fichier attendu : `12_references_visuelles/personnages/REF_PERS_LEA_01.<ext>` — **absent** (Q-002).
+
+## Bloc descriptif canonique pour prompts
+`[À DÉFINIR]` — après dépôt de la planche (P-007).

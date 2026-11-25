@@ -1,0 +1,11 @@
+# P-004 (proposition) : les vidéos et exports lourds ne sont pas suivis par git.
+# Les sauvegarder sur un stockage dédié. Les fiches .md et les images de référence restent suivies.
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.mxf
+*.prproj.lock
+**/Auto-Save/**
+**/Cache/**
