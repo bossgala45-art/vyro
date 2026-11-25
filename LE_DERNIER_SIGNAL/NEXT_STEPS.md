@@ -1,54 +1,42 @@
 # NEXT STEPS — LE DERNIER SIGNAL
 
-Prochaines étapes de préproduction, dans l'ordre recommandé. Aucune génération vidéo n'est prévue avant l'étape 6.
+Prochaines étapes de préproduction, dans l'ordre recommandé. Aucune génération vidéo, aucun storyboard et aucun prompt de scène définitif avant les étapes indiquées.
 
-Dernière mise à jour : 2026-11-25
+Dernière mise à jour : 2026-11-25 (session 2)
 
 ---
 
-## ▶ Étape 1 — Débloquer les fondations (immédiat, par l'équipe)
+## ▶ Étape 1 — Décisions et dépôts (par l'équipe)
 
-1. **Valider, modifier ou refuser** les propositions P-001 à P-007 (`DECISIONS_LOG.md` §B).
-2. **Déposer les références visuelles validées** dans `12_references_visuelles/` (Adrien, Léa, appartement, laboratoire), avec si possible : outil utilisé, prompt d'origine, date de validation (Q-002).
-3. **Indiquer s'il existe déjà** un synopsis, un traitement ou un brouillon de scénario, et le déposer dans `01_scenario/` (Q-004).
-4. **Répondre aux questions de production** Q-003 (capacités de Fable 2), Q-005 (langue et voix), Q-017/Q-018 (musique, logiciel de montage).
+**Décisions à prendre**
+1. **P-008 Chronologie** : option A (recommandée), B, ou autre. Répondre en même temps à Q-023 (Léa cadette de 3 ans ?).
+2. **P-009 Tenue d'Adrien** : valider, et choisir les détails (sweat zippé ou non, cordons, logo).
+3. **P-010 Téléphone** : option T1 ou T2, cadran rotatif ou touches, finition, usure, sonnerie.
+4. **P-011 Règles d'usage des références**.
+5. **Q-026** : confirmer ou non P-001, P-003 à P-007.
 
-## Étape 2 — Bible du film (Claude propose, l'équipe valide)
+**Dépôts à faire**
+6. Les 5 références visuelles, dans leurs sous-dossiers de `12_references_visuelles/`, avec la fiche de dépôt remplie. Confirmer la validation des deux références d'Adrien (Q-022).
+7. Le texte de la base scénaristique des six actes, dans `01_scenario/sources/` (Q-004).
 
-- Règles internes de la reconstruction : ce qui y est stable, ce qui s'y dégrade, comment elle « se trompe ».
-- Logique des appels : qui appelle, comment, pourquoi maintenant (Q-006).
-- Thèmes, motifs récurrents (02:17, la pluie, le signal, le téléphone), grammaire visuelle (réel vs reconstruit).
-- Réponses aux questions narratives Q-006 à Q-014, une à une, sans rien fixer sans validation.
+**Vérifications à faire dans l'interface**
+8. Remplir `08_production/CAPACITES_FABLE2.md` depuis l'interface de Fable 2.
 
-## Étape 3 — Structure narrative
+## Étape 2 — Contrôle des dépôts (Claude)
+- Ouvrir chaque référence déposée et la comparer au canon écrit, puis rapporter les écarts observés : tenue d'Adrien par rapport à P-009, téléphone de la planche de l'appartement par rapport à P-010, niveau d'abandon du laboratoire par rapport à P-008.
+- Mettre à jour l'inventaire scénaristique à partir des sources déposées, sans les réécrire.
+- Reporter les décisions validées dans les fiches et dans `CHRONOLOGIE.md`.
 
-- Synopsis court (1 page) → validation.
-- Séquencier : liste des scènes, lieu, heure diégétique, enjeu, information révélée, **durée estimée**, total ≈ 20 min.
-- Premier remplissage de `05_continuite/CHRONOLOGIE.md`, `REVELATIONS_SPECTATEUR.md` et `ANOMALIES_INTENTIONNELLES.md`.
-
-## Étape 4 — Scénario
-
-- Continuité dialoguée, versionnée dans `01_scenario/versions/`.
-- Vérification d'incohérences à chaque version (chronologie, révélations, cohérence du concept).
-
-## Étape 5 — Préproduction visuelle et tests techniques
-
-- Blocs descriptifs canoniques (P-007) pour Adrien, Léa, appartement, laboratoire, téléphone.
-- Fiches de tenues et d'états par scène.
-- Plan schématique de chaque décor (axes, fenêtre, position du téléphone).
-- **Tests Fable 2** (générés par l'équipe) : fidélité d'identité d'Adrien et de Léa, tenue du décor, mouvements de caméra, rendu de la pluie, durée et résolution réelles. Résultats consignés dans `08_production/`.
-
-## Étape 6 — Découpage et prompts
-
-- Découpage technique scène par scène, storyboard, registre de continuité par plan.
-- Prompts Fable 2 par plan, avec liste des références à joindre.
-- Plan de génération (regroupement par décor et personnage).
+## Étape 3 — Bible du film
+- Règles internes de la reconstruction ; logique des appels ; accident et rôle d'Adrien ; fin.
+- Contenu de chaque acte, d'après la base déposée.
+- Grammaire visuelle réel / reconstruit / souvenir ; motifs récurrents.
 
 ## Étapes suivantes
-Production (générations) → montage → postproduction (son, musique, effets, étalonnage, incrustations) → export.
+Synopsis → séquencier (scènes, durées) → scénario → blocs canoniques et tests Fable 2 → découpage et storyboard → prompts → production → montage → postproduction.
 
 ---
 
 ## Prochaine étape recommandée
 
-**Étape 1**, en priorité : déposer les références visuelles et répondre à Q-003 et Q-004. Ce sont les trois informations qui conditionnent tout le reste. Ensuite, nous attaquerons la bible du film (étape 2), en commençant par la logique interne de la reconstruction et l'identité de l'émetteur des appels.
+**Déposer le texte de la base des six actes** dans `01_scenario/sources/`, et **trancher P-008 (chronologie)**. Ce sont les deux conditions pour commencer la bible sans rien inventer. Le dépôt des références et le remplissage de la grille Fable 2 peuvent se faire en parallèle.

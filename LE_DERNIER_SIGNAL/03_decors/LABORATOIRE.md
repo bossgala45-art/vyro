@@ -19,7 +19,9 @@ Laboratoire de recherche abandonné en 2049.
 
 ## Référence visuelle
 - Planche créée et validée `[VALIDÉ]` (D-016).
-- Fichier attendu : `12_references_visuelles/decors/REF_DECOR_LABO_01.<ext>` — **absent** (Q-002).
+- Fichier attendu : `12_references_visuelles/decors/LABORATOIRE/REF_DECOR_LABO_PLANCHE_v01.<ext>` — **absent** (Q-002).
+- Mode d'emploi : `12_references_visuelles/decors/LABORATOIRE/README.md`.
+- Niveau d'abandon : dépend de la chronologie retenue (P-008). Avec l'option A recommandée, il s'agit d'un site désaffecté depuis quelques mois, pas d'une ruine.
 
 ## À définir pour la continuité
 - Statut du lieu : réel, reconstruit, ou les deux `[À DÉFINIR]` (Q-010).

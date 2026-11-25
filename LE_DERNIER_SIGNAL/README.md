@@ -111,7 +111,7 @@ Voir proposition P-003 dans `DECISIONS_LOG.md`. En résumé :
 | Plan | `S##_P###` (par pas de 10 pour pouvoir insérer) | `S03_P020` |
 | Prompt | `PR_S##_P###_v##.md` | `PR_S03_P020_v02.md` |
 | Clip généré | `LDS_S##_P###_v##_t##.ext` (v = version du prompt, t = tentative) | `LDS_S03_P020_v02_t04.mp4` |
-| Référence visuelle | `REF_<TYPE>_<NOM>_##.ext` | `REF_PERS_ADRIEN_01.png` |
+| Référence visuelle | `REF_<TYPE>_<NOM>_<NATURE>_v##.ext` | `REF_PERS_ADRIEN_PORTRAIT_MAITRE_v01.png` |
 | Version de montage | `LDS_MONTAGE_v###` | `LDS_MONTAGE_v003` |
 
 Dates : format `AAAA-MM-JJ`. Noms de fichiers sans accents ni espaces.

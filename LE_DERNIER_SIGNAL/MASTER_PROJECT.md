@@ -52,6 +52,13 @@ Exigence : le récit doit rester cohérent même lorsque le spectateur ne compre
 ### Élément central : 02:17 `[VALIDÉ]` (D-009)
 L'heure **02:17** est un élément central de la chronologie : elle correspond au **moment de l'accident original**.
 
+### Structure en six actes `[VALIDÉ]` (D-020)
+1. *The Noise* · 2. *The Proofs* · 3. *Absence* · 4. *Laboratory* · 5. *Truth* · 6. *Liberation*
+Seuls les titres sont présents dans le projet. Le contenu des actes n'est pas disponible (Q-004). Voir `01_scenario/INVENTAIRE_SCENARISTIQUE.md`.
+
+### Chronologie
+Proposition en attente : `05_continuite/PROPOSITION_CHRONOLOGIE.md` (P-008, option A recommandée). **Rien n'est encore validé** au-delà de 2049 et 02:17.
+
 ### Points du concept non encore définis
 Qui appelle réellement (Q-006) · nature exacte de la disparition de Léa (Q-007) · rôle précis d'Adrien dans l'accident (Q-008) · temps écoulé depuis l'accident (Q-009) · statut réel / reconstruit du laboratoire (Q-010) · lieu physique d'Adrien pendant la reconstruction (Q-011) · forme de la fin (Q-014).
 
@@ -63,7 +70,8 @@ Qui appelle réellement (Q-006) · nature exacte de la disparition de Léa (Q-00
 - Expression généralement fatiguée, réfléchie, anxieuse et déterminée.
 - Tenue principale : sweat ou hoodie gris anthracite, t-shirt sombre, pantalon cargo noir, baskets sobres.
 - Intelligent, réservé, émotionnel, parfois anxieux, déterminé.
-- Référence visuelle d'identité : **créée** (D-016) — fichier **non encore déposé** dans `12_references_visuelles/` (Q-002).
+- Proposition de tenue canonique unique en attente : P-009 (le canon ci-dessus reste en vigueur).
+- Références visuelles : **portrait maître** (principale) et **planche** (secondaire) annoncées. Validation à confirmer (Q-022). **Non déposées** (Q-002).
 
 ### LÉA `[VALIDÉ]` (D-011) — fiche : `02_personnages/LEA.md`
 - 25 ans, silhouette mince et naturelle.
@@ -88,7 +96,7 @@ Planche de référence : **créée et validée** — fichier non encore déposé
 
 | Accessoire | Description validée | Position validée | Réf. |
 |---|---|---|---|
-| Téléphone | Noir, ancien, sans câble visible | Sur une petite table, appartement d'Adrien | D-014 |
+| Téléphone | Noir, ancien, sans câble visible (fiche détaillée proposée : P-010, non validée) | Sur une petite table, appartement d'Adrien | D-014 |
 | Ordinateur | Présent sur le bureau | Bureau intégré, appartement | D-012 |
 | Documents | Présents sur le bureau | Bureau intégré, appartement | D-012 |
 

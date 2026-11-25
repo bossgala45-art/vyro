@@ -11,7 +11,7 @@ Chaque accessoire a un identifiant `ACC-##`, une description fixe et un **état 
 | ACC-03 | Documents | Présents sur le bureau (nature non précisée) | Appartement | Bureau intégré | `[VALIDÉ]` | D-012 |
 
 Points à définir :
-- ACC-01 : type exact (cadran rotatif, touches…), sonnerie, éventuel affichage de l'heure, statut d'indice (Q-012). Aucune référence visuelle dédiée connue.
+- ACC-01 : type exact (cadran rotatif, touches…), sonnerie, éventuel affichage de l'heure, statut d'indice (Q-012). Aucune référence visuelle dédiée connue. → Fiche proposée, **non validée** : `FICHE_TELEPHONE.md` (P-010).
 - ACC-02 : apparence (doit rester crédible pour 2049, sans futurisme exagéré — D-007).
 - ACC-03 : nature des documents et ce qu'ils révèlent éventuellement (lien avec `05_continuite/REVELATIONS_SPECTATEUR.md`).
 

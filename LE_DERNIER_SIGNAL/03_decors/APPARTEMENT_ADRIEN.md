@@ -19,7 +19,8 @@ Appartement contemporain urbain en 2049.
 
 ## Référence visuelle
 - Planche créée et validée `[VALIDÉ]` (D-016).
-- Fichier attendu : `12_references_visuelles/decors/REF_DECOR_APPART_01.<ext>` — **absent** (Q-002).
+- Fichier attendu : `12_references_visuelles/decors/APPARTEMENT/REF_DECOR_APPART_PLANCHE_v01.<ext>` — **absent** (Q-002).
+- Mode d'emploi : `12_references_visuelles/decors/APPARTEMENT/README.md`.
 
 ## À définir pour la continuité (à aligner sur la planche validée)
 - Plan schématique : position relative salon / bureau / fenêtre / cuisine / entrée / couloir `[À DÉFINIR]`.

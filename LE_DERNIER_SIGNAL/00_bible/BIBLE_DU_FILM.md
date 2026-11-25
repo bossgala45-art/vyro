@@ -12,6 +12,9 @@ Document de référence approfondi : monde, règles internes, ton, thèmes, moti
 ## 2. Concept `[VALIDÉ]`
 Voir `../MASTER_PROJECT.md` §4 (D-008, D-009). Non recopié ici pour éviter les divergences.
 
+## 2 bis. Structure `[VALIDÉ]` (D-020)
+Six actes : *The Noise*, *The Proofs*, *Absence*, *Laboratory*, *Truth*, *Liberation*. Contenu non disponible dans le projet. Ce qui manque pour rédiger la bible : `../01_scenario/INVENTAIRE_SCENARISTIQUE.md` §4.
+
 ## 3. Le monde en 2049
 - Science-fiction réaliste, sans futurisme exagéré `[VALIDÉ]` (D-007).
 - Technologie quotidienne visible, société, ville : `[À DÉFINIR]`.
@@ -26,7 +29,7 @@ Voir `../MASTER_PROJECT.md` §4 (D-008, D-009). Non recopié ici pour éviter le
 ## 5. L'accident
 - Accident expérimental ayant provoqué la disparition de Léa `[VALIDÉ]`.
 - Heure : 02:17 `[VALIDÉ]` (D-009).
-- Date, déroulé, rôle d'Adrien : `[À DÉFINIR]` (Q-008, Q-009).
+- Date, déroulé, rôle d'Adrien : `[À DÉFINIR]` (Q-008, Q-009). Chronologie proposée : P-008.
 
 ## 6. Thèmes
 `[À DÉFINIR]` — pistes issues du concept validé, à formuler : deuil non accepté, culpabilité, mémoire, enfermement, libération.
