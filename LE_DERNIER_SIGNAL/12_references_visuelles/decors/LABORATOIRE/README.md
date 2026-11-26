@@ -2,13 +2,13 @@
 
 Canon écrit : `03_decors/LABORATOIRE.md` (D-013). Règles communes : `../../README.md` §3.
 
-> **État : aucune image déposée.** La planche a été créée et validée (D-016), mais elle n'est pas encore dans le projet.
+> **État : planche déposée le 2026-11-26.** Validée selon D-016. Plan au sol à clarifier (§7, Q-029).
 
 ## 1. Fichiers et rôles
 
 | Fichier | Rôle | Fait foi pour | Présent |
 |---|---|---|---|
-| `REF_DECOR_LABO_PLANCHE_v01.<ext>` | **Référence principale** | Architecture, machine centrale, structures, consoles, état de dégradation, palette | ✗ |
+| `REF_DECOR_LABO_PLANCHE_v01.jpg` | **Référence principale** | Architecture, machine centrale, structures, consoles, état de dégradation, palette | ✓ |
 
 Recadrages possibles : `…_CROP_COULOIR`, `…_CROP_SALLE`, `…_CROP_MACHINE`, `…_CROP_POSTE`.
 
@@ -43,14 +43,34 @@ Recadrages possibles : `…_CROP_COULOIR`, `…_CROP_SALLE`, `…_CROP_MACHINE`,
 
 | Champ | Planche |
 |---|---|
-| Date de dépôt | |
-| Date de validation | |
-| Validée par | |
-| Outil de création | |
-| Prompt d'origine | |
-| Dimensions / format | |
-| Zones montrées | |
-| Niveau d'abandon observé | |
-| Dommages visibles | |
-| Heure visible ? | |
-| Remarques | |
+| Date de dépôt | 2026-11-26 |
+| Nom d'origine | `LABORATOIRE_REFERENCE_SHEET.JPG` |
+| Date de validation | antérieure au 2026-11-25 (D-016) |
+| Validée par | Équipe |
+| Outil de création | non renseigné |
+| Prompt d'origine | non renseigné |
+| Dimensions / format | 1376 × 768, JPEG |
+| Zones montrées | Salle principale (1, 5, 6), couloir industriel (2), poste de contrôle (3), machine centrale (4), plan au sol (7) |
+| Niveau d'abandon observé | Poussière, papiers et débris au sol, câbles arrachés, dalles de plafond tombées (5). Pas de végétation ni d'effondrement de structure. Néons en partie allumés. |
+| Dommages visibles | Traces noires de brûlure sur la machine (4), panneaux déformés, plafond endommagé (5) |
+| Heure visible ? | Aucune heure lisible relevée |
+| Remarques | Voir §7 |
+
+## 7. Observations au dépôt (Claude, 2026-11-26)
+
+Ce qui suit vient de l'examen de l'image par Claude, avec agrandissement des vignettes. **Ce n'est pas une validation.**
+
+**Conforme au canon (D-013)** : couloir industriel ; salle expérimentale ; poste informatique ; machine centrale ; structures métalliques, câbles, consoles, écrans ; dommages liés à l'accident ; éclairage froid ; palette gris acier, bleu froid, noir et blanc.
+
+**Machine centrale** (élément prioritaire de continuité) : grand bâti métallique rectangulaire, avec au centre un **anneau circulaire à plusieurs couronnes**, des faisceaux de câbles épais qui partent de la base vers le sol, des traces de brûlure et des panneaux de commande sur le côté droit.
+
+**Chronologie** : le niveau d'abandon observé est **compatible avec l'option A** de P-008 (quelques mois). Rien n'impose un abandon de plusieurs années. Des néons fonctionnent encore, ce qui suppose une alimentation électrique partielle.
+
+**Points à signaler** :
+1. **Le plan au sol (7) reproduit celui de l'appartement — Q-029.** Comparés côte à côte, les deux plans ont le même contour, la même fenêtre sur le mur gauche, la même salle d'eau avec WC et lavabo en haut à droite, la même entrée, le même fauteuil en bas à gauche, le même meuble en bas, et le « Control Station » est à la place exacte du « Work Desk », avec ses deux chaises. Ce plan est aussi **incompatible avec l'échelle** des vues 1, 5 et 6, qui montrent un grand hall industriel.
+   - Soit c'est un **artefact de génération**, et le plan du laboratoire est inutilisable.
+   - Soit c'est un **indice voulu** (le laboratoire et l'appartement partagent la même empreinte, la reconstruction étant bâtie sur ce lieu). Il irait alors au registre des anomalies intentionnelles.
+   - À décider. **Ne pas utiliser ce plan** d'ici là.
+2. **Un second téléphone — Q-028.** Sur la console du poste de contrôle (3), un téléphone de bureau à combiné **avec cordon spiralé** est posé à gauche. Le canon ne prévoit qu'un téléphone (dans l'appartement). Est-ce un écho voulu ou un artefact ?
+3. **Machine allumée ou éteinte — Q-033.** Dans la vue (5), le centre de la machine émet une **lueur**. Dans les vues (1), (4) et (6), elle paraît éteinte. Il faut fixer son état par scène.
+4. **Écrans** : les moniteurs du poste de contrôle sont éteints. Cela s'accorde avec une incrustation en post si on les allume (Q-020).

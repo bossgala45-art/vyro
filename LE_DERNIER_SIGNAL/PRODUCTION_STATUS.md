@@ -2,7 +2,7 @@
 
 Tableau de bord de l'avancement. Mis à jour à la fin de chaque session de travail.
 
-Dernière mise à jour : 2026-11-25 (session 2)
+Dernière mise à jour : 2026-11-26 (session 3 : dépôt des références)
 Phase actuelle : **Préproduction — préparation de la bible**
 
 ---
@@ -14,7 +14,7 @@ Phase actuelle : **Préproduction — préparation de la bible**
 | 0. Environnement de production | `[FAIT]` — structure globalement validée (D-019) ; P-001, P-003 à P-007 à confirmer (Q-026) |
 | 1. Développement (bible, synopsis, séquencier) | `[EN COURS]` — inventaire scénaristique fait ; propositions chronologie, tenue et téléphone en attente |
 | 2. Scénario | `[BLOQUÉ]` — structure en six actes connue (D-020), mais contenu absent du projet (Q-004) |
-| 3. Préproduction visuelle (fiches, références, blocs canoniques) | `[BLOQUÉ]` — emplacements prêts, **aucune image déposée** (Q-002, Q-022) |
+| 3. Préproduction visuelle (fiches, références, blocs canoniques) | `[EN COURS]` — 5 références déposées et examinées ; **contradiction téléphone / D-014 bloquante** (Q-027) ; autres écarts Q-028 à Q-034 |
 | 4. Tests techniques Fable 2 | `[À FAIRE]` — liste de vérification prête, à remplir par l'équipe (Q-003) |
 | 5. Découpage technique et storyboard | `[À FAIRE]` — non commencé, volontairement |
 | 6. Prompts Fable 2 | `[À FAIRE]` — aucun prompt rédigé |
@@ -43,11 +43,11 @@ Phase actuelle : **Préproduction — préparation de la bible**
 
 | Élément | Fichier attendu | Présent |
 |---|---|---|
-| Adrien — portrait maître | `personnages/ADRIEN/REF_PERS_ADRIEN_PORTRAIT_MAITRE_v01` | ✗ |
-| Adrien — planche | `personnages/ADRIEN/REF_PERS_ADRIEN_PLANCHE_v01` | ✗ |
-| Léa — planche | `personnages/LEA/REF_PERS_LEA_PLANCHE_v01` | ✗ |
-| Appartement — planche | `decors/APPARTEMENT/REF_DECOR_APPART_PLANCHE_v01` | ✗ |
-| Laboratoire — planche | `decors/LABORATOIRE/REF_DECOR_LABO_PLANCHE_v01` | ✗ |
+| Adrien — portrait maître | `personnages/ADRIEN/REF_PERS_ADRIEN_PORTRAIT_MAITRE_v01.jpg` | ✓ 2026-11-26 |
+| Adrien — planche | `personnages/ADRIEN/REF_PERS_ADRIEN_PLANCHE_v01.png` | ✓ 2026-11-26 |
+| Léa — planche | `personnages/LEA/REF_PERS_LEA_PLANCHE_v01.jpg` | ✓ 2026-11-26 |
+| Appartement — planche | `decors/APPARTEMENT/REF_DECOR_APPART_PLANCHE_v01.jpg` | ✓ 2026-11-26 |
+| Laboratoire — planche | `decors/LABORATOIRE/REF_DECOR_LABO_PLANCHE_v01.jpg` | ✓ 2026-11-26 |
 | Téléphone | `accessoires/TELEPHONE/` | ✗ n'existe pas encore (à créer après P-010) |
 
 ---
@@ -80,7 +80,8 @@ Phase actuelle : **Préproduction — préparation de la bible**
 
 ## Points bloquants actuels
 
-1. **Q-004** — Contenu de la base scénaristique des six actes absent du projet : bloque la bible.
-2. **Q-002 / Q-022** — Références visuelles non déposées ; validation des deux références d'Adrien à confirmer.
-3. **P-008** — Chronologie à valider : elle conditionne l'état du laboratoire, l'âge de Léa à l'écran et les dates visibles dans les décors.
-4. **Q-003** — Capacités de Fable 2 à constater.
+1. **Q-027** — Le téléphone de la planche validée de l'appartement a un cordon visible, ce qui contredit D-014 : bloque toute préparation impliquant le téléphone.
+2. **Q-004** — Contenu de la base scénaristique des six actes absent du projet : bloque la bible.
+3. **Q-022** — Validation des deux références d'Adrien à confirmer.
+4. **P-008** — Chronologie à valider : elle conditionne l'état du laboratoire, l'âge de Léa à l'écran et les dates visibles dans les décors.
+5. **Q-003** — Capacités de Fable 2 à constater.

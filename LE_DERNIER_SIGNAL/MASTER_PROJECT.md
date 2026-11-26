@@ -71,14 +71,14 @@ Qui appelle réellement (Q-006) · nature exacte de la disparition de Léa (Q-00
 - Tenue principale : sweat ou hoodie gris anthracite, t-shirt sombre, pantalon cargo noir, baskets sobres.
 - Intelligent, réservé, émotionnel, parfois anxieux, déterminé.
 - Proposition de tenue canonique unique en attente : P-009 (le canon ci-dessus reste en vigueur).
-- Références visuelles : **portrait maître** (principale) et **planche** (secondaire) annoncées. Validation à confirmer (Q-022). **Non déposées** (Q-002).
+- Références visuelles : **portrait maître** (principale) et **planche** (secondaire), **déposées le 2026-11-26**. Validation à confirmer (Q-022). Écarts relevés : Q-032.
 
 ### LÉA `[VALIDÉ]` (D-011) — fiche : `02_personnages/LEA.md`
 - 25 ans, silhouette mince et naturelle.
 - Cheveux brun foncé, mi-longs, légèrement ondulés ; yeux marron ; traits doux et expressifs ; peau claire.
 - Tenue principale : pull beige clair, pantalon neutre.
 - Chaleureuse, intelligente, calme, empathique, indépendante.
-- Planche visuelle d'identité : **créée et validée** (D-016) — fichier **non encore déposé** (Q-002).
+- Planche visuelle d'identité : **créée et validée** (D-016), **déposée le 2026-11-26**. Points relevés : Q-031.
 
 Autres personnages (voix au téléphone, personnes liées au laboratoire, etc.) : `[À DÉFINIR]` (Q-015).
 
@@ -86,11 +86,11 @@ Autres personnages (voix au téléphone, personnes liées au laboratoire, etc.) 
 
 ### APPARTEMENT D'ADRIEN `[VALIDÉ]` (D-012) — fiche : `03_decors/APPARTEMENT_ADRIEN.md`
 Appartement contemporain urbain en 2049 : salon gris sombre ; bureau intégré à l'espace de vie avec ordinateur et documents ; grande fenêtre sur une rue urbaine avec lampadaire visible ; pluie nocturne ; téléphone noir ancien sans câble visible sur une petite table ; cuisine ouverte avec évier et robinet ; entrée et couloir. Ambiance sombre, réaliste, légèrement oppressante. Dominante bleu-gris, faibles lumières chaudes.
-Planche de référence : **créée et validée** — fichier non encore déposé (Q-002).
+Planche de référence : **créée et validée**, **déposée le 2026-11-26**. **Contradiction avec D-014 sur le téléphone : Q-027.** Plan au sol à clarifier : Q-030.
 
 ### LABORATOIRE EXPÉRIMENTAL `[VALIDÉ]` (D-013) — fiche : `03_decors/LABORATOIRE.md`
 Laboratoire de recherche abandonné en 2049 : couloir industriel ; salle expérimentale principale ; poste informatique ; machine expérimentale centrale ; structures métalliques, câbles, consoles, écrans, équipement technique ; quelques dommages liés à l'accident. Éclairage froid. Palette gris acier, bleu froid, noir et blanc. Atmosphère mystérieuse et oppressante.
-Planche de référence : **créée et validée** — fichier non encore déposé (Q-002).
+Planche de référence : **créée et validée**, **déposée le 2026-11-26**. Points relevés : Q-028, Q-029, Q-033.
 
 ## 7. Accessoires validés — registre : `04_accessoires/REGISTRE_ACCESSOIRES.md`
 

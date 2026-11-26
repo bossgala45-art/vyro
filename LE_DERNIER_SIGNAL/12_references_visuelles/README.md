@@ -2,7 +2,7 @@
 
 Références d'identité utilisées pour préparer les générations. Ce dossier ne contient que des références **validées**. Les essais vont dans `08_production/TESTS/`.
 
-> **État au 2026-11-25 : aucune image n'a été déposée.** Tous les fichiers listés ci-dessous sont **attendus** et non présents. Tant qu'une image n'est pas réellement dans le dossier, elle ne peut être ni décrite ni utilisée.
+> **État au 2026-11-26 : les 5 références ont été déposées** (copies identiques aux fichiers envoyés par l'équipe). Elles ont été examinées par Claude le jour même. Plusieurs écarts avec le canon écrit sont signalés dans les README de chaque élément et dans `13_journal_decisions/QUESTIONS_OUVERTES.md` (Q-027 à Q-034). **Aucune ne doit être jointe à une génération avant le traitement de ces questions.**
 
 ---
 
@@ -43,11 +43,11 @@ Si une planche contient plusieurs vues sur une seule image, on peut **en plus** 
 
 | # | Référence | Fichier attendu | Rôle | Présent | Validation |
 |---|---|---|---|---|---|
-| 1 | Adrien — portrait maître | `personnages/ADRIEN/REF_PERS_ADRIEN_PORTRAIT_MAITRE_v01.<ext>` | Principale (visage) | ✗ non déposé | `[À CONFIRMER]` (Q-022) |
-| 2 | Adrien — planche de référence | `personnages/ADRIEN/REF_PERS_ADRIEN_PLANCHE_v01.<ext>` | Secondaire | ✗ non déposé | `[À CONFIRMER]` (Q-022) |
-| 3 | Léa — planche de référence | `personnages/LEA/REF_PERS_LEA_PLANCHE_v01.<ext>` | Principale | ✗ non déposé | Validée selon D-016 |
-| 4 | Appartement — planche de référence | `decors/APPARTEMENT/REF_DECOR_APPART_PLANCHE_v01.<ext>` | Principale | ✗ non déposé | Validée selon D-016 |
-| 5 | Laboratoire — planche de référence | `decors/LABORATOIRE/REF_DECOR_LABO_PLANCHE_v01.<ext>` | Principale | ✗ non déposé | Validée selon D-016 |
+| 1 | Adrien — portrait maître | `personnages/ADRIEN/REF_PERS_ADRIEN_PORTRAIT_MAITRE_v01.jpg` | Principale (visage) | ✓ 2026-11-26 — 612 × 941 | `[À CONFIRMER]` (Q-022) |
+| 2 | Adrien — planche de référence | `personnages/ADRIEN/REF_PERS_ADRIEN_PLANCHE_v01.png` | Secondaire | ✓ 2026-11-26 — 1536 × 1024 | `[À CONFIRMER]` (Q-022) |
+| 3 | Léa — planche de référence | `personnages/LEA/REF_PERS_LEA_PLANCHE_v01.jpg` | Principale | ✓ 2026-11-26 — 1376 × 768 | Validée selon D-016 |
+| 4 | Appartement — planche de référence | `decors/APPARTEMENT/REF_DECOR_APPART_PLANCHE_v01.jpg` | Principale | ✓ 2026-11-26 — 1376 × 768 | Validée selon D-016 — **contradiction avec D-014** (Q-027) |
+| 5 | Laboratoire — planche de référence | `decors/LABORATOIRE/REF_DECOR_LABO_PLANCHE_v01.jpg` | Principale | ✓ 2026-11-26 — 1376 × 768 | Validée selon D-016 — plan au sol à clarifier (Q-029) |
 
 Mettre la colonne « Présent » à jour **au moment du dépôt**, pas avant.
 
@@ -85,3 +85,11 @@ Après chaque dépôt, Claude peut ouvrir l'image et la comparer au canon écrit
 La manière de joindre une référence (nombre d'images, type de référence, rôle de chaque image) dépend de capacités **non vérifiées** (voir `08_production/CAPACITES_FABLE2.md`). Les README des éléments donnent une priorité d'usage applicable quel que soit le nombre de références acceptées. Le mode opératoire définitif sera fixé après vérification.
 
 Une référence **réduit** la dérive d'identité. Elle ne la supprime pas : chaque prise est contrôlée.
+
+---
+
+## 4. Constats communes aux 5 références (examen du 2026-11-26)
+
+- **Textes intégrés dans les images** : les planches contiennent des titres, légendes, fiches texte et le logo « LE DERNIER SIGNAL ». Joints tels quels à une génération, ils risquent d'être reproduits dans la vidéo. Recommandation `[PROPOSITION]` : n'utiliser en génération que des **recadrages sans texte** (`…_CROP_<vue>`), créés à partir de ces fichiers. Les fichiers originaux restent la référence d'archive.
+- **Résolution modeste** : les planches font 1376 × 768 px (planche d'Adrien : 1536 × 1024), donc chaque vignette ne fait que quelques centaines de pixels. Le portrait maître fait 612 × 941. Si des originaux en plus haute définition existent, il vaut mieux les déposer (Q-034).
+- Les fichiers reçus portaient les noms d'origine suivants : `ADRIEN_PORTRAIT_MAITRE.jpg`, `ADRIEN_REFERENCE_SHEET.PNG`, `LEA_REFERENCE_SHEET.JPG`, `APPARTEMENT_REFERENCE_SHEET.JPG`, `LABORATOIRE_REFERENCE_SHEET.JPG`.

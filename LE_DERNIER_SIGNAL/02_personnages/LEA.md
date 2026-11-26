@@ -28,7 +28,7 @@ Autres tenues éventuelles : `[À DÉFINIR]` (Q-016).
 
 ## Référence visuelle
 - Planche d'identité créée et validée `[VALIDÉ]` (D-016).
-- Fichier attendu : `12_references_visuelles/personnages/LEA/REF_PERS_LEA_PLANCHE_v01.<ext>` — **absent** (Q-002).
+- Fichier : `12_references_visuelles/personnages/LEA/REF_PERS_LEA_PLANCHE_v01.jpg` — **déposé le 2026-11-26**. Observé sur la planche : pantalon gris moyen, coupe droite (précise « pantalon neutre », non encore inscrit au canon). Points relevés : Q-031.
 - Mode d'emploi : `12_references_visuelles/personnages/LEA/README.md`.
 
 ## Âge — formulation proposée `[PROPOSITION]` P-008 §2 — non appliquée

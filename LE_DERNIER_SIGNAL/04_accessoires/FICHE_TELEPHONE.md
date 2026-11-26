@@ -91,6 +91,16 @@ Mesures proposées :
 
 ---
 
+## 6 bis. Constat au dépôt de la planche de l'appartement (2026-11-26)
+
+La planche validée de l'appartement montre, vignette 4 (« Cableless Telephone »), un téléphone noir **de bureau à clavier**, avec un **petit écran** et un **cordon spiralé visible**, posé sur une petite table en métal usé à côté du canapé.
+
+Ce constat contredit :
+- **D-014** `[VALIDÉ]` : aucun câble visible ;
+- les recommandations de cette fiche (cadran rotatif, aucun écran).
+
+Selon §6, la planche validée devait primer sur cette fiche. Mais elle contredit elle-même un canon validé. **Décision de l'équipe requise : Q-027.** Cette fiche reste en attente jusque-là.
+
 ## 7. Ce que la validation changerait
 
 - `REGISTRE_ACCESSOIRES.md` : la ligne ACC-01 est complétée avec la description validée.

@@ -19,7 +19,7 @@ Appartement contemporain urbain en 2049.
 
 ## Référence visuelle
 - Planche créée et validée `[VALIDÉ]` (D-016).
-- Fichier attendu : `12_references_visuelles/decors/APPARTEMENT/REF_DECOR_APPART_PLANCHE_v01.<ext>` — **absent** (Q-002).
+- Fichier : `12_references_visuelles/decors/APPARTEMENT/REF_DECOR_APPART_PLANCHE_v01.jpg` — **déposé le 2026-11-26**. **Contradiction avec D-014 sur le téléphone : Q-027.** Plan au sol peut-être inversé : Q-030.
 - Mode d'emploi : `12_references_visuelles/decors/APPARTEMENT/README.md`.
 
 ## À définir pour la continuité (à aligner sur la planche validée)

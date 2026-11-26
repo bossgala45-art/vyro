@@ -52,9 +52,10 @@ Aucun défini. `[À DÉFINIR]`
 
 ## Référence visuelle
 - Référence d'identité créée `[VALIDÉ]` (D-016). Deux images sont annoncées : un portrait maître et une planche. Le statut de validation de chacune est à confirmer (Q-022).
-- Fichiers attendus (**absents**, Q-002) :
-  - `12_references_visuelles/personnages/ADRIEN/REF_PERS_ADRIEN_PORTRAIT_MAITRE_v01.<ext>` — référence principale (visage)
-  - `12_references_visuelles/personnages/ADRIEN/REF_PERS_ADRIEN_PLANCHE_v01.<ext>` — référence secondaire
+- Fichiers :
+  - `12_references_visuelles/personnages/ADRIEN/REF_PERS_ADRIEN_PORTRAIT_MAITRE_v01.jpg` — référence principale (visage) — **déposée le 2026-11-26**
+  - `12_references_visuelles/personnages/ADRIEN/REF_PERS_ADRIEN_PLANCHE_v01.png` — référence secondaire — **déposée le 2026-11-26**
+  - Écarts relevés au dépôt (couleur du sweat, sweat zippé, peau, voix) : Q-032.
 - Mode d'emploi : `12_references_visuelles/personnages/ADRIEN/README.md`.
 
 ## Bloc descriptif canonique pour prompts

@@ -2,15 +2,15 @@
 
 Canon écrit : `02_personnages/ADRIEN.md` (D-010). Règles communes : `../../README.md` §3.
 
-> **État : aucune image déposée.** Les deux fichiers ci-dessous sont attendus.
+> **État : les deux images ont été déposées le 2026-11-26.**
 > Le statut de validation de chacun reste à confirmer (Q-022). D-016 mentionne une référence d'Adrien « créée ». Le portrait maître et la planche sont deux images distinctes.
 
 ## 1. Fichiers et rôles
 
 | Fichier | Rôle | Fait foi pour | Présent |
 |---|---|---|---|
-| `REF_PERS_ADRIEN_PORTRAIT_MAITRE_v01.<ext>` | **Référence principale** | Identité du visage : traits, structure osseuse, yeux, barbe, implantation et texture des cheveux, carnation | ✗ |
-| `REF_PERS_ADRIEN_PLANCHE_v01.<ext>` | Référence secondaire | Morphologie, silhouette, proportions, tenue, vues de profil / dos / trois-quarts | ✗ |
+| `REF_PERS_ADRIEN_PORTRAIT_MAITRE_v01.jpg` | **Référence principale** | Identité du visage : traits, structure osseuse, yeux, barbe, implantation et texture des cheveux, carnation | ✓ |
+| `REF_PERS_ADRIEN_PLANCHE_v01.png` | Référence secondaire | Morphologie, silhouette, proportions, tenue, vues de profil / dos / trois-quarts | ✓ |
 
 En cas de contradiction **sur le visage** entre les deux images, le **portrait maître** l'emporte. Sur la **tenue**, c'est le canon écrit validé qui l'emporte (voir §4).
 
@@ -53,10 +53,34 @@ En cas de contradiction **sur le visage** entre les deux images, le **portrait m
 
 | Champ | Portrait maître | Planche |
 |---|---|---|
-| Date de dépôt | | |
-| Date de validation | | |
+| Date de dépôt | 2026-11-26 | 2026-11-26 |
+| Nom d'origine | `ADRIEN_PORTRAIT_MAITRE.jpg` | `ADRIEN_REFERENCE_SHEET.PNG` |
+| Date de validation | à confirmer (Q-022) | à confirmer (Q-022) |
 | Validé par | | |
-| Outil de création | | |
-| Prompt d'origine | | |
-| Dimensions / format | | |
-| Remarques | | |
+| Outil de création | non renseigné | non renseigné |
+| Prompt d'origine | non renseigné | non renseigné |
+| Dimensions / format | 612 × 941, JPEG | 1536 × 1024, PNG |
+| Remarques | Voir §7 | Voir §7 |
+
+## 7. Observations au dépôt (Claude, 2026-11-26)
+
+Ce qui suit vient de l'examen des images par Claude. **Ce n'est pas une validation.**
+
+**Contenu de la planche** : grand portrait ; trois vues en pied (face, profil, dos) ; quatre vignettes d'expression en situation, dont une **capuche relevée** ; un encart texte (âge, taille, corpulence, cheveux, yeux, peau, barbe, personnalité, tenue, voix, palette, ambiance).
+
+**Ce qui est conforme au canon (D-010)** : cheveux brun foncé, bouclés et désordonnés ; yeux marron ; légère barbe ; visage anguleux ; silhouette mince ; t-shirt sombre ; pantalon cargo noir.
+
+**Comparaison portrait / planche** : les deux images montrent un visage très semblable (cheveux, barbe, traits). Je n'ai pas relevé d'écart net, mais je ne peux pas garantir qu'il s'agit strictement du même visage.
+
+**Écarts ou informations nouvelles (Q-032)** :
+| Point | Observé | Canon / proposition |
+|---|---|---|
+| Couleur du sweat | Paraît **presque noir** sur les deux images | « gris anthracite » (D-010, P-009) |
+| Type de sweat | **Sweat à capuche zippé**, porté ouvert, **cordons présents** | D-010 : « sweat ou hoodie » ; P-009 laissait le choix zippé / enfilé ouvert |
+| Baskets | **Blanches**, basses, sans couleur secondaire visible | D-010 : « sobres » ; P-009 : « blanches discrètes » → conforme à P-009 |
+| Cheveux | Nettement bouclés, volumineux | « légèrement bouclés » |
+| Texte de la planche : « Peau : mate claire » | Information absente du canon | À valider ou non |
+| Texte de la planche : « Voix : grave, naturelle » | Information absente du canon | À valider ou non |
+| Texte de la planche : « Corpulence : mince, athlétique » | Formulation légèrement différente | Canon : « mince, légèrement athlétique » |
+
+Conséquence : si P-009 est validée, la tenue des images correspond à la proposition, **sauf la couleur du sweat**. Il faudra choisir entre « gris anthracite » (texte) et « presque noir » (image).

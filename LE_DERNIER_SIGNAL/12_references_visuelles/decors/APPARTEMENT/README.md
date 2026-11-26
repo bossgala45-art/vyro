@@ -2,13 +2,13 @@
 
 Canon écrit : `03_decors/APPARTEMENT_ADRIEN.md` (D-012). Règles communes : `../../README.md` §3.
 
-> **État : aucune image déposée.** La planche a été créée et validée (D-016), mais elle n'est pas encore dans le projet.
+> **État : planche déposée le 2026-11-26.** Validée selon D-016. **Contradiction majeure avec le canon du téléphone (D-014) : voir §7 et Q-027.**
 
 ## 1. Fichiers et rôles
 
 | Fichier | Rôle | Fait foi pour | Présent |
 |---|---|---|---|
-| `REF_DECOR_APPART_PLANCHE_v01.<ext>` | **Référence principale** | Architecture, matériaux, mobilier, disposition, fenêtre et rue, palette | ✗ |
+| `REF_DECOR_APPART_PLANCHE_v01.jpg` | **Référence principale** | Architecture, matériaux, mobilier, disposition, fenêtre et rue, palette | ✓ |
 
 Recadrages possibles, par zone : `…_CROP_SALON`, `…_CROP_BUREAU`, `…_CROP_FENETRE`, `…_CROP_CUISINE`, `…_CROP_ENTREE`, `…_CROP_TELEPHONE`.
 
@@ -45,13 +45,36 @@ Recadrages possibles, par zone : `…_CROP_SALON`, `…_CROP_BUREAU`, `…_CROP_
 
 | Champ | Planche |
 |---|---|
-| Date de dépôt | |
-| Date de validation | |
-| Validée par | |
-| Outil de création | |
-| Prompt d'origine | |
-| Dimensions / format | |
-| Zones montrées | |
-| Téléphone visible ? (forme, câble) | |
-| Heure visible ? | |
-| Remarques | |
+| Date de dépôt | 2026-11-26 |
+| Nom d'origine | `APPARTEMENT_REFERENCE_SHEET.JPG` |
+| Date de validation | antérieure au 2026-11-25 (D-016) |
+| Validée par | Équipe |
+| Outil de création | non renseigné |
+| Prompt d'origine | non renseigné |
+| Dimensions / format | 1376 × 768, JPEG |
+| Zones montrées | Salon et bureau (1), entrée et couloir (2), bureau (3), téléphone (4), fenêtre et rue (5), cuisine (6), plan au sol (7) |
+| Téléphone visible ? (forme, câble) | Oui (4) : téléphone de bureau à touches, avec écran, **cordon spiralé visible** |
+| Heure visible ? | Aucune heure lisible relevée |
+| Remarques | Voir §7 |
+
+## 7. Observations au dépôt (Claude, 2026-11-26)
+
+Ce qui suit vient de l'examen de l'image par Claude, avec agrandissement des vignettes. **Ce n'est pas une validation.**
+
+**Conforme au canon (D-012)** : salon gris sombre ; bureau intégré avec ordinateur et documents ; grande fenêtre sur la rue avec un **lampadaire visible** ; pluie sur la vitre (5) ; cuisine ouverte avec évier et robinet (6) ; entrée et couloir (2) ; dominante bleu-gris avec des lampes chaudes. Rien de futuriste exagéré.
+
+**Précisions apportées par l'image** :
+- En face : immeubles d'architecture **haussmannienne / parisienne**, avec un balcon à garde-corps devant la fenêtre. C'est une information nouvelle : le canon dit seulement « rue urbaine ».
+- Petite table du téléphone : table basse en **métal usé, plateau rouillé**, placée **à côté du canapé**. Dessus : clés et petits objets. Dessous : livres ou papiers, et ce qui ressemble à une photo.
+- Plan au sol (7) : salon, bureau, cuisine, entrée, couloir, salle d'eau avec WC.
+
+**Contradiction majeure : le téléphone (vignette 4, légendée « Cableless Telephone ») — Q-027**
+| Observé | Canon / proposition |
+|---|---|
+| **Un cordon spiralé** pend du combiné le long de la table | D-014 : « **sans câble visible** » `[VALIDÉ]` |
+| Téléphone de bureau à **clavier**, avec un **petit écran** à cristaux liquides | D-014 : « ancien » ; P-010 : aucun écran, cadran rotatif recommandé |
+| Noir, combiné classique sur sa base | D-014 : noir → conforme |
+
+Une planche **validée** contredit un canon **validé** (D-014). Je ne tranche pas. Tant que Q-027 n'est pas réglée, **ne pas utiliser la vignette 4** en génération.
+
+**Point à vérifier : le plan au sol semble inversé en miroir par rapport à la vue (1) — Q-030.** Sur le plan, la fenêtre est sur le mur de gauche, le canapé contre le mur du haut et le bureau vers le bas. Une caméra tournée vers la fenêtre verrait donc le canapé **à droite** et le bureau **à gauche**. La vue (1) montre l'inverse : canapé à gauche, bureau à droite, près de la fenêtre. Il faudra fixer une seule géographie pour respecter la règle des 180°.
