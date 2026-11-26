@@ -2,7 +2,7 @@
 
 Tableau de bord de l'avancement. Mis à jour à la fin de chaque session de travail.
 
-Dernière mise à jour : 2026-11-26 (session 4 : arbitrage des références)
+Dernière mise à jour : 2026-11-26 (session 5 : intégration de la base narrative V01)
 Phase actuelle : **Préproduction — préparation de la bible**
 
 ---
@@ -12,8 +12,8 @@ Phase actuelle : **Préproduction — préparation de la bible**
 | Phase | Statut |
 |---|---|
 | 0. Environnement de production | `[FAIT]` — structure globalement validée (D-019) ; P-001, P-003 à P-007 à confirmer (Q-026) |
-| 1. Développement (bible, synopsis, séquencier) | `[EN COURS]` — inventaire scénaristique fait ; propositions chronologie, tenue et téléphone en attente |
-| 2. Scénario | `[BLOQUÉ]` — structure en six actes connue (D-020), mais contenu absent du projet (Q-004) |
+| 1. Développement (bible, synopsis, séquencier) | `[EN COURS]` — base narrative V01 intégrée et comparée au canon ; 7 points à clarifier (Q-035 à Q-041) ; chronologie, tenue et téléphone en attente |
+| 2. Scénario | `[À FAIRE]` — base narrative de travail V01 disponible (`01_scenario/sources/`), **non définitive** ; aucun scénario rédigé |
 | 3. Préproduction visuelle (fiches, références, blocs canoniques) | `[EN COURS]` — 5 références déposées, examinées et **arbitrées** (D-021 à D-027), avec restrictions d'usage ; modèle exact du téléphone à définir ; état de la machine du labo ouvert (Q-033) |
 | 4. Tests techniques Fable 2 | `[À FAIRE]` — liste de vérification prête, à remplir par l'équipe (Q-003) |
 | 5. Découpage technique et storyboard | `[À FAIRE]` — non commencé, volontairement |
@@ -50,6 +50,14 @@ Phase actuelle : **Préproduction — préparation de la bible**
 | Références d'Adrien validées pour l'identité générale | `[ARBITRÉ]` | D-026 |
 | Résolutions acceptables pour la préproduction | `[ARBITRÉ]` | D-027 |
 
+## Session 5 (2026-11-26) — base narrative V01
+
+| Tâche | Statut | Fichier |
+|---|---|---|
+| Dépôt à l'identique de la base narrative (SHA-256 vérifié) | `[FAIT]` | `01_scenario/sources/BASE_NARRATIVE_SIX_ACTES_V01.md` |
+| Comparaison avec le canon ; inventaire version 2 | `[FAIT]` | `01_scenario/INVENTAIRE_SCENARISTIQUE.md` |
+| Contradictions et points à clarifier consignés | `[FAIT]` — Q-035 à Q-041 ouvertes | `13_journal_decisions/QUESTIONS_OUVERTES.md` §D |
+
 ---
 
 ## Inventaire des références visuelles
@@ -81,7 +89,7 @@ Phase actuelle : **Préproduction — préparation de la bible**
 
 | Indicateur | Valeur |
 |---|---|
-| Actes définis (titres) | 6 / 6 — contenu : 0 / 6 |
+| Actes | 6 / 6 titrés (D-020) ; contenu : base de travail V01 (non définitive) pour 6 / 6 ; minutage indicatif total 20:00 |
 | Scènes définies | 0 |
 | Plans découpés | 0 |
 | Prompts prêts | 0 |
@@ -93,7 +101,7 @@ Phase actuelle : **Préproduction — préparation de la bible**
 
 ## Points bloquants actuels
 
-1. **Q-004** — Contenu de la base scénaristique des six actes absent du projet : bloque la bible.
+1. **Q-035 à Q-038, Q-040** — Points de la base narrative V01 à clarifier avant la bible : 02:17 au matin de l'acte VI, structure temporelle des appels, téléphone qui sonne au laboratoire, mémoire d'Adrien, besoins visuels absents du canon.
 2. **P-008** — Chronologie à valider : elle conditionne l'état du laboratoire, l'âge de Léa à l'écran et les dates visibles dans les décors.
 3. **Modèle exact du téléphone** — à définir (D-021, Q-012). Bloque toute préparation de plan montrant le téléphone, et la création de sa référence visuelle.
 4. **Q-003** — Capacités de Fable 2 à constater.

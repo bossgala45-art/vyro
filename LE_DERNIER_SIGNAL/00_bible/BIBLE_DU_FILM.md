@@ -13,7 +13,7 @@ Document de référence approfondi : monde, règles internes, ton, thèmes, moti
 Voir `../MASTER_PROJECT.md` §4 (D-008, D-009). Non recopié ici pour éviter les divergences.
 
 ## 2 bis. Structure `[VALIDÉ]` (D-020)
-Six actes : *The Noise*, *The Proofs*, *Absence*, *Laboratory*, *Truth*, *Liberation*. Contenu non disponible dans le projet. Ce qui manque pour rédiger la bible : `../01_scenario/INVENTAIRE_SCENARISTIQUE.md` §4.
+Six actes : *The Noise*, *The Proofs*, *Absence*, *Laboratory*, *Truth*, *Liberation*. Contenu : base narrative de travail V01 (`../01_scenario/sources/BASE_NARRATIVE_SIX_ACTES_V01.md`), non définitive. Ce qui manque pour rédiger la bible : `../01_scenario/INVENTAIRE_SCENARISTIQUE.md` §6.
 
 ## 3. Le monde en 2049
 - Science-fiction réaliste, sans futurisme exagéré `[VALIDÉ]` (D-007).

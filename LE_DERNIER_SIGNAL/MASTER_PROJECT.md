@@ -54,7 +54,7 @@ L'heure **02:17** est un élément central de la chronologie : elle correspond a
 
 ### Structure en six actes `[VALIDÉ]` (D-020)
 1. *The Noise* · 2. *The Proofs* · 3. *Absence* · 4. *Laboratory* · 5. *Truth* · 6. *Liberation*
-Seuls les titres sont présents dans le projet. Le contenu des actes n'est pas disponible (Q-004). Voir `01_scenario/INVENTAIRE_SCENARISTIQUE.md`.
+Contenu : **base narrative de travail V01**, déposée le 2026-11-26 dans `01_scenario/sources/BASE_NARRATIVE_SIX_ACTES_V01.md`. Ce n'est **pas** un scénario définitif et elle ne crée aucune décision validée. Points à clarifier : Q-035 à Q-041. Voir `01_scenario/INVENTAIRE_SCENARISTIQUE.md`.
 
 ### Chronologie
 Proposition en attente : `05_continuite/PROPOSITION_CHRONOLOGIE.md` (P-008, option A recommandée). **Rien n'est encore validé** au-delà de 2049 et 02:17.

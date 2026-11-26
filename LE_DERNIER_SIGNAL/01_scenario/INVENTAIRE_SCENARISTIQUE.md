@@ -1,105 +1,108 @@
 # INVENTAIRE SCÉNARISTIQUE — LE DERNIER SIGNAL
 
-État au 2026-11-25. Recense **uniquement** ce qui est explicitement présent dans le projet ou dans les messages de l'équipe.
+Version 2 — 2026-11-26 (intégration de la base narrative V01).
+Recense **uniquement** ce qui est explicitement présent dans le projet ou dans les sources de l'équipe. Les numéros de ligne renvoient au fichier source. **Les dialogues et événements ne sont pas reformulés ici : la source fait foi.**
 
-## Avertissement sur les sources
+## Sources
 
-- La base scénaristique élaborée lors d'échanges précédents **n'est pas disponible dans ce projet**. Claude Code n'a accès ni à ces conversations, ni à une note de mémoire qui la contiendrait (la mémoire de ce projet est vide).
-- Claude **n'a donc pas lu** de scénario, de traitement ou de résumé d'acte. Seuls les **titres** des six actes sont connus.
-- Pour en tirer parti, déposer le texte de cette base (copier-coller suffit) dans `01_scenario/sources/`. Voir le `README.md` de ce dossier.
+| Code | Source | Statut |
+|---|---|---|
+| S1 | Brief initial de l'équipe (2026-11-25), consigné dans `MASTER_PROJECT.md` et `DECISIONS_LOG.md` | Décisions validées D-001 à D-018 |
+| S2 | Message de l'équipe du 2026-11-25 (structure en six actes) | D-020 |
+| **S3** | `sources/BASE_NARRATIVE_SIX_ACTES_V01.md` (reçue le 2026-11-26) | **Source de travail, non définitive** (S3 l. 311, 329) |
 
-Sources utilisées :
-| Code | Source |
+S3 ne crée **aucune décision validée**. Ses éléments sont des matériaux de travail, à confirmer avant d'entrer dans la bible ou le scénario.
+
+---
+
+## 1. Structure et minutage (S3)
+
+| Acte | Titre | Minutage indicatif | Durée | Lignes S3 |
+|---|---|---|---|---|
+| I | THE NOISE | 0:00–3:00 | 3:00 | 19–57 |
+| II | THE PROOFS | 3:00–6:30 | 3:30 | 59–91 |
+| III | ABSENCE | 6:30–10:00 | 3:30 | 93–133 |
+| IV | LABORATORY | 10:00–14:30 | 4:30 | 135–175 |
+| V | TRUTH | 14:30–18:30 | 4:00 | 177–239 |
+| VI | LIBERATION | 18:30–20:00 | 1:30 | 241–295 |
+| | **Total** | | **20:00** | Conforme à D-002 |
+
+## 2. Repérage par acte (extraction factuelle, sans reformulation des dialogues)
+
+| Acte | Lieux mentionnés | Heure / lumière | Éléments à l'écran ou au son | Personnages |
+|---|---|---|---|---|
+| I | Appartement ; vue par la fenêtre sur la rue | Nuit pluvieuse ; **02:17** | Texte d'ordinateur (l. 31) ; sonnerie ; accident voiture / lampadaire vu par la fenêtre (l. 43) | Adrien, la voix |
+| II | Appartement (ordinateur, cuisine, porte) | Non précisée | Trois prédictions réalisées (l. 67–69) ; téléphone qui « semble ne pas être connecté » (l. 83) ; texte d'ordinateur (l. 87) ; photographie de Léa (l. 89) | Adrien, la voix |
+| III | Appartement (tiroir) | **02:17** (l. 109) | Photographies, documents, **ancien badge de laboratoire** (l. 99) ; **vidéo de Léa** (l. 101–105) ; son déformé (l. 131) | Adrien, la voix, Léa (vidéo) |
+| IV | **Laboratoire abandonné** « depuis plusieurs mois » (l. 141) | Non précisée | Texte à l'écran (l. 147) ; **vidéo d'Adrien hors de la reconstruction, épuisé et blessé** (l. 149–151) ; le téléphone sonne (l. 175) | Adrien, Adrien de la vidéo |
+| V | Non précisé ; **flashback** au laboratoire en fonctionnement (l. 199–221) | Non précisée | Alarme (l. 217) ; disparition de Léa (l. 221) | Adrien, la voix, Léa (flashback) |
+| VI | Non précisé (« dernière représentation de Léa ») ; puis appartement | **Lumière du matin** (l. 281), puis **02:17** (l. 283) | Dissolution de l'environnement (l. 275) ; dernier message (l. 287) ; écran noir et titre (l. 293–295) | Adrien, Léa (représentation), message |
+
+### Textes à l'écran mentionnés (S3)
+| Acte | Texte (copié de la source) | Langue |
+|---|---|---|
+| I | `SESSION 07 — SYNCHRONISATION INCOMPLÈTE` | Français |
+| II | `RESTORE SESSION?` | Anglais |
+| IV | `PROTOCOLE DE RESTAURATION — SESSION 07` | Français |
+| VI | `LE DERNIER SIGNAL` (titre) | Français |
+
+### Accessoires et éléments de décor mentionnés (S3), **non inscrits au registre tant qu'ils ne sont pas validés**
+Téléphone ancien (canon D-014 / D-021) · ordinateur (canon D-012) · photos et objets personnels · appareils électroniques · photographie de Léa · tiroir · documents · ancien badge de laboratoire · support de la vidéo de Léa (non précisé) · robinet de la cuisine (décor D-012) · porte d'entrée (décor D-012) · voiture et lampadaire de la rue · écran du laboratoire · bouton de l'expérience (l. 127).
+
+---
+
+## 3. Concordance avec le canon validé
+
+| Point du canon | S3 | Verdict |
+|---|---|---|
+| 2049, six actes, environ 20 min (D-002, D-004, D-020) | l. 6–9 ; total des minutages = 20:00 | Conforme |
+| Appels apparemment venus du futur (D-008) | La voix « prétend être lui-même, dans le futur » (l. 13) | Conforme |
+| 02:17 central (D-009) | Les appels ont lieu à 02:17 (l. 299). S3 ne dit pas que c'est l'heure de l'accident. | Compatible |
+| Reconstruction devenue prison (D-008) | l. 17, 159–163 | Conforme |
+| Rôle d'Adrien dans l'accident (D-008) | l. 125–127, 207–209 | Compatible (précise sans contredire) |
+| Usage **clandestin** du système (D-008) | Non mentionné | Silence de S3, pas une contradiction |
+| Léa est la **sœur** d'Adrien (D-008, D-011) | Le lien de parenté n'est pas mentionné ; flashback où ils « travaillent sur leur expérience » (l. 201) | Silence de S3, pas une contradiction |
+| Pas d'esthétique futuriste exagérée (D-007) | « contemporain, légèrement futuriste, mais crédible » (l. 25) | Compatible |
+| Pluie nocturne, lampadaire visible (D-012) | l. 23, 43 | Conforme |
+| Téléphone ancien, aucun câble visible (D-014, D-021) | « un téléphone ancien » (l. 27) ; « semble ne pas être connecté » (l. 83) | Compatible |
+| Laboratoire abandonné (D-013) | « depuis plusieurs mois » (l. 141) | Conforme ; compatible avec P-008 (options A et B) |
+| Un seul téléphone canonique (D-014, D-022) | « Le téléphone sonne » à la fin de l'acte IV, au laboratoire (l. 175) | **À clarifier : Q-037** |
+
+## 4. Contradictions et incohérences relevées (non résolues)
+
+| Question | Objet |
 |---|---|
-| S1 | Brief initial de l'équipe (2026-11-25), consigné dans `MASTER_PROJECT.md` et `DECISIONS_LOG.md` |
-| S2 | Message de l'équipe du 2026-11-25 (structure en six actes) |
+| Q-035 | Acte VI : la lumière du matin apparaît, puis le téléphone sonne à 02:17 |
+| Q-036 | Plusieurs appels « à 02:17 » : une nuit, plusieurs nuits, ou une boucle ? Nombre de sessions (« SESSION 07 ») |
+| Q-037 | Fin de l'acte IV : quel téléphone sonne au laboratoire ? Où se passe l'acte V ? |
+| Q-038 | Acte III : « Qui ? » alors qu'Adrien vient de voir une photo et une vidéo de Léa |
+| Q-039 | Textes à l'écran en français et en anglais |
+| Q-040 | Besoins visuels absents du canon (labo en fonctionnement, extérieur de la reconstruction, Adrien blessé, rue accidentée, matin) |
+| Q-041 | Continuité du lampadaire après l'accident de l'acte I |
 
----
+Détail : `13_journal_decisions/QUESTIONS_OUVERTES.md` §D.
 
-## 1. Éléments connus
+## 5. Éléments que S3 laisse explicitement ouverts (S3 l. 315–327)
 
-### 1.1 Structure
+Fonctionnement de l'expérience · nature de la disparition de Léa · chronologie exacte de l'accident · état réel d'Adrien dans le monde extérieur · fonctionnement de la reconstruction · origine des appels et de la voix · conditions de répétition de la session · transitions entre les actes · quantité et durée des flashbacks · dialogues définitifs · mise en scène de la libération · logique du dernier message · rôle narratif exact du téléphone.
 
-| Ordre | Titre de l'acte | Contenu connu | Source |
+## 6. Éléments encore manquants pour une bible définitive
+
+| Domaine | Élément | Réf. | Éclairé par S3 ? |
 |---|---|---|---|
-| 1 | **The Noise** | Aucun | S2 |
-| 2 | **The Proofs** | Aucun | S2 |
-| 3 | **Absence** | Aucun | S2 |
-| 4 | **Laboratory** | Aucun (le laboratoire est un décor validé, D-013) | S2 |
-| 5 | **Truth** | Aucun | S2 |
-| 6 | **Liberation** | Aucun | S2 |
-
-Durée moyenne par acte, par simple division (≈ 20 min / 6) : environ 3 min 20 s. **Ce n'est pas une décision**, la répartition réelle reste à définir.
-
-### 1.2 Concept et faits narratifs (S1, D-008, D-009)
-- Adrien, 28 ans, reçoit des appels mystérieux venant **apparemment** de son propre futur.
-- Son environnement est une reconstruction imparfaite de souvenirs et de données.
-- Cette reconstruction est liée à un accident expérimental qui a provoqué la disparition de Léa, sa sœur de 25 ans.
-- Adrien n'a jamais accepté cette disparition.
-- Il a utilisé **clandestinement** un système expérimental pour reconstruire un environnement où retrouver Léa.
-- La reconstruction est devenue une prison psychologique et temporelle.
-- Les communications visent à lui faire comprendre la réalité de l'accident, **son rôle dans celui-ci**, et la nécessité de mettre fin à la reconstruction.
-- Mouvement : mystère, suspense, émotion, révélation, libération.
-- 02:17 = heure de l'accident original, élément central.
-
-### 1.3 Personnages, décors, accessoires connus
-Adrien, Léa (D-010, D-011). Appartement d'Adrien, laboratoire (D-012, D-013). Téléphone (D-014).
-
----
-
-## 2. Rapprochements possibles — hypothèses de lecture, **non validées**
-
-Les titres des actes peuvent être rapprochés du mouvement validé du concept. C'est **seulement une lecture des titres**, pas une information sur leur contenu :
-
-| Acte | Rapprochement possible avec le concept validé | Degré de certitude |
-|---|---|---|
-| The Noise | Mystère : premiers appels ? | Hypothèse |
-| The Proofs | Suspense : accumulation d'indices ? | Hypothèse |
-| Absence | Émotion : la disparition de Léa ? | Hypothèse |
-| Laboratory | Le décor du laboratoire (D-013) | Probable (titre identique au décor) |
-| Truth | Révélation | Probable (sens du mot) |
-| Liberation | Libération : fin de la reconstruction ? | Probable (mot présent dans le concept) |
-
-Aucune de ces hypothèses ne sera utilisée sans confirmation.
-
----
-
-## 3. Incohérences ou points à clarifier dans ce qui est connu
-
-| # | Point | Question |
-|---|---|---|
-| I-1 | Les titres des actes sont **en anglais**, le titre du film et tous les documents sont en français. | Titres de travail, ou cartons affichés à l'écran ? En quelle langue ? (Q-025, lié à Q-005) |
-| I-2 | Six actes pour cinq mouvements dans le concept (mystère, suspense, émotion, révélation, libération). | Ce n'est pas une contradiction, mais la correspondance acte / mouvement est à confirmer. |
-| I-3 | « Les reconstructions » (pluriel, message du 2026-11-25) contre « une reconstruction » (concept). | Une seule ou plusieurs ? (Q-024) |
-
----
-
-## 4. Éléments manquants pour rédiger une bible définitive
-
-| Domaine | Élément manquant | Réf. |
-|---|---|---|
-| **Structure** | Contenu de chaque acte : événements, lieux, scènes, fin d'acte, point de bascule | Q-004 |
-| | Durée cible de chaque acte | — |
-| | Ce que le spectateur apprend à chaque acte | `REVELATIONS_SPECTATEUR.md` |
-| **Appels** | Qui appelle réellement | Q-006 |
-| | Comment les appels se manifestent (téléphone uniquement ? voix ? contenu ?) | — |
-| | Pourquoi ils commencent maintenant ; pourquoi « le dernier » signal | — |
-| **Reconstruction** | Règles internes : ce qui est stable, ce qui se dégrade, comment elle se trompe | — |
-| | Une ou plusieurs reconstructions ; temps réel / temps vécu | Q-024 |
-| | Ce qu'elle recrée : le présent, ou la période d'avant l'accident | P-008 §6 |
-| | Où se trouve physiquement Adrien | Q-011 |
-| **Accident** | Date, déroulé, cause | Q-009 |
-| | Rôle d'Adrien | Q-008 |
-| | Ce qu'est devenue Léa | Q-007 |
-| **Personnages** | Histoire commune d'Adrien et Léa, nature de leur lien | — |
-| | Métier ou lien d'Adrien (et de Léa ?) avec le laboratoire | — |
-| | Mode de présence de Léa à l'écran | Q-016 |
-| | Autres personnages ou voix | Q-015 |
-| | Arc émotionnel d'Adrien acte par acte | — |
-| **Chronologie** | Choix de l'option A / B / C | P-008 |
-| **Fin** | Forme concrète de la libération et ce qu'on voit après | Q-014 |
-| **Monde 2049** | Niveau technologique visible au quotidien | — |
-| **Langage du film** | Différenciation visuelle réel / reconstruit / souvenir | — |
-| | Motifs récurrents (02:17, pluie, téléphone, signal, bruit) | Q-012, Q-013 |
-| | Langue des dialogues et des cartons | Q-005, Q-025 |
-| **Titre** | Sens de « Le Dernier Signal » dans le récit | — |
+| Structure | Contenu de chaque acte | ~~Q-004~~ | **Oui** (base de travail) |
+| | Transitions entre actes ; quantité de flashbacks | S3 l. 322–323 | Non |
+| Appels | Qui appelle réellement | Q-006 | Partiellement (la voix prétend être Adrien) |
+| | Pourquoi « le dernier » signal ; logique du dernier message | S3 l. 326 | Non |
+| Reconstruction | Règles internes ; répétition des sessions | Q-024, Q-036 | Partiellement (« SESSION 07 », l. 171, 235) |
+| | Ce qu'elle recrée | P-008 §6 | Partiellement (« son propre passé », l. 17) |
+| | Lieu et état physique réels d'Adrien | Q-011 | Partiellement (vidéo l. 149–151) |
+| Accident | Date, déroulé | Q-009 | Partiellement (flashback l. 199–221 ; abandon de plusieurs mois) |
+| | Rôle d'Adrien | Q-008 | Partiellement (l. 127, 209) |
+| | Ce qu'est devenue Léa | Q-007 | Non (« disparaît », l. 221) |
+| Personnages | Mémoire d'Adrien au début du film | Q-038 | À clarifier |
+| | Formes de présence de Léa | Q-016 | Partiellement (photo, vidéo, voix enregistrée, flashback, représentation finale) |
+| | Autres personnages ou voix | Q-015 | Partiellement (aucun autre nommé ; qui frappe à la porte ?) |
+| Chronologie | Option retenue | P-008 | Compatible A et B |
+| Fin | Mise en scène de la libération | Q-014, Q-035 | Partiellement |
+| Langue | Dialogues et textes à l'écran | Q-005, Q-039 | Dialogues en français dans S3 ; textes mixtes |

@@ -1,8 +1,8 @@
 # 01 — Scénario
 
-État : **aucun texte de scénario présent** (Q-004). Rien ne sera écrit avant validation de la bible et du synopsis.
+État : **aucun scénario rédigé**. Une base narrative de travail (V01) est disponible dans `sources/`. Rien ne sera écrit avant validation de la bible et du synopsis.
 
-Connu à ce jour : la structure en six actes (D-020) : *The Noise*, *The Proofs*, *Absence*, *Laboratory*, *Truth*, *Liberation*. Seuls les titres sont connus, pas le contenu. Voir `INVENTAIRE_SCENARISTIQUE.md`.
+Connu à ce jour : la structure en six actes (D-020) : *The Noise*, *The Proofs*, *Absence*, *Laboratory*, *Truth*, *Liberation*. Contenu disponible depuis le 2026-11-26 sous forme de **base narrative de travail, non définitive** : `sources/BASE_NARRATIVE_SIX_ACTES_V01.md`. Voir `INVENTAIRE_SCENARISTIQUE.md`.
 
 Organisation :
 - `INVENTAIRE_SCENARISTIQUE.md` — éléments connus, sources, éléments manquants.
