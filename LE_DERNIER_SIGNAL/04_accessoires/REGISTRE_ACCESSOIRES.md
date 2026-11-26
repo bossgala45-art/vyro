@@ -12,6 +12,8 @@ Chaque accessoire a un identifiant `ACC-##`, une description fixe et un **état 
 
 Points à définir :
 - ACC-01 : type exact (cadran rotatif, touches…), sonnerie, éventuel affichage de l'heure, statut d'indice (Q-012). Aucune référence visuelle dédiée connue. → Fiche proposée, **non validée** : `FICHE_TELEPHONE.md` (P-010).
+- ACC-01, décision du 2026-11-26 (D-021) : canon **maintenu**, téléphone ancien, **aucun câble visible**. Le cordon visible sur la vignette 4 de la planche de l'appartement est une erreur de génération : cette vignette ne fait pas référence pour le téléphone. **Modèle exact à définir.**
+- Le téléphone visible sur la console de la planche du laboratoire est un artefact hors canon, à ne pas reproduire (D-022). Il n'est pas inscrit au registre.
 - ACC-02 : apparence (doit rester crédible pour 2049, sans futurisme exagéré — D-007).
 - ACC-03 : nature des documents et ce qu'ils révèlent éventuellement (lien avec `05_continuite/REVELATIONS_SPECTATEUR.md`).
 

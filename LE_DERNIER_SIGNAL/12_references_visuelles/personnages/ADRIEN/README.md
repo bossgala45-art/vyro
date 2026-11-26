@@ -3,7 +3,7 @@
 Canon écrit : `02_personnages/ADRIEN.md` (D-010). Règles communes : `../../README.md` §3.
 
 > **État : les deux images ont été déposées le 2026-11-26.**
-> Le statut de validation de chacun reste à confirmer (Q-022). D-016 mentionne une référence d'Adrien « créée ». Le portrait maître et la planche sont deux images distinctes.
+> **Validées le 2026-11-26 comme références de l'identité visuelle générale (D-026).** Voir §8 pour la portée exacte de cette validation.
 
 ## 1. Fichiers et rôles
 
@@ -55,8 +55,8 @@ En cas de contradiction **sur le visage** entre les deux images, le **portrait m
 |---|---|---|
 | Date de dépôt | 2026-11-26 | 2026-11-26 |
 | Nom d'origine | `ADRIEN_PORTRAIT_MAITRE.jpg` | `ADRIEN_REFERENCE_SHEET.PNG` |
-| Date de validation | à confirmer (Q-022) | à confirmer (Q-022) |
-| Validé par | | |
+| Date de validation | 2026-11-26 (D-026) | 2026-11-26 (D-026) |
+| Validé par | Équipe | Équipe |
 | Outil de création | non renseigné | non renseigné |
 | Prompt d'origine | non renseigné | non renseigné |
 | Dimensions / format | 612 × 941, JPEG | 1536 × 1024, PNG |
@@ -84,3 +84,10 @@ Ce qui suit vient de l'examen des images par Claude. **Ce n'est pas une validati
 | Texte de la planche : « Corpulence : mince, athlétique » | Formulation légèrement différente | Canon : « mince, légèrement athlétique » |
 
 Conséquence : si P-009 est validée, la tenue des images correspond à la proposition, **sauf la couleur du sweat**. Il faudra choisir entre « gris anthracite » (texte) et « presque noir » (image).
+
+## 8. Décision de l'équipe (2026-11-26) — D-026
+
+- Le portrait maître et la planche sont **validés comme références de l'identité visuelle générale** d'Adrien (résout Q-022 et Q-032).
+- Cette validation **ne rend pas canonique** chaque texte ou détail de la planche. Couleur exacte, type de sweat, cordons, fermeture et toute caractéristique supplémentaire restent soumis au **canon écrit** (`02_personnages/ADRIEN.md`).
+- « Peau mate claire » et « voix grave » **ne sont pas** des caractéristiques officielles, sauf validation distincte.
+- Les écarts relevés au §7 (sweat presque noir, zippé, avec cordons ; cheveux nettement bouclés) restent consignés pour mémoire. Ils ne modifient pas le canon.

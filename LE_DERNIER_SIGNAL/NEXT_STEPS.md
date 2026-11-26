@@ -2,26 +2,24 @@
 
 Prochaines étapes de préproduction, dans l'ordre recommandé. Aucune génération vidéo, aucun storyboard et aucun prompt de scène définitif avant les étapes indiquées.
 
-Dernière mise à jour : 2026-11-26 (session 3)
+Dernière mise à jour : 2026-11-26 (session 4)
 
 ---
 
 ## ▶ Étape 1 — Décisions et dépôts (par l'équipe)
 
-**Nouveau, prioritaire (issu du dépôt des références du 2026-11-26)**
-- **Q-027** : trancher la contradiction entre le téléphone de la planche de l'appartement (cordon visible, clavier, écran) et D-014.
-- **Q-029** : le plan du laboratoire, copie de celui de l'appartement, est-il un artefact ou un indice ?
-- Q-028, Q-030 à Q-034 : voir `13_journal_decisions/QUESTIONS_OUVERTES.md` §C.
+**Arbitré le 2026-11-26** : Q-022, Q-027 à Q-032, Q-034 (décisions D-021 à D-027).
+Reste ouvert, issu du dépôt des références : **Q-033** (machine du laboratoire éteinte ou avec une lueur, selon les scènes).
 
 **Décisions à prendre**
 1. **P-008 Chronologie** : option A (recommandée), B, ou autre. Répondre en même temps à Q-023 (Léa cadette de 3 ans ?).
 2. **P-009 Tenue d'Adrien** : valider, et choisir les détails (sweat zippé ou non, cordons, logo).
-3. **P-010 Téléphone** : option T1 ou T2, cadran rotatif ou touches, finition, usure, sonnerie.
+3. **Téléphone** : le canon est maintenu (D-021), mais le **modèle exact reste à définir**. P-010 propose des options (T1 / T2, cadran ou touches, finition, usure, sonnerie) : aucune n'est retenue tant que l'équipe ne l'a pas choisie explicitement.
 4. **P-011 Règles d'usage des références**.
 5. **Q-026** : confirmer ou non P-001, P-003 à P-007.
 
 **Dépôts à faire**
-6. ~~Les 5 références visuelles~~ : **déposées le 2026-11-26**. Reste à fournir l'outil et les prompts d'origine, d'éventuelles versions en haute définition (Q-034), et la confirmation de validation des deux références d'Adrien (Q-022).
+6. ~~Les 5 références visuelles~~ : **déposées le 2026-11-26**. Références d'Adrien validées (D-026) ; résolutions acceptées pour la préproduction (D-027). Facultatif : préciser l'outil et les prompts d'origine ; fournir plus tard des versions améliorées.
 7. Le texte de la base scénaristique des six actes, dans `01_scenario/sources/` (Q-004).
 
 **Vérifications à faire dans l'interface**

@@ -2,7 +2,7 @@
 
 Canon écrit : `03_decors/LABORATOIRE.md` (D-013). Règles communes : `../../README.md` §3.
 
-> **État : planche déposée le 2026-11-26.** Validée selon D-016. Plan au sol à clarifier (§7, Q-029).
+> **État : planche déposée le 2026-11-26.** Validée selon D-016. Plan au sol (7) et téléphone de la console exclus (D-022, D-023) : voir §8.
 
 ## 1. Fichiers et rôles
 
@@ -74,3 +74,9 @@ Ce qui suit vient de l'examen de l'image par Claude, avec agrandissement des vig
 2. **Un second téléphone — Q-028.** Sur la console du poste de contrôle (3), un téléphone de bureau à combiné **avec cordon spiralé** est posé à gauche. Le canon ne prévoit qu'un téléphone (dans l'appartement). Est-ce un écho voulu ou un artefact ?
 3. **Machine allumée ou éteinte — Q-033.** Dans la vue (5), le centre de la machine émet une **lueur**. Dans les vues (1), (4) et (6), elle paraît éteinte. Il faut fixer son état par scène.
 4. **Écrans** : les moniteurs du poste de contrôle sont éteints. Cela s'accorde avec une incrustation en post si on les allume (Q-020).
+
+## 8. Décisions de l'équipe (2026-11-26)
+
+- **D-023 (Q-029)** : la ressemblance du plan au sol avec celui de l'appartement est une **erreur de génération, pas un indice narratif**. Elle n'est intégrée ni au scénario, ni à la continuité, ni à la bible. Les **vues photographiques** du laboratoire sont privilégiées pour les futures références.
+- **D-022 (Q-028)** : le téléphone posé sur la console (vue 3) est un **artefact de génération**, hors canon, à **ne pas reproduire** dans les futurs plans.
+- Toujours ouvert : état de la machine, éteinte ou avec une lueur (Q-033).

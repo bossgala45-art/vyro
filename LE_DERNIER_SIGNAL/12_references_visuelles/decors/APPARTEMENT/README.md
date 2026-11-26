@@ -2,7 +2,7 @@
 
 Canon écrit : `03_decors/APPARTEMENT_ADRIEN.md` (D-012). Règles communes : `../../README.md` §3.
 
-> **État : planche déposée le 2026-11-26.** Validée selon D-016. **Contradiction majeure avec le canon du téléphone (D-014) : voir §7 et Q-027.**
+> **État : planche déposée le 2026-11-26.** Validée selon D-016. Vignette 4 (téléphone) et plan au sol (7) exclus comme références (D-021, D-024) : voir §8.
 
 ## 1. Fichiers et rôles
 
@@ -78,3 +78,9 @@ Ce qui suit vient de l'examen de l'image par Claude, avec agrandissement des vig
 Une planche **validée** contredit un canon **validé** (D-014). Je ne tranche pas. Tant que Q-027 n'est pas réglée, **ne pas utiliser la vignette 4** en génération.
 
 **Point à vérifier : le plan au sol semble inversé en miroir par rapport à la vue (1) — Q-030.** Sur le plan, la fenêtre est sur le mur de gauche, le canapé contre le mur du haut et le bureau vers le bas. Une caméra tournée vers la fenêtre verrait donc le canapé **à droite** et le bureau **à gauche**. La vue (1) montre l'inverse : canapé à gauche, bureau à droite, près de la fenêtre. Il faudra fixer une seule géographie pour respecter la règle des 180°.
+
+## 8. Décisions de l'équipe (2026-11-26)
+
+- **D-021 (Q-027)** : le canon du téléphone est **maintenu** (ancien, aucun câble visible). Le cordon visible sur la vignette 4 est une **erreur de génération**. Cette vignette ne fait pas référence pour le téléphone, dont le **modèle exact reste à définir**.
+- **D-024 (Q-030)** : le plan au sol (7) **n'est pas utilisé comme référence de spatialisation**. Les **vues photographiques** sont privilégiées. Aucune correction géométrique n'est faite sans validation.
+- Les vues photographiques 1, 2, 3, 5 et 6 restent les références du décor.

@@ -86,7 +86,7 @@ Recommandation : **T2** pour l'objet. La question narrative « le téléphone es
 
 Mesures proposées :
 - Créer une **référence visuelle dédiée** au téléphone après validation de cette fiche (vues face, trois-quarts, profil, dessus, combiné décroché). Emplacement : `12_references_visuelles/accessoires/TELEPHONE/`.
-- Comparer cette référence au téléphone éventuellement visible sur la planche de l'appartement (validée). **En cas d'écart, la planche validée prime** tant qu'aucune décision ne change le canon.
+- ~~Comparer cette référence au téléphone de la planche de l'appartement ; en cas d'écart, la planche prime.~~ **Remplacé par D-021** : le téléphone de la vignette 4 n'est pas une référence (cordon = erreur de génération). Le canon écrit D-014 fait foi.
 - Prévoir des **plans d'insert** du téléphone seul, plus faciles à maîtriser.
 
 ---
@@ -99,7 +99,11 @@ Ce constat contredit :
 - **D-014** `[VALIDÉ]` : aucun câble visible ;
 - les recommandations de cette fiche (cadran rotatif, aucun écran).
 
-Selon §6, la planche validée devait primer sur cette fiche. Mais elle contredit elle-même un canon validé. **Décision de l'équipe requise : Q-027.** Cette fiche reste en attente jusque-là.
+**Décision de l'équipe (2026-11-26, D-021)** : le canon est **maintenu** (téléphone ancien, aucun câble visible). Le cordon de la vignette 4 est une **erreur de génération** et ne modifie pas le canon. Le **modèle exact reste à définir**, sans caractéristique supplémentaire inventée.
+
+Conséquence pour cette fiche : les caractéristiques proposées aux §2 et §3 (sans fil T2, cadran, finition, dimensions, sonnerie…) **restent de simples propositions (P-010), non canoniques**. Elles ne seront retenues que si l'équipe les choisit explicitement.
+
+Le second téléphone de la planche du laboratoire est un artefact, à ne pas reproduire (D-022).
 
 ## 7. Ce que la validation changerait
 

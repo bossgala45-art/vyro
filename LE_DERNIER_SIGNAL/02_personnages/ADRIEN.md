@@ -44,18 +44,18 @@ Détails à figer en même temps, pour éviter la dérive d'un plan à l'autre (
 
 Points de vigilance :
 - **Baskets blanches** : dans des décors à dominante bleu-gris et nuit (D-012, D-013), le blanc est l'élément le plus lumineux du bas du cadre. Il attire l'œil et sera plus visible en cas d'erreur (salissures, forme). Ce n'est pas un obstacle, mais un point de contrôle. « Discrètes » devrait se traduire par : sans couleur secondaire, semelle blanche, forme basse et simple.
-- **Accord avec les références** : la tenue doit correspondre à ce que montrent le portrait maître et la planche d'Adrien. Je ne peux pas le vérifier tant qu'elles ne sont pas déposées. Si la planche montre une autre tenue, il faudra soit refaire la planche, soit ne l'utiliser que pour la morphologie (voir `12_references_visuelles/personnages/ADRIEN/README.md` §5).
+- **Accord avec les références** (déposées le 2026-11-26) : les images montrent un sweat à capuche **zippé**, porté ouvert, **avec cordons**, de teinte **presque noire**, et des baskets blanches. Selon D-026, ces détails **ne sont pas canoniques du seul fait de l'image** : couleur, type de sweat, cordons et fermeture restent fixés par le canon écrit. Les choix ci-dessus restent donc à faire, même si P-009 est validée.
 - Si elle est validée, cette proposition **résout la première partie de Q-016**.
 
 ## États physiques (blessures, fatigue visible, mouillé…)
 Aucun défini. `[À DÉFINIR]`
 
 ## Référence visuelle
-- Référence d'identité créée `[VALIDÉ]` (D-016). Deux images sont annoncées : un portrait maître et une planche. Le statut de validation de chacune est à confirmer (Q-022).
+- Portrait maître **et** planche **validés comme références de l'identité visuelle générale** d'Adrien `[VALIDÉ]` (D-026, 2026-11-26).
 - Fichiers :
   - `12_references_visuelles/personnages/ADRIEN/REF_PERS_ADRIEN_PORTRAIT_MAITRE_v01.jpg` — référence principale (visage) — **déposée le 2026-11-26**
   - `12_references_visuelles/personnages/ADRIEN/REF_PERS_ADRIEN_PLANCHE_v01.png` — référence secondaire — **déposée le 2026-11-26**
-  - Écarts relevés au dépôt (couleur du sweat, sweat zippé, peau, voix) : Q-032.
+  - Portée de la validation (D-026) : les images font foi pour l'**identité visuelle générale**. Les textes et détails de la planche ne sont pas canoniques d'office : couleur exacte, type de sweat, cordons, fermeture et toute caractéristique supplémentaire restent soumis au **canon écrit** de cette fiche. « Peau mate claire » et « voix grave » (texte de la planche) **ne sont pas des caractéristiques officielles**.
 - Mode d'emploi : `12_references_visuelles/personnages/ADRIEN/README.md`.
 
 ## Bloc descriptif canonique pour prompts

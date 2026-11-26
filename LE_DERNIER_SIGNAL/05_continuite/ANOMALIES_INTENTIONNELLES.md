@@ -9,3 +9,10 @@ Aucune anomalie n'est encore décidée. Ne rien ajouter sans validation de l'éq
 | ID | Anomalie | Scène(s) / plan(s) | Ce qu'elle signifie | Comment la rendre lisible (et la distinguer d'un défaut IA) | Statut |
 |---|---|---|---|---|---|
 | — | — | — | — | — | — |
+
+## Pistes explicitement écartées
+
+| Piste | Décision | Motif |
+|---|---|---|
+| Plans au sol du laboratoire et de l'appartement identiques (planches de référence) | D-023 | Erreur de génération, **pas un indice narratif** : ne pas l'intégrer au scénario, à la continuité ni à la bible |
+| Second téléphone sur la console du laboratoire | D-022 | Artefact de génération, hors canon, à ne pas reproduire |

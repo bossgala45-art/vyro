@@ -20,7 +20,7 @@ Chaleureuse, intelligente, calme, empathique, indépendante.
 |---|---|---|
 | T-LEA-01 | Tenue principale : pull beige clair, pantalon neutre | `[VALIDÉ]` |
 
-Couleur et coupe exactes du « pantalon neutre » : à aligner sur la planche validée `[À DÉFINIR]`.
+Tenue de référence visuelle : celle de la planche validée (vignettes 5 à 7), conservée par D-025. La description écrite reste « pantalon neutre ». Sa couleur et sa coupe exactes ne sont pas encore inscrites au canon écrit `[À DÉFINIR]`.
 Autres tenues éventuelles : `[À DÉFINIR]` (Q-016).
 
 ## Mode de présence à l'écran
@@ -28,7 +28,7 @@ Autres tenues éventuelles : `[À DÉFINIR]` (Q-016).
 
 ## Référence visuelle
 - Planche d'identité créée et validée `[VALIDÉ]` (D-016).
-- Fichier : `12_references_visuelles/personnages/LEA/REF_PERS_LEA_PLANCHE_v01.jpg` — **déposé le 2026-11-26**. Observé sur la planche : pantalon gris moyen, coupe droite (précise « pantalon neutre », non encore inscrit au canon). Points relevés : Q-031.
+- Fichier : `12_references_visuelles/personnages/LEA/REF_PERS_LEA_PLANCHE_v01.jpg` — **déposé le 2026-11-26**. Observé sur la planche : pantalon gris moyen, coupe droite (précise « pantalon neutre », non encore inscrit au canon). Seuls sont conservés de la planche : **visage, cheveux, apparence générale et tenue de référence** (D-025). Les vignettes 8 à 10 **ne sont pas des scènes canon** et ne constituent pas des événements du scénario.
 - Mode d'emploi : `12_references_visuelles/personnages/LEA/README.md`.
 
 ## Âge — formulation proposée `[PROPOSITION]` P-008 §2 — non appliquée

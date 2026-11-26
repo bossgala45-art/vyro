@@ -2,7 +2,7 @@
 
 Tableau de bord de l'avancement. Mis à jour à la fin de chaque session de travail.
 
-Dernière mise à jour : 2026-11-26 (session 3 : dépôt des références)
+Dernière mise à jour : 2026-11-26 (session 4 : arbitrage des références)
 Phase actuelle : **Préproduction — préparation de la bible**
 
 ---
@@ -14,7 +14,7 @@ Phase actuelle : **Préproduction — préparation de la bible**
 | 0. Environnement de production | `[FAIT]` — structure globalement validée (D-019) ; P-001, P-003 à P-007 à confirmer (Q-026) |
 | 1. Développement (bible, synopsis, séquencier) | `[EN COURS]` — inventaire scénaristique fait ; propositions chronologie, tenue et téléphone en attente |
 | 2. Scénario | `[BLOQUÉ]` — structure en six actes connue (D-020), mais contenu absent du projet (Q-004) |
-| 3. Préproduction visuelle (fiches, références, blocs canoniques) | `[EN COURS]` — 5 références déposées et examinées ; **contradiction téléphone / D-014 bloquante** (Q-027) ; autres écarts Q-028 à Q-034 |
+| 3. Préproduction visuelle (fiches, références, blocs canoniques) | `[EN COURS]` — 5 références déposées, examinées et **arbitrées** (D-021 à D-027), avec restrictions d'usage ; modèle exact du téléphone à définir ; état de la machine du labo ouvert (Q-033) |
 | 4. Tests techniques Fable 2 | `[À FAIRE]` — liste de vérification prête, à remplir par l'équipe (Q-003) |
 | 5. Découpage technique et storyboard | `[À FAIRE]` — non commencé, volontairement |
 | 6. Prompts Fable 2 | `[À FAIRE]` — aucun prompt rédigé |
@@ -36,6 +36,19 @@ Phase actuelle : **Préproduction — préparation de la bible**
 | Règles d'usage des références | `[FAIT]` — en attente (P-011) | `12_references_visuelles/README.md` |
 | Liste de vérification Fable 2 | `[FAIT]` — à remplir par l'équipe | `08_production/CAPACITES_FABLE2.md` |
 | Inventaire scénaristique | `[FAIT]` | `01_scenario/INVENTAIRE_SCENARISTIQUE.md` |
+
+## Sessions 3 et 4 (2026-11-26) — dépôt et arbitrage des références
+
+| Tâche | Statut | Décision |
+|---|---|---|
+| Dépôt et examen des 5 références | `[FAIT]` | — |
+| Téléphone : canon maintenu, cordon de la planche = erreur, modèle à définir | `[ARBITRÉ]` | D-021 |
+| Second téléphone du laboratoire = artefact, à ne pas reproduire | `[ARBITRÉ]` | D-022 |
+| Plan au sol du laboratoire = erreur, pas un indice | `[ARBITRÉ]` | D-023 |
+| Plan au sol de l'appartement non utilisé pour la spatialisation | `[ARBITRÉ]` | D-024 |
+| Vignettes 8 à 10 de Léa hors canon | `[ARBITRÉ]` | D-025 |
+| Références d'Adrien validées pour l'identité générale | `[ARBITRÉ]` | D-026 |
+| Résolutions acceptables pour la préproduction | `[ARBITRÉ]` | D-027 |
 
 ---
 
@@ -59,7 +72,7 @@ Phase actuelle : **Préproduction — préparation de la bible**
 | P-001, P-003 à P-007 | Propositions de la session 1 (Q-026) |
 | P-008 | Chronologie (option A recommandée) |
 | P-009 | Tenue canonique d'Adrien |
-| P-010 | Fiche du téléphone (option T2 recommandée) |
+| P-010 | Fiche du téléphone (option T2 recommandée). Le canon est maintenu par D-021 ; le modèle exact reste à définir ; les caractéristiques proposées ne sont pas canoniques |
 | P-011 | Règles d'usage des références visuelles |
 
 ---
@@ -80,8 +93,7 @@ Phase actuelle : **Préproduction — préparation de la bible**
 
 ## Points bloquants actuels
 
-1. **Q-027** — Le téléphone de la planche validée de l'appartement a un cordon visible, ce qui contredit D-014 : bloque toute préparation impliquant le téléphone.
-2. **Q-004** — Contenu de la base scénaristique des six actes absent du projet : bloque la bible.
-3. **Q-022** — Validation des deux références d'Adrien à confirmer.
-4. **P-008** — Chronologie à valider : elle conditionne l'état du laboratoire, l'âge de Léa à l'écran et les dates visibles dans les décors.
-5. **Q-003** — Capacités de Fable 2 à constater.
+1. **Q-004** — Contenu de la base scénaristique des six actes absent du projet : bloque la bible.
+2. **P-008** — Chronologie à valider : elle conditionne l'état du laboratoire, l'âge de Léa à l'écran et les dates visibles dans les décors.
+3. **Modèle exact du téléphone** — à définir (D-021, Q-012). Bloque toute préparation de plan montrant le téléphone, et la création de sa référence visuelle.
+4. **Q-003** — Capacités de Fable 2 à constater.

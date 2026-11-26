@@ -2,7 +2,7 @@
 
 Canon écrit : `02_personnages/LEA.md` (D-011). Règles communes : `../../README.md` §3.
 
-> **État : planche déposée le 2026-11-26.** Validée selon D-016.
+> **État : planche déposée le 2026-11-26.** Validée (D-016). Vignettes 8 à 10 hors canon (D-025) : voir §8.
 
 ## 1. Fichiers et rôles
 
@@ -72,3 +72,8 @@ Ce qui suit vient de l'examen de l'image par Claude. **Ce n'est pas une validati
   - 10 : Léa dans un **laboratoire éclairé et en état de fonctionner**, très différent du laboratoire abandonné de la planche du décor.
   
   Ces images ne fixent ni où Léa apparaît, ni sous quelle forme (Q-016), ni l'état du laboratoire. Elles peuvent servir d'**ambiance**, pas de canon, sauf décision.
+
+## 8. Décision de l'équipe (2026-11-26) — D-025
+
+- Les vignettes 8 à 10 **ne sont pas des scènes canon** et **ne constituent pas des événements du scénario** (résout Q-031).
+- Sont conservés de la planche uniquement : **visage, cheveux, apparence générale et tenue de référence** (vignettes 1 à 7).

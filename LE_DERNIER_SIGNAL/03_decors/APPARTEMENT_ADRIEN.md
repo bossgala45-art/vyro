@@ -19,11 +19,13 @@ Appartement contemporain urbain en 2049.
 
 ## Référence visuelle
 - Planche créée et validée `[VALIDÉ]` (D-016).
-- Fichier : `12_references_visuelles/decors/APPARTEMENT/REF_DECOR_APPART_PLANCHE_v01.jpg` — **déposé le 2026-11-26**. **Contradiction avec D-014 sur le téléphone : Q-027.** Plan au sol peut-être inversé : Q-030.
+- Fichier : `12_references_visuelles/decors/APPARTEMENT/REF_DECOR_APPART_PLANCHE_v01.jpg` — **déposé le 2026-11-26**. Restrictions d'usage :
+  - **Vignette 4 (téléphone)** : le cordon visible est une erreur de génération. Le canon D-014 est maintenu (D-021). Cette vignette ne fait pas référence pour le téléphone, dont le modèle exact reste à définir.
+  - **Plan au sol (7)** : non utilisé comme référence de spatialisation (D-024). Les **vues photographiques** de la planche sont privilégiées. Aucune correction géométrique n'est faite sans validation.
 - Mode d'emploi : `12_references_visuelles/decors/APPARTEMENT/README.md`.
 
 ## À définir pour la continuité (à aligner sur la planche validée)
-- Plan schématique : position relative salon / bureau / fenêtre / cuisine / entrée / couloir `[À DÉFINIR]`.
+- Plan schématique : position relative salon / bureau / fenêtre / cuisine / entrée / couloir `[À DÉFINIR]`. À établir à partir des **vues photographiques** uniquement, et à soumettre à validation (D-024).
 - Emplacement exact de la petite table du téléphone par rapport à la fenêtre et au bureau `[À DÉFINIR]`.
 - Sources de lumière chaude (lampe, écran, cuisine…) et leur position `[À DÉFINIR]`.
 - Côté de la rue et position du lampadaire dans le cadre de la fenêtre `[À DÉFINIR]`.

@@ -3,7 +3,7 @@
 Synthèse de **toutes les informations validées** du film à ce jour.
 Ce document est un résumé : le détail de chaque élément se trouve dans les fiches indiquées. Il ne contient aucune information inventée ; ce qui n'est pas décidé est signalé `[À DÉFINIR]` et renvoie aux questions ouvertes.
 
-Dernière mise à jour : 2026-11-25
+Dernière mise à jour : 2026-11-26
 
 ---
 
@@ -71,14 +71,14 @@ Qui appelle réellement (Q-006) · nature exacte de la disparition de Léa (Q-00
 - Tenue principale : sweat ou hoodie gris anthracite, t-shirt sombre, pantalon cargo noir, baskets sobres.
 - Intelligent, réservé, émotionnel, parfois anxieux, déterminé.
 - Proposition de tenue canonique unique en attente : P-009 (le canon ci-dessus reste en vigueur).
-- Références visuelles : **portrait maître** (principale) et **planche** (secondaire), **déposées le 2026-11-26**. Validation à confirmer (Q-022). Écarts relevés : Q-032.
+- Références visuelles : **portrait maître** (principale) et **planche** (secondaire), **déposées le 2026-11-26**, **validées comme références de l'identité visuelle générale** (D-026). Les détails de tenue restent régis par le canon écrit. « Peau mate claire » et « voix grave » ne sont pas officielles.
 
 ### LÉA `[VALIDÉ]` (D-011) — fiche : `02_personnages/LEA.md`
 - 25 ans, silhouette mince et naturelle.
 - Cheveux brun foncé, mi-longs, légèrement ondulés ; yeux marron ; traits doux et expressifs ; peau claire.
 - Tenue principale : pull beige clair, pantalon neutre.
 - Chaleureuse, intelligente, calme, empathique, indépendante.
-- Planche visuelle d'identité : **créée et validée** (D-016), **déposée le 2026-11-26**. Points relevés : Q-031.
+- Planche visuelle d'identité : **créée et validée** (D-016), **déposée le 2026-11-26**. Seuls visage, cheveux, apparence générale et tenue de référence sont conservés. Les vignettes 8 à 10 ne sont pas canon (D-025).
 
 Autres personnages (voix au téléphone, personnes liées au laboratoire, etc.) : `[À DÉFINIR]` (Q-015).
 
@@ -86,17 +86,17 @@ Autres personnages (voix au téléphone, personnes liées au laboratoire, etc.) 
 
 ### APPARTEMENT D'ADRIEN `[VALIDÉ]` (D-012) — fiche : `03_decors/APPARTEMENT_ADRIEN.md`
 Appartement contemporain urbain en 2049 : salon gris sombre ; bureau intégré à l'espace de vie avec ordinateur et documents ; grande fenêtre sur une rue urbaine avec lampadaire visible ; pluie nocturne ; téléphone noir ancien sans câble visible sur une petite table ; cuisine ouverte avec évier et robinet ; entrée et couloir. Ambiance sombre, réaliste, légèrement oppressante. Dominante bleu-gris, faibles lumières chaudes.
-Planche de référence : **créée et validée**, **déposée le 2026-11-26**. **Contradiction avec D-014 sur le téléphone : Q-027.** Plan au sol à clarifier : Q-030.
+Planche de référence : **créée et validée**, **déposée le 2026-11-26**. Vignette 4 : cordon du téléphone = erreur de génération, canon D-014 maintenu (D-021). Plan au sol non utilisé pour la spatialisation ; vues photographiques privilégiées (D-024).
 
 ### LABORATOIRE EXPÉRIMENTAL `[VALIDÉ]` (D-013) — fiche : `03_decors/LABORATOIRE.md`
 Laboratoire de recherche abandonné en 2049 : couloir industriel ; salle expérimentale principale ; poste informatique ; machine expérimentale centrale ; structures métalliques, câbles, consoles, écrans, équipement technique ; quelques dommages liés à l'accident. Éclairage froid. Palette gris acier, bleu froid, noir et blanc. Atmosphère mystérieuse et oppressante.
-Planche de référence : **créée et validée**, **déposée le 2026-11-26**. Points relevés : Q-028, Q-029, Q-033.
+Planche de référence : **créée et validée**, **déposée le 2026-11-26**. Plan au sol (erreur de génération, pas un indice) et téléphone de la console (artefact, à ne pas reproduire) exclus (D-022, D-023). Vues photographiques privilégiées. État de la machine : Q-033.
 
 ## 7. Accessoires validés — registre : `04_accessoires/REGISTRE_ACCESSOIRES.md`
 
 | Accessoire | Description validée | Position validée | Réf. |
 |---|---|---|---|
-| Téléphone | Noir, ancien, sans câble visible (fiche détaillée proposée : P-010, non validée) | Sur une petite table, appartement d'Adrien | D-014 |
+| Téléphone | Noir, ancien, sans câble visible. Canon maintenu par D-021 ; **modèle exact à définir** (P-010 non validée) | Sur une petite table, appartement d'Adrien | D-014 |
 | Ordinateur | Présent sur le bureau | Bureau intégré, appartement | D-012 |
 | Documents | Présents sur le bureau | Bureau intégré, appartement | D-012 |
 

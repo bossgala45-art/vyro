@@ -44,7 +44,10 @@ Le **registre de continuité par plan** (`05_continuite/REGISTRE_PAR_PLAN.md`, c
 - **02:17** (D-009) : toute apparition de l'heure 02:17 (horloge, écran, téléphone, dialogue) est consignée dans `CHRONOLOGIE.md`. Aucune autre heure affichée à l'écran ne doit apparaître par hasard : toute horloge visible doit avoir une heure décidée.
 - **Textes à l'écran** (écrans du laboratoire, ordinateur, téléphone) : les outils de génération vidéo produisent souvent des textes illisibles ou faux. Par défaut, tout texte devant être lu par le spectateur est prévu en **incrustation en postproduction** `[PROPOSITION]`, et noté dans la fiche de plan.
 - **Pluie nocturne** dans l'appartement (D-012) : son intensité et la présence de gouttes sur la vitre doivent être constantes à l'intérieur d'une même scène.
-- **Téléphone sans câble visible** (D-014) : aucun câble ne doit apparaître dans un plan. Un câble visible est une erreur, sauf décision contraire consignée.
+- **Téléphone sans câble visible** (D-014) : aucun câble ne doit apparaître dans un plan. Un câble visible est une erreur, sauf décision contraire consignée. Le cordon visible sur la vignette 4 de la planche de l'appartement est une erreur de génération : cette vignette ne fait pas référence pour le téléphone (D-021).
+- **Un seul téléphone canonique** : le téléphone visible sur la console de la planche du laboratoire est un artefact. Il ne doit pas être reproduit (D-022).
+- **Spatialisation des décors** : les plans au sol des planches de l'appartement et du laboratoire ne font pas référence (D-023, D-024). La géographie des décors s'appuie sur les vues photographiques, et toute correction géométrique est soumise à validation.
+- **Léa** : seuls son visage, ses cheveux, son apparence générale et sa tenue de référence sont repris de sa planche. Les vignettes 8 à 10 ne sont pas des scènes du film (D-025).
 - **Palettes** : appartement bleu-gris avec faibles lumières chaudes (D-012) ; laboratoire gris acier, bleu froid, noir et blanc (D-013). Une couleur hors palette doit être justifiée et consignée.
 - **Pas de futurisme exagéré** (D-007) : tout élément technologique visible doit rester crédible pour 2049 réaliste.
 
