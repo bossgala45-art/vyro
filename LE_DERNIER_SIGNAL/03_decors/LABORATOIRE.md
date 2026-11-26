@@ -24,7 +24,7 @@ Laboratoire de recherche abandonné en 2049.
   - **Téléphone sur la console (vue 3)** : **artefact de génération**, hors canon, à **ne pas reproduire** dans les futurs plans (D-022).
   - État de la machine (lueur dans la vue 5) : toujours ouvert (Q-033).
 - Mode d'emploi : `12_references_visuelles/decors/LABORATOIRE/README.md`.
-- Niveau d'abandon : dépend de la chronologie retenue (P-008). Avec l'option A recommandée, il s'agit d'un site désaffecté depuis quelques mois, pas d'une ruine.
+- Niveau d'abandon : **abandonné depuis quelques mois** au moment de l'histoire principale `[VALIDÉ]` (D-028). Les circonstances de la fermeture (scellés, enquête…) ne sont pas validées.
 
 ## À définir pour la continuité
 - Statut du lieu : réel, reconstruit, ou les deux `[À DÉFINIR]` (Q-010).

@@ -2,7 +2,7 @@
 
 Tableau de bord de l'avancement. Mis à jour à la fin de chaque session de travail.
 
-Dernière mise à jour : 2026-11-26 (session 5 : intégration de la base narrative V01)
+Dernière mise à jour : 2026-11-26 (session 6 : chronologie)
 Phase actuelle : **Préproduction — préparation de la bible**
 
 ---
@@ -30,7 +30,7 @@ Phase actuelle : **Préproduction — préparation de la bible**
 | Tâche | Statut | Fichier |
 |---|---|---|
 | Organisation des références visuelles (5 références + téléphone) | `[FAIT]` | `12_references_visuelles/` |
-| Proposition de chronologie | `[FAIT]` — en attente (P-008) | `05_continuite/PROPOSITION_CHRONOLOGIE.md` |
+| Proposition de chronologie | `[FAIT]` — option A retenue (D-028) | `05_continuite/PROPOSITION_CHRONOLOGIE.md` |
 | Proposition de tenue canonique d'Adrien | `[FAIT]` — en attente (P-009) | `02_personnages/ADRIEN.md` |
 | Fiche du téléphone | `[FAIT]` — en attente (P-010) | `04_accessoires/FICHE_TELEPHONE.md` |
 | Règles d'usage des références | `[FAIT]` — en attente (P-011) | `12_references_visuelles/README.md` |
@@ -78,7 +78,7 @@ Phase actuelle : **Préproduction — préparation de la bible**
 | ID | Objet |
 |---|---|
 | P-001, P-003 à P-007 | Propositions de la session 1 (Q-026) |
-| P-008 | Chronologie (option A recommandée) |
+| ~~P-008~~ | Acceptée partiellement → D-028. Chronologie détaillée V01 en attente de validation (`05_continuite/PROPOSITION_CHRONOLOGIE_DETAILLEE_V01.md`) |
 | P-009 | Tenue canonique d'Adrien |
 | P-010 | Fiche du téléphone (option T2 recommandée). Le canon est maintenu par D-021 ; le modèle exact reste à définir ; les caractéristiques proposées ne sont pas canoniques |
 | P-011 | Règles d'usage des références visuelles |
@@ -102,6 +102,6 @@ Phase actuelle : **Préproduction — préparation de la bible**
 ## Points bloquants actuels
 
 1. **Q-035 à Q-038, Q-040** — Points de la base narrative V01 à clarifier avant la bible : 02:17 au matin de l'acte VI, structure temporelle des appels, téléphone qui sonne au laboratoire, mémoire d'Adrien, besoins visuels absents du canon.
-2. **P-008** — Chronologie à valider : elle conditionne l'état du laboratoire, l'âge de Léa à l'écran et les dates visibles dans les décors.
+2. **Q-042 et Q-036** — Période représentée par la reconstruction, et durée de l'histoire (une nuit ou plusieurs) : nécessaires pour compléter la chronologie détaillée V01.
 3. **Modèle exact du téléphone** — à définir (D-021, Q-012). Bloque toute préparation de plan montrant le téléphone, et la création de sa référence visuelle.
 4. **Q-003** — Capacités de Fable 2 à constater.

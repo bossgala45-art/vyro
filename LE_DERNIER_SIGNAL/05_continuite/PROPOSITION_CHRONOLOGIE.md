@@ -1,7 +1,6 @@
 # PROPOSITION DE CHRONOLOGIE — LE DERNIER SIGNAL
 
-Statut : `[PROPOSITION]` P-008 — **non validée**. Répond à Q-009.
-Rien ici ne doit être reporté dans `CHRONOLOGIE.md` ni utilisé en production avant validation.
+Statut : `[PROPOSITION]` P-008 — **acceptée partiellement le 2026-11-26 → D-028** (option A). Seuls sont validés : accident et disparition de Léa en 2049 ; histoire principale environ six mois après ; Adrien 28 ans ; Léa 25 ans au moment de sa disparition ; laboratoire abandonné depuis quelques mois. **Tout le reste de ce document demeure une proposition non validée**, conservée pour mémoire. Suite du travail : `PROPOSITION_CHRONOLOGIE_DETAILLEE_V01.md`.
 
 Date de la proposition : 2026-11-25
 

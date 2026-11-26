@@ -31,7 +31,10 @@ Autres tenues éventuelles : `[À DÉFINIR]` (Q-016).
 - Fichier : `12_references_visuelles/personnages/LEA/REF_PERS_LEA_PLANCHE_v01.jpg` — **déposé le 2026-11-26**. Observé sur la planche : pantalon gris moyen, coupe droite (précise « pantalon neutre », non encore inscrit au canon). Seuls sont conservés de la planche : **visage, cheveux, apparence générale et tenue de référence** (D-025). Les vignettes 8 à 10 **ne sont pas des scènes canon** et ne constituent pas des événements du scénario.
 - Mode d'emploi : `12_references_visuelles/personnages/LEA/README.md`.
 
-## Âge — formulation proposée `[PROPOSITION]` P-008 §2 — non appliquée
+## Âge
+`[VALIDÉ]` D-028 : **Léa avait 25 ans au moment de sa disparition** (2049).
+
+Complément encore à l'état de proposition (P-008 §2, non validé par D-028) :
 « Léa avait 25 ans au moment de sa disparition. Par défaut, toute représentation de Léa la montre à cet âge. Un souvenir situé à une autre époque de sa vie exigerait une décision et une référence dédiée. »
 Voir `05_continuite/PROPOSITION_CHRONOLOGIE.md`.
 

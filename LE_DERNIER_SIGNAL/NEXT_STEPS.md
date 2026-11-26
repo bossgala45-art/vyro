@@ -2,7 +2,7 @@
 
 Prochaines étapes de préproduction, dans l'ordre recommandé. Aucune génération vidéo, aucun storyboard et aucun prompt de scène définitif avant les étapes indiquées.
 
-Dernière mise à jour : 2026-11-26 (session 5)
+Dernière mise à jour : 2026-11-26 (session 6)
 
 ---
 
@@ -14,7 +14,7 @@ Reste ouvert, issu du dépôt des références : **Q-033** (machine du laboratoi
 **Nouveau — base narrative V01 intégrée (2026-11-26)** : 7 points à clarifier, en priorité **Q-035** (02:17 au matin), **Q-036** (une nuit ou plusieurs ; « SESSION 07 »), **Q-037** (quel téléphone sonne au laboratoire), **Q-038** (mémoire d'Adrien) et **Q-040** (besoins visuels absents du canon). Puis Q-039 et Q-041. Voir `13_journal_decisions/QUESTIONS_OUVERTES.md` §D.
 
 **Décisions à prendre**
-1. **P-008 Chronologie** : option A (recommandée), B, ou autre. Répondre en même temps à Q-023 (Léa cadette de 3 ans ?).
+1. ~~P-008 Chronologie~~ : **option A retenue (D-028)**. À examiner : `05_continuite/PROPOSITION_CHRONOLOGIE_DETAILLEE_V01.md`, puis trancher **Q-042** (période représentée par la reconstruction) et **Q-036** (une nuit ou plusieurs).
 2. **P-009 Tenue d'Adrien** : valider, et choisir les détails (sweat zippé ou non, cordons, logo).
 3. **Téléphone** : le canon est maintenu (D-021), mais le **modèle exact reste à définir**. P-010 propose des options (T1 / T2, cadran ou touches, finition, usure, sonnerie) : aucune n'est retenue tant que l'équipe ne l'a pas choisie explicitement.
 4. **P-011 Règles d'usage des références**.
@@ -45,4 +45,4 @@ Synopsis → séquencier (scènes, durées) → scénario → blocs canoniques e
 
 ## Prochaine étape recommandée
 
-**Arbitrer les points de la base narrative V01** (Q-035 à Q-038 et Q-040), **ainsi que la chronologie (P-008)**. La base est compatible avec l'option A comme avec l'option B : le laboratoire y est abandonné « depuis plusieurs mois ». Ensuite, rédiger la bible (étape 3) à partir du canon validé et de cette source, sans la réécrire.
+**Examiner la chronologie détaillée V01**, puis arbitrer **Q-042** (période représentée par la reconstruction) et **Q-036** (une nuit ou plusieurs). Ce sont les deux décisions qui structurent toute la chronologie du récit. Viennent ensuite Q-035, Q-037, Q-038 et Q-040. Ensuite, rédiger la bible (étape 3) à partir du canon validé et de cette source, sans la réécrire.

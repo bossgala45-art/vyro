@@ -57,7 +57,7 @@ L'heure **02:17** est un élément central de la chronologie : elle correspond a
 Contenu : **base narrative de travail V01**, déposée le 2026-11-26 dans `01_scenario/sources/BASE_NARRATIVE_SIX_ACTES_V01.md`. Ce n'est **pas** un scénario définitif et elle ne crée aucune décision validée. Points à clarifier : Q-035 à Q-041. Voir `01_scenario/INVENTAIRE_SCENARISTIQUE.md`.
 
 ### Chronologie
-Proposition en attente : `05_continuite/PROPOSITION_CHRONOLOGIE.md` (P-008, option A recommandée). **Rien n'est encore validé** au-delà de 2049 et 02:17.
+`[VALIDÉ]` D-028 (option A de P-008) : accident et disparition de Léa **en 2049** à 02:17 ; histoire principale **environ six mois après** ; Adrien 28 ans ; Léa 25 ans au moment de sa disparition ; laboratoire abandonné depuis quelques mois. Les dates exactes, les mécanismes et les circonstances ne sont **pas** validés. Chronologie détaillée (proposition de travail) : `05_continuite/PROPOSITION_CHRONOLOGIE_DETAILLEE_V01.md`.
 
 ### Points du concept non encore définis
 Qui appelle réellement (Q-006) · nature exacte de la disparition de Léa (Q-007) · rôle précis d'Adrien dans l'accident (Q-008) · temps écoulé depuis l'accident (Q-009) · statut réel / reconstruit du laboratoire (Q-010) · lieu physique d'Adrien pendant la reconstruction (Q-011) · forme de la fin (Q-014).
